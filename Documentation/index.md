@@ -41,3 +41,6 @@ Detailed documentation regarding hardware registers Q&A can be found in [Hardwar
 ## Disassembly Analysis
 14. [Boot Analyzed Assembly](boot_analyzed.S)
 15. [Comprehensive Disassembly Audit](comprehensive_disassembly_audit.md)
+
+## Hardware Sequence Analysis
+16. [Low-Level Hardware Sequence Analysis](hardware_sequence_analysis.md)

@@ -8,7 +8,7 @@ OBJCOPY = mips-linux-gnu-objcopy
 # Compiler flags
 CFLAGS = -mips32 -O2 -G0 -mno-abicalls -fno-pic -nostdlib -Wall -Wextra -I../helpfull-headers
 
-CSOURCES += flash_programmer/flash_programmer.c
+
 
 # Source files
 ASOURCES = bare_metal/start.S
