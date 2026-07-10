@@ -31,3 +31,6 @@ Detailed documentation regarding hardware registers Q&A can be found in [Hardwar
 
 ## Hardware Integration and Source Code Mappings
 11. [Flash Programmer Source to Disassembly Map](flash_programmer_source_mapping.md)
+
+## Hardware Structure Abstractions
+12. [Hardware Peripherals Structural Mapping](hardware_peripherals_structs.md)
