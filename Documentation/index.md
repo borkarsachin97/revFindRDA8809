@@ -34,3 +34,6 @@ Detailed documentation regarding hardware registers Q&A can be found in [Hardwar
 
 ## Hardware Structure Abstractions
 12. [Hardware Peripherals Structural Mapping](hardware_peripherals_structs.md)
+
+## Bare-Metal Hardware Implementations
+13. [Source-to-Disassembly Boot Mapping](platform_boot_mapping.md)
