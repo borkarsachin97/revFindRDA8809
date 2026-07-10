@@ -28,3 +28,6 @@ Detailed documentation regarding hardware registers Q&A can be found in [Hardwar
 
 ## Execution Timeline & State Logic
 10. [Chronological Execution Path & Internal State](chronological_execution_path.md)
+
+## Hardware Integration and Source Code Mappings
+11. [Flash Programmer Source to Disassembly Map](flash_programmer_source_mapping.md)

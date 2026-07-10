@@ -56,3 +56,26 @@ This structure strongly suggests that `0x81C00274` and `0x81C00278` store memory
 - The transition occurs right after the final boot verification branches. The code either:
   1. Jumps back to the ROM (`0x81e0...`) if failure occurs.
   2. Falls through into the primary command processor loop (mapped closely to `flash_programmer.c`'s `main()`), which spins and polls for commands from the debug interface or USB to begin programming the SPI flash.
+
+### Master Pointer Optimization for Hardware Access
+A key compiler optimization discovered in the disassembly is the use of a master pointer for hardware access.
+Instead of loading `lui` for every peripheral block, the compiler initializes `t5` with `0xA1A00000` (the `SYS_CTRL` base).
+When the bootloader needs to clear the Watchdog timer, it uses `sb zero, 8192(t5)`. Since `8192` translates to `0x2000`, this instruction elegantly reaches `0xA1A02000`, mapping directly to `REG_TIMER_OSTIMER_CTRL` inside the `TIMER` block. This minimizes instruction density during critical path bootstrapping.
+
+### Payload Boundary Validation (MIPS Overflow Wrapping)
+Right after dereferencing `0x81C00278` and `0x81C00274`, the firmware performs bounds validation using a classic MIPS unsigned addition overflow trick:
+
+```assembly
+81c002b8:	3c097e40 	lui	t1,0x7e40    ; t1 = 0x7E400000
+81c002bc:	00494021 	addu	t0,v0,t1   ; t0 = v0 + 0x7E400000
+81c002c0:	3c030001 	lui	v1,0x1       ; v1 = 0x00010000 (65536 bytes / 64 KB)
+81c002c4:	0103382b 	sltu	a3,t0,v1   ; a3 = (t0 < 64KB) ? 1 : 0
+81c002c8:	14e00006 	bnez	a3,0x81c002e4
+```
+This is a standard compiler idiom for `if (v0 >= BASE && v0 < BASE + LIMIT)`.
+- `v0` is the address pointer.
+- `0x7E400000` is the two's complement of `0x81C00000`. By adding `0x7E400000` to a `KSEG0` SRAM pointer (e.g. `0x81C0XXXX`), the result wraps around past `0xFFFFFFFF` back to zero (relative to the base).
+- The `sltu` threshold is `0x00010000` (64 KB).
+
+This proves the Boot ROM enforces an exact **64 KB maximum payload limit** for chunks loaded into the `0x81C00000` (`KSEG0`) memory space.
+The exact same validation is duplicated for the `KSEG1` uncached region using `0x5E400000` (`-0xA1C00000`), verifying memory blocks accessed without caching.
