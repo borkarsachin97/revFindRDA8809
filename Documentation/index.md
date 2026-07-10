@@ -15,3 +15,9 @@ This documentation collection details the boot sequence and hardware initializat
 3. The setup reads boot profile flags (`0x81C000CC`, `0x81C00278`), configures the stack inside SRAM, and validates memory blocks.
 4. Intensive interaction occurs with the `SYS_CTRL` module at `0xA1A00000` to adjust clock trees, timers, and peripheral resets.
 5. Control flows into external routines (SPI Flash/ROM) starting at `0x81E0XXXX` using `jalx` which signifies jumping to 16-bit MIPS code (MIPS16e) for code density.
+
+## Factory BootROM Integrations
+6. [Rom & Source Code Mapping](rom_and_disassembly_mapping.md)
+7. [Comprehensive Disassembly Functions](comprehensive_disassembly_functions.md)
+
+Detailed documentation regarding hardware registers Q&A can be found in [Hardware Q&A](hardware_QnA.md).

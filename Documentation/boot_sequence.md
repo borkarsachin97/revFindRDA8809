@@ -21,3 +21,9 @@ Execution begins at `0x81c00280`. The first steps involve checking hardware stat
 4. It reads memory at `0x81c00278` and processes bitfields to determine subsequent control flow.
 
 Control flow handles setup and initialization before moving towards a major loop or jumping to other functional blocks (like `0x81e0...` routines).
+
+### Interaction with Hardware and BootROM
+During the boot sequence:
+- Spinloops frequently poll hardware status registers (specifically in the `SYS_CTRL` block mapped at `0xA1A00000`).
+- Mathematical operations (`dmult`, `mflo`) are used in setup loops to derive memory boundaries or validation hashes over SRAM structures.
+- Execution heavily leverages factory BootROM routines by jumping to `0x81E0XXXX` for standardized operations (like potentially `printf` strings via the debug serial, or hardware configuration logic).
