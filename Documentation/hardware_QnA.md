@@ -25,3 +25,15 @@
 - The LCD controller block is called **Gouda** (`REG_GOUDA_BASE_LO`), which supports SPI or parallel connections.
 - Initialization occurs by configuring the system control block (`CFG_REGS`) to map the LCD data pins (`CFG_REGS_MODE_PIN_LCD_DATA_8` up to `15` for parallel) or setting `CFG_REGS_SPI_CAM_LCD_MASK`.
 - Then, LCD commands are sent to the controller via `gd_lcd_ctrl` and `gd_lcd_timing` to configure the data stride, memory addressing, and rendering destinations (`GOUDA_DESTINATION_LCD_CS_0` or `1`).
+
+**What the location of bootrom? What the size?**
+Based on the hardware headers (`mem_bridge.h`), the RDA 8809 architecture specifies the internal Boot ROM layout as follows:
+- **XCPU (Main Processor) Internal ROM Base Address**: `0x01E00000`
+  - *Cached MIPS Address (KSEG0)*: `0x81E00000`
+  - *Uncached MIPS Address (KSEG1)*: `0xA1E00000`
+- **XCPU Internal ROM Size**: `80 * 1024` bytes (80 KB).
+- **BCPU (Baseband Processor) Internal ROM Base Address**: `0x01E80000`
+  - *Cached MIPS Address (KSEG0)*: `0x81E80000`
+  - *Uncached MIPS Address (KSEG1)*: `0xA1E80000`
+
+If you are looking to extract or dump the primary factory BootROM containing the firmware validation and `jalx 0x81e0...` handlers we traced earlier, you should target the memory region from **`0x81E00000`** to **`0x81E14000`** (Length: `0x14000` or 81,920 bytes).
