@@ -1,0 +1,12 @@
+Physical Hardware:
+Chip: RDA 88X9CL
+1531
+E67144W
+CF315094.2C	4641
+
+Chip: RDA 6625E
+3651C
+XFAWR717
+
+Virtual Hardware:
+

@@ -1,0 +1,19 @@
+REG_SYS_COMREGS_BASE       					0x01A0B000
+REG_BB_COMREGS_BASE        					0x0190E000
+Firmware/Flash/Binary						0x08000000
+To load BL, here needs to write something	0x01c000a0			
+BL needs  to place here						0x01c0027c			
+1st BL Buffer								0x81c05954			
+2nd BL Buffer								0x81c05968	
+EXT_RAM_BASE								0x02000000			
+DUALPORT_SRAM_BASE							0x01B00000
+ROM Misc
+ROM_MISC_BASE: 								0x81C000A0
+ROM_MISC_UBASE: 							0xA1C000A0
+System SRAM
+SYS_SRAM_AVAILABLE_BASE: 					0x81C00280
+SYS_SRAM_BCPU_BASE: 						0x81C00680
+INT_ROM_BASE:								0x81E00000
+INT_ROM_END: 								0x81E04FFC
+BCPU_ROM_BASE: 								0x81E80000
+BCPU_ROM_END: 								0x81E97FFC

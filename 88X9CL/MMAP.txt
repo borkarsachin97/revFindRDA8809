@@ -1,0 +1,119 @@
+0x08000000			Firmware/Flash/Binary
+0x01c000a0			To load programmer, here needs to write something
+0x01c0027c			Programmer/Bootloader needs  to place here, start from this adress
+0x81c05954			1st Unknown, but By writing here, we can execute comand via BL
+0x81c05968			2st Unknown, but By writing here, we can execute comand via BL
+0x02000000			EXT_RAM_BASE
+0x01B00000			DUALPORT_SRAM_BASE
+
+REG_GOUDA_BASE              0x01A21000
+REG_GOUDA_SRAM_BASE         0x01AE0000
+REG_GPIO_BASE               0x01A03000
+REG_I2C_MASTER_BASE         0x01A07000
+REG_KEYPAD_BASE             0x01A05000
+REG_MEM_BRIDGE_BASE         0x01A04000
+REG_PWM_BASE                0x01A06000
+REG_SPI1_BASE               0x01A11000
+REG_SPI_FLASH_BASE         0x01a25000
+
+
+Grep--------------------------------------
+
+REG_SYS_APB_BASE                 0x01A00000
+REG_BB_APB_BASE                  0x01900000
+REG_VOC_BASE                     0x01940000
+REG_AIF_BASE                     0x01927000
+REG_BB_AHB_MONITOR_BASE          0x01A1E000
+REG_BB_CP2_BASE                  0x01908000
+REG_BB_IFC_BASE                  0x01901000
+REG_BB_IRQ_BASE                  0x01902000
+REG_BB_SRAM_BASE                 0x01980000
+REG_BCPU_IDATA_BASE              0x0190C000
+REG_BCPU_DDATA_BASE              0x0190D000
+REG_BCPU_TAG_BASE                0x0190B000
+REG_SYS_BIST_BASE                0x01A1F000
+REG_BB_BIST_BASE                 0x01909000
+REG_CALENDAR_BASE                0x01A0A000
+REG_CAMERA_BASE                  0x01A18000
+REG_CONFIG_REGS_BASE             0x01A24000
+REG_CIPHER_BASE                  0x01905000
+REG_SYS_COMREGS_BASE             0x01A0B000
+REG_BB_COMREGS_BASE              0x0190E000
+REG_CORDIC_BASE                  0x01911000
+REG_DEBUG_HOST_BASE              0x01A3F000
+REG_INT_REG_DBG_HOST_BASE        0x00000000
+REG_DEBUG_PORT_BASE              0x01A0D000
+REG_DEBUG_UART_BASE              0x01A14000
+REG_DMA_BASE                     0x01A08000
+REG_GOUDA_BASE                   0x01A21000
+REG_GOUDA_SRAM_BASE              0x01AE0000
+REG_GPIO_BASE                    0x01A03000
+REG_I2C_MASTER_BASE              0x01A07000
+REG_I2C_MASTER2_BASE             0x01A22000
+REG_I2C_MASTER3_BASE             0x01A23000
+REG_ITLV_BASE                    0x01903000
+REG_KEYPAD_BASE                  0x01A05000
+REG_MEM_BRIDGE_BASE              0x01A04000
+REG_BB_MEM_BRIDGE_BASE           0x01912000
+REG_MEM_FIFO_BASE                0x018C0000
+REG_CS0_BASE                     0x08000000
+REG_CS1_BASE                     0x02000000
+REG_CS2_BASE                     0x01800000
+REG_CS3_BASE                     0x01880000
+REG_CS4_BASE                     0x01000000
+REG_INT_SRAM_BASE                0x01C00000
+REG_BB_PATCH_BASE                0x01D00000
+REG_INT_ROM_BASE                 0x01E00000
+REG_BCPU_ROM_BASE                0x01E80000
+REG_CS0_CONF_BASE                0x02000000
+REG_CS1_CONF_BASE                0x00000000
+REG_CS2_CONF_BASE                0x01800000
+REG_CS3_CONF_BASE                0x01880000
+REG_CS4_CONF_BASE                0x01000000
+REG_MIPI_CSI_BASE                0x01A18050
+REG_PAGE_SPY_BASE                0x01A0C000
+REG_PWM_BASE                     0x01A06000
+REG_RF_IF_BASE                   0x01906000
+REG_RF_SPI_BASE                  0x01A0E000
+REG_SCI_BASE                     0x01A10000
+REG_SDMMC2_BASE                  0x01A19000
+REG_SDMMC_BASE                   0x01A17000
+REG_SPI1_BASE                    0x01A11000
+REG_SPI2_BASE                    0x01A12000
+REG_SPI3_BASE                    0x01A13000
+REG_SPI_FLASH_BASE               0x01A25000
+REG_SYS_AHB_MONITOR_BASE         0x01A1D000
+REG_SYS_CTRL_BASE                0x01A00000
+REG_SYS_IFC2_BASE                0x01921000
+
+END Grep ---------------------------------------------
+
+
+
+ROM Misc
+ROM_MISC_BASE: 0x81C000A0
+ROM_MISC_UBASE: 0xA1C000A0
+ROM_MISC_SIZE: 0x180
+
+SYS_SRAM_BASE: 0x81C00000
+BB_SRAM_BASE: 0x81980000
+ROM Memory
+INT_ROM_BASE: 0x81E00000
+INT_ROM_END: 0x81E04FFC
+BCPU_ROM_BASE: 0x81E80000
+BCPU_ROM_END: 0x81E97FFC
+
+System SRAM
+SYS_SRAM_AVAILABLE_BASE: 0x81C00280
+SYS_SRAM_BCPU_BASE: 0x81C00680
+SYS_SRAM_END: SYS_SRAM_BASE + SYS_SRAM_SIZE - 4 (Calculates to 0x81C0FFFF)
+Reserved Sizes
+RESERVED_MBX_SIZE: 0x280
+BB_SRAM_GLOBALS_SIZE: 0x1A0
+RESERVED_PATCH_SIZE: 0xC00
+IRQ and Stack Sizes
+SYS_SRAM_IRQ_STACKWATCH_SIZE: 0x80
+XCPU_IRQ_STACK_SIZE: 0xE00
+PS_STACK_SIZE (if PAGE_SPY_LOG = 1): 0x40
+PS_STACK_SIZE (if PAGE_SPY_LOG = 0): 0x0
+
