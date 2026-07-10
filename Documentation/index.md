@@ -25,3 +25,6 @@ Detailed documentation regarding hardware registers Q&A can be found in [Hardwar
 ## Sub-Register and Hardware Level Breakdown
 8. [Register Level Analysis (Sub-registers)](register_level_analysis.md)
 9. [Master Peripheral Register Map](master_register_map.md)
+
+## Execution Timeline & State Logic
+10. [Chronological Execution Path & Internal State](chronological_execution_path.md)
