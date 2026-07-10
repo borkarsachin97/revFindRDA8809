@@ -1,9 +1,9 @@
-ENTRY(_start)
+ENTRY(__xcpu_start)
 
 MEMORY
 {
     /* Enforce exactly the 64 KB memory limit constraint in KSEG0 SRAM */
-    SRAM (rwx) : ORIGIN = 0x81C00000, LENGTH = 64K
+    SRAM (rwx) : ORIGIN = 0x81C00280, LENGTH = 64K - 0x0280
 }
 
 SECTIONS
@@ -13,7 +13,7 @@ SECTIONS
 
     .text :
     {
-        KEEP(*(.text.boot))
+        *(.text.boot)
         *(.text)
         *(.text.*)
     } > SRAM

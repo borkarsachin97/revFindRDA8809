@@ -6,11 +6,7 @@ LD = mips-elf-ld
 OBJCOPY = mips-elf-objcopy
 
 # Compiler flags
-# -mips32: Target standard 32-bit MIPS ISA
-# -O2: Optimization level 2
-# -G0: Disable small data sections (.sdata/.sbss) to avoid GP relative addressing issues in raw SRAM
-# -nostdlib: We are bare-metal, do not link standard C libraries
-CFLAGS = -mips32 -O2 -G0 -nostdlib -Wall -Wextra
+CFLAGS = -mips32 -O2 -G0 -mno-abicalls -fno-pic -nostdlib -Wall -Wextra -I../helpfull-headers
 
 # Source files
 ASOURCES = bare_metal/start.S
@@ -37,7 +33,7 @@ $(ELF): $(OBJECTS)
 	$(LD) -T $(LDSCRIPT) $(OBJECTS) -o $@
 
 %.o: %.S
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -DCT_ASM -c $< -o $@
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
