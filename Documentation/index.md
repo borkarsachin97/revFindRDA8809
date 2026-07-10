@@ -44,3 +44,6 @@ Detailed documentation regarding hardware registers Q&A can be found in [Hardwar
 
 ## Hardware Sequence Analysis
 16. [Low-Level Hardware Sequence Analysis](hardware_sequence_analysis.md)
+
+## Factory ROM
+17. [BootROM Internal Analysis](bootROM_analysis.md)
