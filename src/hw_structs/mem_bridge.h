@@ -3,6 +3,7 @@
 #define _MEM_BRIDGE_H_
 
 #include <stdint.h>
+#include "../../helpfull-headers/globals.h"
 
 typedef struct
 {

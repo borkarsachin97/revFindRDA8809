@@ -3,6 +3,7 @@
 #define _SYS_COMREGS_H_
 
 #include <stdint.h>
+#include "../../helpfull-headers/globals.h"
 
 typedef struct
 {

@@ -3,6 +3,7 @@
 #define _RF_SPI_H_
 
 #include <stdint.h>
+#include "../../helpfull-headers/globals.h"
 
 typedef struct
 {

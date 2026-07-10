@@ -3,6 +3,7 @@
 #define _PAGE_SPY_H_
 
 #include <stdint.h>
+#include "../../helpfull-headers/globals.h"
 
 typedef struct
 {

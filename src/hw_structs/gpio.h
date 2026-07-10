@@ -3,6 +3,7 @@
 #define _GPIO_H_
 
 #include <stdint.h>
+#include "../../helpfull-headers/globals.h"
 
 typedef struct
 {
@@ -24,5 +25,8 @@ typedef struct
 
 #define GPIO_BASE_ADDR 0xA1A03000
 #define hw_gpio ((HWP_GPIO_T*) GPIO_BASE_ADDR)
+
+void gpio_set_output(uint32_t pin);
+void gpio_toggle_pin(uint32_t pin);
 
 #endif // _GPIO_H_

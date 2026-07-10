@@ -3,6 +3,7 @@
 #define _TIMER_H_
 
 #include <stdint.h>
+#include "../../helpfull-headers/globals.h"
 
 typedef struct
 {
@@ -20,5 +21,7 @@ typedef struct
 
 #define TIMER_BASE_ADDR 0xA1A02000
 #define hw_timer ((HWP_TIMER_T*) TIMER_BASE_ADDR)
+
+void timer_disable_watchdog(void);
 
 #endif // _TIMER_H_
