@@ -37,3 +37,7 @@ Detailed documentation regarding hardware registers Q&A can be found in [Hardwar
 
 ## Bare-Metal Hardware Implementations
 13. [Source-to-Disassembly Boot Mapping](platform_boot_mapping.md)
+
+## Disassembly Analysis
+14. [Boot Analyzed Assembly](boot_analyzed.S)
+15. [Comprehensive Disassembly Audit](comprehensive_disassembly_audit.md)
