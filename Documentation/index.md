@@ -21,3 +21,6 @@ This documentation collection details the boot sequence and hardware initializat
 7. [Comprehensive Disassembly Functions](comprehensive_disassembly_functions.md)
 
 Detailed documentation regarding hardware registers Q&A can be found in [Hardware Q&A](hardware_QnA.md).
+
+## Sub-Register and Hardware Level Breakdown
+8. [Register Level Analysis (Sub-registers)](register_level_analysis.md)
