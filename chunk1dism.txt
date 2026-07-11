@@ -330,7 +330,7 @@ Disassembly of section .data:
 81c00784:	ea8db406 	swc2	$13,-19450(s4)                                     ; Memory Access: sw operation
 81c00788:	db40f0a0 	ldc2	$0,-3936(k0)
 81c0078c:	6500e820 	daddiu	zero,t0,-6112
-81c00790:	a1a00000 	sb	zero,0(t5)                                     ; Memory Access: sb operation
+81c00790:	a1a00000 	sb	zero,0(t5)                                     ; Hardware Register Access: operation targeting REG_SYS_CTRL_REG_DBG at 0xA1A00000
 81c00794:	81c00220 	lb	zero,544(t6)
 81c00798:	81c00278 	lb	zero,632(t6)
 81c0079c:	00400000 	0x400000
@@ -406,7 +406,7 @@ Disassembly of section .data:
 81c008b4:	650017a3 	daddiu	zero,t0,6051
 81c008b8:	06c32dd1 	bgezl	s6,0x81c0c000                                       ; Branch: evaluate condition and jump (error state fallback/looping)
 81c008bc:	a18c0000 	sb	t4,0(t4)                                     ; Memory Access: sb operation
-81c008c0:	a1a00000 	sb	zero,0(t5)                                     ; Memory Access: sb operation
+81c008c0:	a1a00000 	sb	zero,0(t5)                                     ; Hardware Register Access: operation targeting REG_SYS_CTRL_REG_DBG at 0xA1A00000
 81c008c4:	00a50001 	0xa50001
 81c008c8:	00a50000 	0xa50000
 81c008cc:	0aa06c92 	j	0x8a81b248                                       ; Jump or subroutine call
@@ -534,7 +534,7 @@ Disassembly of section .data:
 81c00ab4:	ef6db50a 	swc3	$13,-19190(k1)                                     ; Memory Access: sw operation
 81c00ab8:	dad2daf1 	ldc2	$18,-9487(s6)
 81c00abc:	daa0e820 	ldc2	$0,-6112(s5)
-81c00ac0:	a1a00000 	sb	zero,0(t5)                                     ; Memory Access: sb operation
+81c00ac0:	a1a00000 	sb	zero,0(t5)                                     ; Hardware Register Access: operation targeting REG_SYS_CTRL_REG_DBG at 0xA1A00000
 81c00ac4:	00a50001 	0xa50001
 81c00ac8:	00110011 	0x110011
 81c00acc:	81c05570 	lb	zero,21872(t6)
@@ -559,7 +559,7 @@ Disassembly of section .data:
 81c00b18:	eb83e54f 	swc2	$3,-6833(gp)                                     ; Memory Access: sw operation
 81c00b1c:	e82061fb 	swc2	$0,25083(at)                                     ; Memory Access: sw operation
 81c00b20:	65006500 	daddiu	zero,t0,25856
-81c00b24:	a1a02000 	sb	zero,8192(t5)                                ; Hardware Register Access: sb operation targeting REG_TIMER_OSTIMER_CTRL at 0xA1A02000
+81c00b24:	a1a02000 	sb	zero,8192(t5)                                ; Hardware Register Access: sb operation targeting REG_TIMER_OSTIMER_CTRL at 0xA1A02000                                     ; Hardware Register Access: operation targeting REG_TIMER_OSTIMER_CTRL at 0xA1A02000
 81c00b28:	620563fd 	daddi	a1,s0,25597
 81c00b2c:	e8452c01 	swc2	$5,11265(v0)                                     ; Memory Access: sw operation
 81c00b30:	1a03b506 	0x1a03b506
@@ -808,7 +808,7 @@ Disassembly of section .data:
 81c00f04:	a2000000 	sb	zero,0(s0)                                     ; Memory Access: sb operation
 81c00f08:	e820b202 	swc2	$0,-19966(at)                                     ; Memory Access: sw operation
 81c00f0c:	65009a45 	daddiu	zero,t0,-26043
-81c00f10:	a1a02000 	sb	zero,8192(t5)                                ; Hardware Register Access: sb operation targeting REG_TIMER_OSTIMER_CTRL at 0xA1A02000
+81c00f10:	a1a02000 	sb	zero,8192(t5)                                ; Hardware Register Access: sb operation targeting REG_TIMER_OSTIMER_CTRL at 0xA1A02000                                     ; Hardware Register Access: operation targeting REG_TIMER_OSTIMER_CTRL at 0xA1A02000
 81c00f14:	f7ffb207 	sdc1	$f31,-19961(ra)
 81c00f18:	e4596b1f 	swc1	$f25,27423(v0)                                     ; Memory Access: sw operation
 81c00f1c:	6c01aee0 	ldr	at,-20768(zero)
@@ -891,7 +891,7 @@ Disassembly of section .data:
 81c01050:	da61da80 	ldc2	$1,-9600(s3)
 81c01054:	650017ff 	daddiu	zero,t0,6143
 81c01058:	81c05574 	lb	zero,21876(t6)
-81c0105c:	a1a00000 	sb	zero,0(t5)                                     ; Memory Access: sb operation
+81c0105c:	a1a00000 	sb	zero,0(t5)                                     ; Hardware Register Access: operation targeting REG_SYS_CTRL_REG_DBG at 0xA1A00000
 81c01060:	00a50001 	0xa50001
 81c01064:	80000000 	lb	zero,0(zero)
 81c01068:	d00463fd 	lld	a0,25597(zero)
@@ -1846,7 +1846,7 @@ Disassembly of section .data:
 81c01f3c:	1298be00 	beq	s4,t8,0x81bf1740                                       ; Branch: evaluate condition and jump (error state fallback/looping)
 81c01f40:	81c0598c 	lb	zero,22924(t6)
 81c01f44:	81c05574 	lb	zero,21876(t6)
-81c01f48:	a1a00000 	sb	zero,0(t5)                                     ; Memory Access: sb operation
+81c01f48:	a1a00000 	sb	zero,0(t5)                                     ; Hardware Register Access: operation targeting REG_SYS_CTRL_REG_DBG at 0xA1A00000
 81c01f4c:	00a50001 	0xa50001
 81c01f50:	00a50000 	0xa50000
 81c01f54:	80000000 	lb	zero,0(zero)
@@ -1875,7 +1875,7 @@ Disassembly of section .data:
 81c01fb0:	65006304 	daddiu	zero,t0,25348
 81c01fb4:	81c0598c 	lb	zero,22924(t6)
 81c01fb8:	81c05574 	lb	zero,21876(t6)
-81c01fbc:	a1a00000 	sb	zero,0(t5)                                     ; Memory Access: sb operation
+81c01fbc:	a1a00000 	sb	zero,0(t5)                                     ; Hardware Register Access: operation targeting REG_SYS_CTRL_REG_DBG at 0xA1A00000
 81c01fc0:	00a50001 	0xa50001
 81c01fc4:	00a50000 	0xa50000
 81c01fc8:	ea8c6aff 	swc2	$12,27391(s4)                                     ; Memory Access: sw operation
@@ -1887,7 +1887,7 @@ Disassembly of section .data:
 81c01fe0:	b407db81 	sdr	a3,-9343(zero)
 81c01fe4:	e820db80 	swc2	$0,-9344(at)                                     ; Memory Access: sw operation
 81c01fe8:	6500dfa0 	daddiu	zero,t0,-8288
-81c01fec:	a1a00000 	sb	zero,0(t5)                                     ; Memory Access: sb operation
+81c01fec:	a1a00000 	sb	zero,0(t5)                                     ; Hardware Register Access: operation targeting REG_SYS_CTRL_REG_DBG at 0xA1A00000
 81c01ff0:	40000000 	mfc0	zero,$0
 81c01ff4:	81c05574 	lb	zero,21876(t6)
 81c01ff8:	00a50001 	0xa50001
@@ -2035,7 +2035,7 @@ Disassembly of section .data:
 81c02230:	90079108 	lbu	a3,-28408(zero)
 81c02234:	6305ef00 	daddi	a1,t8,-4352
 81c02238:	81c05574 	lb	zero,21876(t6)
-81c0223c:	a1a00000 	sb	zero,0(t5)                                     ; Memory Access: sb operation
+81c0223c:	a1a00000 	sb	zero,0(t5)                                     ; Hardware Register Access: operation targeting REG_SYS_CTRL_REG_DBG at 0xA1A00000
 81c02240:	81c05884 	lb	zero,22660(t6)
 81c02244:	07704c00 	bltzal	k1,0x81c15248                                       ; Branch: evaluate condition and jump (error state fallback/looping)
 81c02248:	04a62f80 	0x4a62f80
@@ -2212,7 +2212,7 @@ Disassembly of section .data:
 81c024f4:	90049705 	lbu	a0,-26875(zero)
 81c024f8:	6303ef00 	daddi	v1,t8,-4352
 81c024fc:	81c05c40 	lb	zero,23616(t6)
-81c02500:	a1a02000 	sb	zero,8192(t5)                                ; Hardware Register Access: sb operation targeting REG_TIMER_OSTIMER_CTRL at 0xA1A02000
+81c02500:	a1a02000 	sb	zero,8192(t5)                                ; Hardware Register Access: sb operation targeting REG_TIMER_OSTIMER_CTRL at 0xA1A02000                                     ; Hardware Register Access: operation targeting REG_TIMER_OSTIMER_CTRL at 0xA1A02000
 81c02504:	81c05c44 	lb	zero,23620(t6)
 81c02508:	81c02511 	lb	zero,9489(t6)
 81c0250c:	81c05c3c 	lb	zero,23612(t6)
@@ -2227,7 +2227,7 @@ Disassembly of section .data:
 81c02530:	ef009705 	swc3	$0,-26875(t8)                                     ; Memory Access: sw operation
 81c02534:	65006303 	daddiu	zero,t0,25347
 81c02538:	81c05574 	lb	zero,21876(t6)
-81c0253c:	a1a02000 	sb	zero,8192(t5)                                ; Hardware Register Access: sb operation targeting REG_TIMER_OSTIMER_CTRL at 0xA1A02000
+81c0253c:	a1a02000 	sb	zero,8192(t5)                                ; Hardware Register Access: sb operation targeting REG_TIMER_OSTIMER_CTRL at 0xA1A02000                                     ; Hardware Register Access: operation targeting REG_TIMER_OSTIMER_CTRL at 0xA1A02000
 81c02540:	81c05c44 	lb	zero,23620(t6)
 81c02544:	ea8c6aff 	swc2	$12,27391(s4)                                     ; Memory Access: sw operation
 81c02548:	2204b306 	addi	a0,s0,-19706                                     ; Math operation on registers
@@ -3691,7 +3691,7 @@ Disassembly of section .data:
 81c03c10:	67e31008 	daddiu	v1,ra,4104
 81c03c14:	aca09304 	sw	zero,-27900(a1)                                     ; Memory Access: sw operation
 81c03c18:	ebefef6d 	swc2	$15,-4243(ra)                                     ; Memory Access: sw operation
-81c03c1c:	eb4debac 	swc2	$13,-5204(k0)                                     ; Memory Access: sw operation
+81c03c1c:	eb4debac 	swc2	$13,-5204(at)                                 ; Hardware Register Access: sw operation targeting Boot Profile Code Flags at 0x81C000CC
 81c03c20:	b73dcc60 	sdr	sp,-13216(t9)
 81c03c24:	6c3eafa0 	ldr	s8,-20576(at)
 81c03c28:	0da11a03 	jal	0x8684680c                                       ; Jump or subroutine call
@@ -5258,7 +5258,7 @@ Disassembly of section .data:
 81c0548c:	ef009007 	swc3	$0,-28665(t8)                                     ; Memory Access: sw operation
 81c05490:	65006305 	daddiu	zero,t0,25349
 81c05494:	00a50001 	0xa50001
-81c05498:	a1a00000 	sb	zero,0(t5)                                     ; Memory Access: sb operation
+81c05498:	a1a00000 	sb	zero,0(t5)                                     ; Hardware Register Access: operation targeting REG_SYS_CTRL_REG_DBG at 0xA1A00000
 81c0549c:	00010001 	0x10001
 81c054a0:	00420000 	0x420000
 81c054a4:	00200860 	0x200860
