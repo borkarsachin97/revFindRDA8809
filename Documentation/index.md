@@ -56,3 +56,6 @@ Detailed documentation regarding hardware registers Q&A can be found in [Hardwar
 
 ## Disassembly Analysis
 19. [Static Structural Pattern Analysis](static_structural_pattern_analysis.md)
+
+## Hardware Validation Sequences
+20. [LED & Bare-Metal Subsystem Initialization](led_and_system_init_analysis.md)
