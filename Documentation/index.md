@@ -53,3 +53,6 @@ Detailed documentation regarding hardware registers Q&A can be found in [Hardwar
 
 ## Memory Constraints & Boundary Validation
 19. [SRAM Boundaries & Structural Safety Assessment](sram_memory_limits.md)
+
+## Disassembly Analysis
+19. [Static Structural Pattern Analysis](static_structural_pattern_analysis.md)
