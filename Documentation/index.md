@@ -47,3 +47,6 @@ Detailed documentation regarding hardware registers Q&A can be found in [Hardwar
 
 ## Factory ROM
 17. [BootROM Internal Analysis](bootROM_analysis.md)
+
+## Hardware Security & Architecture Design
+18. [Boot Architecture Map & Loophole Discovery](boot_architecture_map.md)
