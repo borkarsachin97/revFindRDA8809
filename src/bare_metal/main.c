@@ -1,10 +1,7 @@
 #include <stdint.h>
 #include "../hw_structs/sys_ctrl.h"
 #include "../hw_structs/timer.h"
-#include "../hw_structs/gpio.h"
-
-// Define a test LED pin (e.g. GPIO bit 5)
-#define LED_PIN 5
+#include "../hw_structs/pwm.h"
 
 // Simple delay using a spinloop
 void delay(volatile uint32_t count) {
@@ -15,19 +12,23 @@ void delay(volatile uint32_t count) {
 
 int main(void) {
     // 1. Kill the Watchdog Timer
-    timer_disable_watchdog();
+    hw_timer->WDTimer_Ctrl = (1 << 4); // TIMER_STOP
+    hw_timer->WDTimer_LoadVal = 0;
 
-    // 2. Stabilize and enable peripheral system clocks
-    sys_ctrl_init_clocks();
+    // 2. Unlock System Registers
+    hw_sys_ctrl->REG_DBG = 1U << 31; // SYS_CTRL_WRITE_UNLOCK
 
-    // 3. Configure LED pin as output
-    gpio_set_output(LED_PIN);
+    // 3. Enable PWM Clock (SYSD_PWM is bit 29)
+    hw_sys_ctrl->Clk_Sys_Enable = (1 << 29);
 
-    // 4. Spinloop: Toggle LED infinitely
+    // 4. Spinloop: Toggle LED infinitely using PWL1 (Pulse Width Light 1)
     while (1) {
-        gpio_toggle_pin(LED_PIN);
+        // Turn PWL1 fully ON (Force High, Output Enable)
+        hw_pwm->PWL1_Config = (1 << 20) | (1 << 18); // PWM_PWL1_SET_OE | PWM_PWL1_FORCE_H
+        delay(500000);
 
-        // Delay for visual effect
+        // Turn PWL1 fully OFF (Force Low, Output Enable)
+        hw_pwm->PWL1_Config = (1 << 20) | (1 << 17); // PWM_PWL1_SET_OE | PWM_PWL1_FORCE_L
         delay(500000);
     }
 
