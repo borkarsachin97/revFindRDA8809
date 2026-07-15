@@ -6,7 +6,7 @@ LD = mips-linux-gnu-ld
 OBJCOPY = mips-linux-gnu-objcopy
 
 # Compiler flags
-CFLAGS = -mips32 -O2 -G0 -mno-abicalls -fno-pic -nostdlib -Wall -Wextra -I../helpfull-headers
+CFLAGS = -EL -mips32 -O2 -G0 -mno-abicalls -fno-pic -nostdlib -Wall -Wextra -I../helpfull-headers
 
 
 
