@@ -1,46 +1,78 @@
-# RDA 8809 Bare-Metal Boot Makefile
+# ====================================================================
+# CUSTOM FREESTANDING MIPS TOOLCHAIN CONFIGURATION
+# ====================================================================
 
-# Toolchain definitions
-CC = mips-linux-gnu-gcc
-LD = mips-linux-gnu-ld
-OBJCOPY = mips-linux-gnu-objcopy
+COMPILER_PATH = /home/vixxkigoli/applications/cooltools/gcc/bin/
+TOOLCHAIN_LIB_PATH = /home/vixxkigoli/applications/cooltools/gcc/lib
 
-# Compiler flags
-CFLAGS = -EL -mips32 -O2 -G0 -mno-abicalls -fno-pic -nostdlib -Wall -Wextra -I../helpfull-headers
+export LD_LIBRARY_PATH := $(TOOLCHAIN_LIB_PATH):$(LD_LIBRARY_PATH)
 
+CC      = $(COMPILER_PATH)mips-elf-gcc
+LD      = $(COMPILER_PATH)mips-elf-ld
+OBJCOPY = $(COMPILER_PATH)mips-elf-objcopy
+OBJDUMP = $(COMPILER_PATH)mips-elf-objdump
 
+# [PREPROCESSOR MACROS] Add your configuration flags here
+HW_FLAGS =
 
-# Source files
-ASOURCES = bare_metal/start.S
-CSOURCES = bare_metal/main.c hw_structs/sys_ctrl.c hw_structs/timer.c hw_structs/gpio.c flash_programmer/flash_programmer.c
+# Strict hardware profile compilation flags
+CFLAGS  = -c -O0 -mips32 -mel -G0 -ffreestanding -nostdlib -std=c99 $(HW_FLAGS)
+LDFLAGS = -EL -T link.ld -e bl_entry
 
-# Object files
-AOBJECTS = $(ASOURCES:.S=.o)
-COBJECTS = $(CSOURCES:.c=.o)
-OBJECTS = $(AOBJECTS) $(COBJECTS)
+# Host system compiler for the packaging tool
+HOST_CC = gcc
 
-# Output binaries
-ELF = blink_payload.elf
-BIN = blink_payload.bin
+# Build Targets
+TARGET     = custom_test_payload.bin
+ELF_TARGET = custom_test_payload.elf
 
-# Linker script
-LDSCRIPT = bare_metal/link.ld
+# ====================================================================
+# [OPTION] STATE MULTIPLE .C FILES HERE
+# ====================================================================
+SRCS       = main.c
+OBJECTS    = $(SRCS:.c=.o)
 
-all: $(BIN)
+PACKER_SRC  = firmWrap.c
+PACKER_BIN  = ./firmWrap
+FP_OUTPUT   = firm.fp
 
-$(BIN): $(ELF)
-	$(OBJCOPY) -O binary $< $@
+# ====================================================================
+# BUILD RULES
+# ====================================================================
 
-$(ELF): $(OBJECTS)
-	$(LD) -T $(LDSCRIPT) $(OBJECTS) -o $@
+all: $(TARGET) $(PACKER_BIN) pack disasm flash
 
-%.o: %.S
-	$(CC) $(CFLAGS) -DCT_ASM -c $< -o $@
+$(TARGET): $(OBJECTS)
+	$(LD) $(LDFLAGS) $(OBJECTS) -o $(ELF_TARGET)
+	$(OBJCOPY) -O binary $(ELF_TARGET) $(TARGET)
+	@echo "===================================================="
+	@echo "[+] Raw MIPS binary payload created: $(TARGET)"
+	@echo "===================================================="
 
+# The compiler will now explicitly inherit $(HW_FLAGS) via $(CFLAGS)
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
+
+$(PACKER_BIN): $(PACKER_SRC)
+	$(HOST_CC) -O2 $(PACKER_SRC) -o $(PACKER_BIN)
+	@echo "[+] Host packager utility compiled: $(PACKER_BIN)"
+	@echo "===================================================="
+
+pack: $(TARGET) $(PACKER_BIN)
+	$(PACKER_BIN) $(TARGET) $(FP_OUTPUT)
+	@echo "[+] Firmware container successfully packaged: $(FP_OUTPUT)"
+	@echo "===================================================="
+
+disasm: $(TARGET)
+	$(OBJDUMP) -D -b binary -m mips:isa32 -EL --adjust-vma=0x81c00280 $(TARGET) > disassembly.txt
+	@echo "[+] Assembly successfully generated inside disassembly.txt"
+	@echo "===================================================="
+
+flash:
+	sudo ./rudra -t $(FP_OUTPUT)
 
 clean:
-	rm -f $(OBJECTS) $(ELF) $(BIN)
+	rm -f *.o $(TARGET) $(ELF_TARGET) $(PACKER_BIN) $(FP_OUTPUT) disassembly.txt
+	@echo "Clean complete."
 
-.PHONY: all clean
+.PHONY: all clean disasm pack flash
