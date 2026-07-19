@@ -1,10 +1,6 @@
+; RDA 8809 Mixed-Mode (MIPS32 + MIPS16) Disassembly
+; Generated via jalx boundary heuristics and dual-decoding.
 
-chunk_1_0x01c0027c.bin:     file format binary
-
-
-Disassembly of section .data:
-
-81c0027c <.data>:
 81c0027c:	00000000 	nop
 81c00280:	3c0581c0 	lui	a1,0x81c0
 81c00284:	8ca300cc 	lw	v1,204(a1)
@@ -264,47 +260,94 @@ Disassembly of section .data:
 81c0067c:	8fb0001c 	lw	s0,28(sp)
 81c00680:	03e00008 	jr	ra
 81c00684:	27bd0028 	addiu	sp,sp,40
-81c00688:	6500e820 	daddiu	zero,t0,-6112
-81c0068c:	9b40b306 	lwr	zero,-19706(k0)
-81c00690:	63fd6c02 	daddi	sp,ra,27650
-81c00694:	6205ea8d 	daddi	a1,s0,-5491
-81c00698:	01901b03 	0x1901b03
-81c0069c:	9705db40 	lhu	a1,-9408(t8)
-81c006a0:	6303ef00 	daddi	v1,t8,-4352
-81c006a4:	81c000cc 	lb	zero,204(t6)
-81c006a8:	e820b202 	swc2	$0,-19966(at)
-81c006ac:	65006500 	daddiu	zero,t0,25856
-81c006b0:	81c00704 	lb	zero,1796(t6)
-81c006b4:	ea8c6aff 	swc2	$12,27391(s4)
-81c006b8:	b6076b00 	sdr	a3,27392(s0)
-81c006bc:	a580e3d5 	sh	zero,-7211(t4)
-81c006c0:	2c03ec4e 	sltiu	v1,zero,-5042
-81c006c4:	e8206aff 	swc2	$0,27391(at)
-81c006c8:	4b01ea6c 	c2	0x101ea6c
-81c006cc:	61f57340 	daddi	s5,t7,29504
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c00688:	e820      	jr	ra
+    81c0068a:	6500      	nop
+    81c0068c:	b306      	lw	v1,0x81c006a4
+    81c0068e:	9b40      	lw	v0,0(v1)
+    81c00690:	6c02      	li	a0,2
+    81c00692:	63fd      	addiu	sp,-24
+    81c00694:	ea8d      	or	v0,a0
+    81c00696:	6205      	sw	ra,20(sp)
+    81c00698:	1b03 0190 	jal	0x81e00641
+    81c0069c:	db40      	sw	v0,0(v1)
+    81c0069e:	9705      	lw	a3,20(sp)
+    81c006a0:	ef00      	jr	a3
+    81c006a2:	6303      	addiu	sp,24
+    81c006a4:	00cc      	addiu	s0,sp,816
+    81c006a6:	81c0      	lb	a2,0(s1)
+    81c006a8:	b202      	lw	v0,0x81c006b0
+    81c006aa:	e820      	jr	ra
+    81c006ac:	6500      	nop
+    81c006ae:	6500      	nop
+    81c006b0:	0704      	addiu	a3,sp,16
+    81c006b2:	81c0      	lb	a2,0(s1)
+    81c006b4:	6aff      	li	v0,255
+    81c006b6:	ea8c      	and	v0,a0
+    81c006b8:	6b00      	li	v1,0
+    81c006ba:	b607      	lw	a2,0x81c006d4
+    81c006bc:	e3d5      	addu	a1,v1,a2
+    81c006be:	a580      	lbu	a0,0(a1)
+    81c006c0:	ec4e      	xor	a0,v0
+    81c006c2:	2c03      	bnez	a0,0x81c006cb
+    81c006c4:	6aff      	li	v0,255
+    81c006c6:	e820      	jr	ra
+    81c006c8:	ea6c      	and	v0,v1
+    81c006ca:	4b01      	addiu	v1,1
+    81c006cc:	7340      	cmpi	v1,64
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c006d0:	6affe820 	ldl	ra,-6112(s7)
 81c006d4:	81c00734 	lb	zero,1844(t6)
 81c006d8:	6a02b303 	ldl	v0,-19709(s0)
 81c006dc:	e820dc60 	swc2	$0,-9120(at)
 81c006e0:	6500dd40 	daddiu	zero,t0,-8896
 81c006e4:	81c00774 	lb	zero,1908(t6)
-81c006e8:	620563fd 	daddi	a1,s0,25597
-81c006ec:	01f81a03 	0x1f81a03
-81c006f0:	97056500 	lhu	a1,25856(t8)
-81c006f4:	b303324c 	sdl	v1,12876(t8)
-81c006f8:	ef00e349 	swc3	$0,-7351(t8)
-81c006fc:	65006303 	daddiu	zero,t0,25347
-81c00700:	81c0070c 	lb	zero,1804(t6)
-81c00704:	100a2206 	beq	zero,t2,0x81c08f20
-81c00708:	00010011 	0x10011
-81c0070c:	100f040d 	beq	zero,t7,0x81c01744
-81c00710:	00302015 	0x302015
-81c00714:	100f040d 	beq	zero,t7,0x81c0174c
-81c00718:	00302015 	0x302015
-81c0071c:	100f000d 	beq	zero,t7,0x81c00754
-81c00720:	00302015 	0x302015
-81c00724:	100e000d 	beq	zero,t6,0x81c0075c
-81c00728:	00300015 	0x300015
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c006e8:	63fd      	addiu	sp,-24
+    81c006ea:	6205      	sw	ra,20(sp)
+    81c006ec:	1a03 01f8 	jal	0x81c007e1
+    81c006f0:	6500      	nop
+    81c006f2:	9705      	lw	a3,20(sp)
+    81c006f4:	324c      	sll	v0,3
+    81c006f6:	b303      	lw	v1,0x81c00700
+    81c006f8:	e349      	addu	v0,v1,v0
+    81c006fa:	ef00      	jr	a3
+    81c006fc:	6303      	addiu	sp,24
+    81c006fe:	6500      	nop
+    81c00700:	070c      	addiu	a3,sp,48
+    81c00702:	81c0      	lb	a2,0(s1)
+    81c00704:	2206      	beqz	v0,0x81c00713
+    81c00706:	100a      	b	0x81c0071d
+    81c00708:	0011      	addiu	s0,sp,68
+    81c0070a:	0001      	addiu	s0,sp,4
+    81c0070c:	040d      	addiu	a0,sp,52
+    81c0070e:	100f      	b	0x81c0072f
+    81c00710:	2015      	beqz	s0,0x81c0073d
+    81c00712:	0030      	addiu	s0,sp,192
+    81c00714:	040d      	addiu	a0,sp,52
+    81c00716:	100f      	b	0x81c00737
+    81c00718:	2015      	beqz	s0,0x81c00745
+    81c0071a:	0030      	addiu	s0,sp,192
+    81c0071c:	000d      	addiu	s0,sp,52
+    81c0071e:	100f      	b	0x81c0073f
+    81c00720:	2015      	beqz	s0,0x81c0074d
+    81c00722:	0030      	addiu	s0,sp,192
+    81c00724:	000d      	addiu	s0,sp,52
+    81c00726:	100e      	b	0x81c00745
+    81c00728:	0015      	addiu	s0,sp,84
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c0072c:	100e000d 	beq	zero,t6,0x81c00764
 81c00730:	00302015 	0x302015
 81c00734:	3134372a 	andi	s4,t1,0x372a
@@ -347,29 +390,61 @@ Disassembly of section .data:
 81c007c8:	6500da64 	daddiu	zero,t0,-9628
 81c007cc:	ebc00e28 	swc2	$0,3624(s8)
 81c007d0:	81c00220 	lb	zero,544(t6)
-81c007d4:	e820b202 	swc2	$0,-19966(at)
-81c007d8:	6500c298 	daddiu	zero,t0,-15720
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c007d4:	b202      	lw	v0,0x81c007dc
+    81c007d6:	e820      	jr	ra
+    81c007d8:	c298      	sb	a0,24(v0)
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c007dc:	81c00220 	lb	zero,544(t6)
 81c007e0:	e820b202 	swc2	$0,-19966(at)
 81c007e4:	6500a258 	daddiu	zero,t0,-23976
 81c007e8:	81c00220 	lb	zero,544(t6)
-81c007ec:	63fdb233 	daddi	sp,ra,-19917
-81c007f0:	6205b333 	daddi	a1,s0,-19661
-81c007f4:	9b60ec4a 	lwr	zero,-5046(k1)
-81c007f8:	6d46610c 	ldr	a2,24844(t2)
-81c007fc:	b732b631 	sdr	s2,-18895(t9)
-81c00800:	deb4dee0 	ld	s4,-8480(s5)
-81c00804:	1a03b531 	0x1a03b531
-81c00808:	dea001f0 	ld	zero,496(s5)
-81c0080c:	ef009705 	swc3	$0,-26875(t8)
-81c00810:	ea836303 	swc2	$3,25347(s4)
-81c00814:	b22e6010 	sdl	t6,24592(s1)
-81c00818:	601aec4a 	daddi	k0,zero,-5046
-81c0081c:	6138ea83 	daddi	t8,t1,-5501
-81c00820:	ea8eb22c 	swc2	$14,-19924(s4)
-81c00824:	b52c2226 	sdr	t4,8742(t1)
-81c00828:	2541ed8e 	addiu	at,t2,-4722
-81c0082c:	ee8eb62b 	swc3	$14,-18901(s4)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c007ec:	b233      	lw	v0,0x81c008b8
+    81c007ee:	63fd      	addiu	sp,-24
+    81c007f0:	b333      	lw	v1,0x81c008bc
+    81c007f2:	6205      	sw	ra,20(sp)
+    81c007f4:	ec4a      	cmp	a0,v0
+    81c007f6:	9b60      	lw	v1,0(v1)
+    81c007f8:	610c      	btnez	0x81c00813
+    81c007fa:	6d46      	li	a1,70
+    81c007fc:	b631      	lw	a2,0x81c008c0
+    81c007fe:	b732      	lw	a3,0x81c008c4
+    81c00800:	dee0      	sw	a3,0(a2)
+    81c00802:	deb4      	sw	a1,80(a2)
+    81c00804:	b531      	lw	a1,0x81c008c8
+    81c00806:	1a03 01f0 	jal	0x81c007c1
+    81c0080a:	dea0      	sw	a1,0(a2)
+    81c0080c:	9705      	lw	a3,20(sp)
+    81c0080e:	ef00      	jr	a3
+    81c00810:	6303      	addiu	sp,24
+    81c00812:	ea83      	sltu	v0,a0
+    81c00814:	6010      	bteqz	0x81c00837
+    81c00816:	b22e      	lw	v0,0x81c008cc
+    81c00818:	ec4a      	cmp	a0,v0
+    81c0081a:	601a      	bteqz	0x81c00851
+    81c0081c:	ea83      	sltu	v0,a0
+    81c0081e:	6138      	btnez	0x81c00891
+    81c00820:	b22c      	lw	v0,0x81c008d0
+    81c00822:	ea8e      	xor	v0,a0
+    81c00824:	2226      	beqz	v0,0x81c00873
+    81c00826:	b52c      	lw	a1,0x81c008d4
+    81c00828:	ed8e      	xor	a1,a0
+    81c0082a:	2541      	beqz	a1,0x81c008af
+    81c0082c:	b62b      	lw	a2,0x81c008d8
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c00830:	6d472e13 	ldr	a3,11795(t2)
 81c00834:	b22a17e3 	sdl	t2,6115(s1)
 81c00838:	600cec4a 	daddi	t4,zero,-5046
@@ -499,41 +574,83 @@ Disassembly of section .data:
 81c00a28:	81c05574 	lb	zero,21876(t6)
 81c00a2c:	a18c0000 	sb	t4,0(t4)
 81c00a30:	a8000000 	swl	zero,0(zero)
-81c00a34:	620963fb 	daddi	t1,s0,25595
-81c00a38:	d007d108 	lld	a3,-12024(zero)
-81c00a3c:	9b40b313 	lwr	zero,-19693(k0)
-81c00a40:	9a20d40a 	lwr	zero,-11254(s1)
-81c00a44:	03c21a03 	0x3c21a03
-81c00a48:	67626800 	daddiu	v0,k1,26624
-81c00a4c:	1a031008 	0x1a031008
-81c00a50:	d30403c2 	lld	a0,962(t8)
-81c00a54:	e2739304 	sc	s3,-27900(s3)
-81c00a58:	61015c05 	daddi	at,t0,23557
-81c00a5c:	b40c6801 	sdr	t4,26625(zero)
-81c00a60:	9cc26d01 	lwu	v0,27905(a2)
-81c00a64:	2e03eeac 	sltiu	v1,s0,-4436
-81c00a68:	674520f2 	daddiu	a1,k0,8434
-81c00a6c:	67501004 	daddiu	s0,k0,4100
-81c00a70:	950a2802 	lhu	t2,10242(t0)
-81c00a74:	b005dca2 	sdl	a1,-9054(zero)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c00a34:	63fb      	addiu	sp,-40
+    81c00a36:	6209      	sw	ra,36(sp)
+    81c00a38:	d108      	sw	s1,32(sp)
+    81c00a3a:	d007      	sw	s0,28(sp)
+    81c00a3c:	b313      	lw	v1,0x81c00a88
+    81c00a3e:	9b40      	lw	v0,0(v1)
+    81c00a40:	d40a      	sw	a0,40(sp)
+    81c00a42:	9a20      	lw	s1,0(v0)
+    81c00a44:	1a03 03c2 	jal	0x81c00f09
+    81c00a48:	6800      	li	s0,0
+    81c00a4a:	6762      	move	v1,v0
+    81c00a4c:	1008      	b	0x81c00a5f
+    81c00a4e:	1a03 03c2 	jal	0x81c00f09
+    81c00a52:	d304      	sw	v1,16(sp)
+    81c00a54:	9304      	lw	v1,16(sp)
+    81c00a56:	e273      	subu	a0,v0,v1
+    81c00a58:	5c05      	sltiu	a0,5
+    81c00a5a:	6101      	btnez	0x81c00a5f
+    81c00a5c:	6801      	li	s0,1
+    81c00a5e:	b40c      	lw	a0,0x81c00a8c
+    81c00a60:	6d01      	li	a1,1
+    81c00a62:	9cc2      	lw	a2,8(a0)
+    81c00a64:	eeac      	and	a2,a1
+    81c00a66:	2e03      	bnez	a2,0x81c00a6f
+    81c00a68:	20f2      	beqz	s0,0x81c00a4f
+    81c00a6a:	6745      	move	v0,a1
+    81c00a6c:	1004      	b	0x81c00a77
+    81c00a6e:	6750      	move	v0,s0
+    81c00a70:	2802      	bnez	s0,0x81c00a77
+    81c00a72:	950a      	lw	a1,40(sp)
+    81c00a74:	dca2      	sw	a1,8(a0)
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c00a78:	df2098e0 	ld	zero,-26400(t9)
 81c00a7c:	91089709 	lbu	t0,-26871(t0)
 81c00a80:	ef009007 	swc3	$0,-28665(t8)
 81c00a84:	65006305 	daddiu	zero,t0,25349
 81c00a88:	81c05574 	lb	zero,21876(t6)
 81c00a8c:	a1a3f000 	sb	v1,-4096(t5)
-81c00a90:	b50db20c 	sdr	t5,-19956(t0)
-81c00a94:	6f01b30d 	ldr	at,-19699(t8)
-81c00a98:	6c00b60d 	ldr	zero,-18931(zero)
-81c00a9c:	daa0c6e0 	ldc2	$0,-14624(s5)
-81c00aa0:	da71da91 	ldc2	$17,-9583(s3)
-81c00aa4:	b40bb207 	sdr	t3,-19961(zero)
-81c00aa8:	eb8c9a72 	swc2	$12,-25998(gp)
-81c00aac:	9af123fb 	lwr	s1,9211(s7)
-81c00ab0:	b60ab309 	sdr	t2,-19703(s0)
-81c00ab4:	ef6db50a 	swc3	$13,-19190(k1)
-81c00ab8:	dad2daf1 	ldc2	$18,-9487(s6)
-81c00abc:	daa0e820 	ldc2	$0,-6112(s5)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c00a90:	b20c      	lw	v0,0x81c00ac0
+    81c00a92:	b50d      	lw	a1,0x81c00ac4
+    81c00a94:	b30d      	lw	v1,0x81c00ac8
+    81c00a96:	6f01      	li	a3,1
+    81c00a98:	b60d      	lw	a2,0x81c00acc
+    81c00a9a:	6c00      	li	a0,0
+    81c00a9c:	c6e0      	sb	a3,0(a2)
+    81c00a9e:	daa0      	sw	a1,0(v0)
+    81c00aa0:	da91      	sw	a0,68(v0)
+    81c00aa2:	da71      	sw	v1,68(v0)
+    81c00aa4:	b207      	lw	v0,0x81c00ac0
+    81c00aa6:	b40b      	lw	a0,0x81c00ad0
+    81c00aa8:	9a72      	lw	v1,72(v0)
+    81c00aaa:	eb8c      	and	v1,a0
+    81c00aac:	23fb      	beqz	v1,0x81c00aa5
+    81c00aae:	9af1      	lw	a3,68(v0)
+    81c00ab0:	b309      	lw	v1,0x81c00ad4
+    81c00ab2:	b60a      	lw	a2,0x81c00ad8
+    81c00ab4:	b50a      	lw	a1,0x81c00adc
+    81c00ab6:	ef6d      	or	a3,v1
+    81c00ab8:	daf1      	sw	a3,68(v0)
+    81c00aba:	dad2      	sw	a2,72(v0)
+    81c00abc:	e820      	jr	ra
+    81c00abe:	daa0      	sw	a1,0(v0)
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c00ac0:	a1a00000 	sb	zero,0(t5)
 81c00ac4:	00a50001 	0xa50001
 81c00ac8:	00110011 	0x110011
@@ -554,29 +671,63 @@ Disassembly of section .data:
 81c00b04:	e820eacc 	swc2	$0,-5428(at)
 81c00b08:	65006500 	daddiu	zero,t0,25856
 81c00b0c:	a1a24000 	sb	v0,16384(t5)
-81c00b10:	9a45b205 	lwr	a1,-19963(s2)
-81c00b14:	9ea5b604 	lwu	a1,-18940(s5)
-81c00b18:	eb83e54f 	swc2	$3,-6833(gp)
-81c00b1c:	e82061fb 	swc2	$0,25083(at)
-81c00b20:	65006500 	daddiu	zero,t0,25856
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c00b10:	b205      	lw	v0,0x81c00b24
+    81c00b12:	9a45      	lw	v0,20(v0)
+    81c00b14:	b604      	lw	a2,0x81c00b24
+    81c00b16:	9ea5      	lw	a1,20(a2)
+    81c00b18:	e54f      	subu	v1,a1,v0
+    81c00b1a:	eb83      	sltu	v1,a0
+    81c00b1c:	61fb      	btnez	0x81c00b15
+    81c00b1e:	e820      	jr	ra
+    81c00b20:	6500      	nop
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c00b24:	a1a02000 	sb	zero,8192(t5)
-81c00b28:	620563fd 	daddi	a1,s0,25597
-81c00b2c:	e8452c01 	swc2	$5,11265(v0)
-81c00b30:	1a03b506 	0x1a03b506
-81c00b34:	65000274 	daddiu	zero,t0,628
-81c00b38:	f008b205 	scd	t0,-19963(zero)
-81c00b3c:	da606b00 	ldc2	$0,27392(s3)
-81c00b40:	ef009705 	swc3	$0,-26875(t8)
-81c00b44:	65006303 	daddiu	zero,t0,25347
-81c00b48:	81c00f15 	lb	zero,3861(t6)
-81c00b4c:	a1a04410 	sb	zero,17424(t5)
-81c00b50:	3c0681c1 	lui	a2,0x81c1
-81c00b54:	3c0581c0 	lui	a1,0x81c0
-81c00b58:	24c3fffc 	addiu	v1,a2,-4
-81c00b5c:	aca300c4 	sw	v1,196(a1)
-81c00b60:	27bdffe8 	addiu	sp,sp,-24
-81c00b64:	afbf0014 	sw	ra,20(sp)
-81c00b68:	8ca200c4 	lw	v0,196(a1)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c00b28:	63fd      	addiu	sp,-24
+    81c00b2a:	6205      	sw	ra,20(sp)
+    81c00b2c:	2c01      	bnez	a0,0x81c00b31
+    81c00b2e:	e845      	break	2
+    81c00b30:	b506      	lw	a1,0x81c00b48
+    81c00b32:	1a03 0274 	jal	0x81c009d1
+    81c00b36:	6500      	nop
+    81c00b38:	b205      	lw	v0,0x81c00b4c
+    81c00b3a:	f008 6b00 	li	v1,16384
+    81c00b3e:	da60      	sw	v1,0(v0)
+    81c00b40:	9705      	lw	a3,20(sp)
+    81c00b42:	ef00      	jr	a3
+    81c00b44:	6303      	addiu	sp,24
+    81c00b46:	6500      	nop
+    81c00b48:	0f15      	la	a3,0x81c00b9c
+    81c00b4a:	81c0      	lb	a2,0(s1)
+    81c00b4c:	4410      	daddiu	s0,a0,0
+    81c00b4e:	a1a0      	lbu	a1,0(s1)
+    81c00b50:	81c1      	lb	a2,1(s1)
+    81c00b52:	3c06      	ld	s0,48(a0)
+    81c00b54:	81c0      	lb	a2,0(s1)
+    81c00b56:	3c05      	ld	s0,40(a0)
+    81c00b58:	fffc      	daddiu	a3,sp,112
+    81c00b5a:	24c3      	beqz	a0,0x81c00ae3
+    81c00b5c:	00c4      	addiu	s0,sp,784
+    81c00b5e:	aca3      	lhu	a1,6(a0)
+    81c00b60:	ffe8      	daddiu	a3,sp,32
+    81c00b62:	27bd      	beqz	a3,0x81c00adf
+    81c00b64:	0014      	addiu	s0,sp,80
+    81c00b66:	afbf      	lhu	a1,62(a3)
+    81c00b68:	00c4      	addiu	s0,sp,784
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c00b6c:	00000000 	nop
 81c00b70:	0c7002f0 	jal	0x81c00bc0
 81c00b74:	0040e821 	move	sp,v0
@@ -588,7 +739,6 @@ Disassembly of section .data:
 81c00b8c:	27bdffe8 	addiu	sp,sp,-24
 81c00b90:	afbf0014 	sw	ra,20(sp)
 81c00b94:	0001000d 	break	0x1
-	...
 81c00ba4:	00002021 	move	a0,zero
 81c00ba8:	0c700473 	jal	0x81c011cc
 81c00bac:	00002821 	move	a1,zero
@@ -894,23 +1044,41 @@ Disassembly of section .data:
 81c0105c:	a1a00000 	sb	zero,0(t5)
 81c01060:	00a50001 	0xa50001
 81c01064:	80000000 	lb	zero,0(zero)
-81c01068:	d00463fd 	lld	a0,25597(zero)
-81c0106c:	1a036205 	0x1a036205
-81c01070:	650003c2 	daddiu	zero,t0,962
-81c01074:	1a036c01 	0x1a036c01
-81c01078:	6702067c 	daddiu	v0,t8,1660
-81c0107c:	03c21a03 	0x3c21a03
-81c01080:	f7436500 	sdc1	$f3,25856(k0)
-81c01084:	ea634060 	swc2	$3,16480(s3)
-81c01088:	1a0361f9 	0x1a0361f9
-81c0108c:	6c00067c 	ldr	zero,1660(zero)
-81c01090:	040f1a03 	0x40f1a03
-81c01094:	97056500 	lhu	a1,25856(t8)
-81c01098:	ef009004 	swc3	$0,-28668(t8)
-81c0109c:	65006303 	daddiu	zero,t0,25347
-81c010a0:	27bdffd8 	addiu	sp,sp,-40
-81c010a4:	3c0281c0 	lui	v0,0x81c0
-81c010a8:	3c0881c0 	lui	t0,0x81c0
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c01068:	63fd      	addiu	sp,-24
+    81c0106a:	d004      	sw	s0,16(sp)
+    81c0106c:	6205      	sw	ra,20(sp)
+    81c0106e:	1a03 03c2 	jal	0x81c00f09
+    81c01072:	6500      	nop
+    81c01074:	6c01      	li	a0,1
+    81c01076:	1a03 067c 	jal	0x81c019f1
+    81c0107a:	6702      	move	s0,v0
+    81c0107c:	1a03 03c2 	jal	0x81c00f09
+    81c01080:	6500      	nop
+    81c01082:	f743 4060 	addiu	v1,s0,8000
+    81c01086:	ea63      	sltu	v0,v1
+    81c01088:	61f9      	btnez	0x81c0107d
+    81c0108a:	1a03 067c 	jal	0x81c019f1
+    81c0108e:	6c00      	li	a0,0
+    81c01090:	1a03 040f 	jal	0x81c0103d
+    81c01094:	6500      	nop
+    81c01096:	9705      	lw	a3,20(sp)
+    81c01098:	9004      	lw	s0,16(sp)
+    81c0109a:	ef00      	jr	a3
+    81c0109c:	6303      	addiu	sp,24
+    81c0109e:	6500      	nop
+    81c010a0:	ffd8      	daddiu	a2,sp,96
+    81c010a2:	27bd      	beqz	a3,0x81c0101f
+    81c010a4:	81c0      	lb	a2,0(s1)
+    81c010a6:	3c02      	ld	s0,16(a0)
+    81c010a8:	81c0      	lb	a2,0(s1)
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c010ac:	3c0781c0 	lui	a3,0x81c0
 81c010b0:	3c0681c0 	lui	a2,0x81c0
 81c010b4:	afbf0024 	sw	ra,36(sp)
@@ -1484,7 +1652,16 @@ Disassembly of section .data:
 81c01994:	afa00038 	sw	zero,56(sp)
 81c01998:	6500e820 	daddiu	zero,t0,-6112
 81c0199c:	6500e820 	daddiu	zero,t0,-6112
-81c019a0:	6a00e820 	ldl	zero,-6112(s0)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c019a0:	e820      	jr	ra
+    81c019a2:	6a00      	li	v0,0
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c019a4:	6500e820 	daddiu	zero,t0,-6112
 81c019a8:	6a00e820 	ldl	zero,-6112(s0)
 81c019ac:	6500e820 	daddiu	zero,t0,-6112
@@ -1533,8 +1710,17 @@ Disassembly of section .data:
 81c01a58:	6500e820 	daddiu	zero,t0,-6112
 81c01a5c:	6500e820 	daddiu	zero,t0,-6112
 81c01a60:	6500e820 	daddiu	zero,t0,-6112
-81c01a64:	e820b202 	swc2	$0,-19966(at)
-81c01a68:	65006500 	daddiu	zero,t0,25856
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c01a64:	b202      	lw	v0,0x81c01a6c
+    81c01a66:	e820      	jr	ra
+    81c01a68:	6500      	nop
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c01a6c:	81c055cc 	lb	zero,21964(t6)
 81c01a70:	e820b202 	swc2	$0,-19966(at)
 81c01a74:	65006500 	daddiu	zero,t0,25856
@@ -1605,10 +1791,22 @@ Disassembly of section .data:
 81c01b78:	81c05acc 	lb	zero,23244(t6)
 81c01b7c:	81c05ad0 	lb	zero,23248(t6)
 81c01b80:	81c05ac8 	lb	zero,23240(t6)
-81c01b84:	9eabb604 	lwu	t3,-18940(s5)
-81c01b88:	326233a2 	andi	v0,s3,0x33a2
-81c01b8c:	c461c4a0 	lwc1	$f1,-15200(v1)
-81c01b90:	c442e820 	lwc1	$f2,-6112(v0)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c01b84:	b604      	lw	a2,0x81c01b94
+    81c01b86:	9eab      	lw	a1,44(a2)
+    81c01b88:	33a2      	srl	v1,a1,8
+    81c01b8a:	3262      	srl	v0,v1,8
+    81c01b8c:	c4a0      	sb	a1,0(a0)
+    81c01b8e:	c461      	sb	v1,1(a0)
+    81c01b90:	e820      	jr	ra
+    81c01b92:	c442      	sb	v0,2(a0)
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c01b94:	a1a08000 	sb	zero,-32768(t5)
 81c01b98:	d10863fb 	lld	t0,25595(t0)
 81c01b9c:	d007b11e 	lld	a3,-20194(zero)
@@ -1647,23 +1845,45 @@ Disassembly of section .data:
 81c01c20:	81c05ad0 	lb	zero,23248(t6)
 81c01c24:	0003ffff 	dsra32	ra,v1,0x1f
 81c01c28:	00100010 	0x100010
-81c01c2c:	d00d63f8 	lld	t5,25592(zero)
-81c01c30:	d10e620f 	lld	t6,25103(t0)
-81c01c34:	9a40b225 	lwr	zero,-19931(s2)
-81c01c38:	72016b00 	0x72016b00
-81c01c3c:	d3046704 	lld	a0,26372(t8)
-81c01c40:	d306d305 	lld	a2,-11515(t8)
-81c01c44:	d308d307 	lld	t0,-11513(t8)
-81c01c48:	d30ad309 	lld	t2,-11511(t8)
-81c01c4c:	22066004 	addi	a2,s0,24580
-81c01c50:	60045a04 	daddi	a0,zero,23044
-81c01c54:	1a031033 	0x1a031033
-81c01c58:	040406b6 	0x40406b6
-81c01c5c:	6d01b11c 	ldr	at,-20196(t0)
-81c01c60:	ecac9980 	swc3	$12,-26240(a1)
-81c01c64:	b51b242b 	sdr	k1,9259(t0)
-81c01c68:	1a036c11 	0x1a036c11
-81c01c6c:	6e000900 	ldr	zero,2304(s0)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c01c2c:	63f8      	addiu	sp,-64
+    81c01c2e:	d00d      	sw	s0,52(sp)
+    81c01c30:	620f      	sw	ra,60(sp)
+    81c01c32:	d10e      	sw	s1,56(sp)
+    81c01c34:	b225      	lw	v0,0x81c01cc8
+    81c01c36:	9a40      	lw	v0,0(v0)
+    81c01c38:	6b00      	li	v1,0
+    81c01c3a:	7201      	cmpi	v0,1
+    81c01c3c:	6704      	move	s0,a0
+    81c01c3e:	d304      	sw	v1,16(sp)
+    81c01c40:	d305      	sw	v1,20(sp)
+    81c01c42:	d306      	sw	v1,24(sp)
+    81c01c44:	d307      	sw	v1,28(sp)
+    81c01c46:	d308      	sw	v1,32(sp)
+    81c01c48:	d309      	sw	v1,36(sp)
+    81c01c4a:	d30a      	sw	v1,40(sp)
+    81c01c4c:	6004      	bteqz	0x81c01c57
+    81c01c4e:	2206      	beqz	v0,0x81c01c5d
+    81c01c50:	5a04      	sltiu	v0,4
+    81c01c52:	6004      	bteqz	0x81c01c5d
+    81c01c54:	1033      	b	0x81c01cbd
+    81c01c56:	1a03 06b6 	jal	0x81c01ad9
+    81c01c5a:	0404      	addiu	a0,sp,16
+    81c01c5c:	b11c      	lw	s1,0x81c01ccc
+    81c01c5e:	6d01      	li	a1,1
+    81c01c60:	9980      	lw	a0,0(s1)
+    81c01c62:	ecac      	and	a0,a1
+    81c01c64:	242b      	beqz	a0,0x81c01cbd
+    81c01c66:	b51b      	lw	a1,0x81c01cd0
+    81c01c68:	6c11      	li	a0,17
+    81c01c6a:	1a03 0900 	jal	0x81c02401
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c01c70:	b7166a03 	sdr	s6,27139(t8)
 81c01c74:	98c2df40 	lwr	v0,-8384(a2)
 81c01c78:	ddc0b517 	ld	zero,-19177(t6)
@@ -1695,36 +1915,82 @@ Disassembly of section .data:
 81c01ce0:	e820b202 	swc2	$0,-19966(at)
 81c01ce4:	6500da82 	daddiu	zero,t0,-9598
 81c01ce8:	a18c0000 	sb	t4,0(t4)
-81c01cec:	60055c05 	daddi	a1,zero,23557
-81c01cf0:	b2043388 	sdl	a0,13192(s0)
-81c01cf4:	e820e271 	swc2	$0,-7567(at)
-81c01cf8:	e8209c40 	swc2	$0,-25536(at)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c01cec:	5c05      	sltiu	a0,5
+    81c01cee:	6005      	bteqz	0x81c01cfb
+    81c01cf0:	3388      	sll	v1,a0,2
+    81c01cf2:	b204      	lw	v0,0x81c01d00
+    81c01cf4:	e271      	addu	a0,v0,v1
+    81c01cf6:	e820      	jr	ra
+    81c01cf8:	9c40      	lw	v0,0(a0)
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c01cfc:	65006a00 	daddiu	zero,t0,27136
 81c01d00:	81c05784 	lb	zero,22404(t6)
-81c01d04:	6b01b407 	ldl	at,-19449(t8)
-81c01d08:	ea6c9c42 	swc2	$12,-25534(s3)
-81c01d0c:	b70622fb 	sdr	a2,8955(t8)
-81c01d10:	6e00f707 	ldr	zero,-2297(s0)
-81c01d14:	edcc9fa1 	swc3	$12,-24671(t6)
-81c01d18:	e8202dfa 	swc2	$0,11770(at)
-81c01d1c:	65006500 	daddiu	zero,t0,25856
-81c01d20:	a1a3f000 	sb	v1,-4096(t5)
-81c01d24:	a1a14000 	sb	at,16384(t5)
-81c01d28:	b407b206 	sdr	a3,-19962(zero)
-81c01d2c:	da606b00 	ldc2	$0,27392(s3)
-81c01d30:	4a08da61 	c2	0x8da61
-81c01d34:	61faea8a 	daddi	k0,t7,-5494
-81c01d38:	b204b402 	sdl	a0,-19454(s0)
-81c01d3c:	da80e820 	ldc2	$0,-6112(s4)
-81c01d40:	81c05ad4 	lb	zero,23252(t6)
-81c01d44:	81c05ba4 	lb	zero,23460(t6)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c01d04:	b407      	lw	a0,0x81c01d20
+    81c01d06:	6b01      	li	v1,1
+    81c01d08:	9c42      	lw	v0,8(a0)
+    81c01d0a:	ea6c      	and	v0,v1
+    81c01d0c:	22fb      	beqz	v0,0x81c01d05
+    81c01d0e:	b706      	lw	a3,0x81c01d24
+    81c01d10:	f707 6e00 	li	a2,16128
+    81c01d14:	9fa1      	lw	a1,4(a3)
+    81c01d16:	edcc      	and	a1,a2
+    81c01d18:	2dfa      	bnez	a1,0x81c01d0f
+    81c01d1a:	e820      	jr	ra
+    81c01d1c:	6500      	nop
+    81c01d1e:	6500      	nop
+    81c01d20:	f000 a1a3 	lbu	a1,3(s1)
+    81c01d24:	4000      	addiu	s0,s0,0
+    81c01d26:	a1a1      	lbu	a1,1(s1)
+    81c01d28:	b206      	lw	v0,0x81c01d40
+    81c01d2a:	b407      	lw	a0,0x81c01d44
+    81c01d2c:	6b00      	li	v1,0
+    81c01d2e:	da60      	sw	v1,0(v0)
+    81c01d30:	da61      	sw	v1,4(v0)
+    81c01d32:	4a08      	addiu	v0,8
+    81c01d34:	ea8a      	cmp	v0,a0
+    81c01d36:	61fa      	btnez	0x81c01d2d
+    81c01d38:	b402      	lw	a0,0x81c01d40
+    81c01d3a:	b204      	lw	v0,0x81c01d48
+    81c01d3c:	e820      	jr	ra
+    81c01d3e:	da80      	sw	a0,0(v0)
+    81c01d40:	5ad4      	sltiu	v0,212
+    81c01d42:	81c0      	lb	a2,0(s1)
+    81c01d44:	5ba4      	sltiu	v1,164
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c01d48:	81c0027c 	lb	zero,636(t6)
-81c01d4c:	6a055c1a 	ldl	a1,23578(s0)
-81c01d50:	b2056006 	sdl	a1,24582(s0)
-81c01d54:	e271338c 	sc	s1,13196(s3)
-81c01d58:	dcc1dca0 	ld	at,-9056(a2)
-81c01d5c:	e8206a00 	swc2	$0,27136(at)
-81c01d60:	65006500 	daddiu	zero,t0,25856
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c01d4c:	5c1a      	sltiu	a0,26
+    81c01d4e:	6a05      	li	v0,5
+    81c01d50:	6006      	bteqz	0x81c01d5f
+    81c01d52:	b205      	lw	v0,0x81c01d64
+    81c01d54:	338c      	sll	v1,a0,3
+    81c01d56:	e271      	addu	a0,v0,v1
+    81c01d58:	dca0      	sw	a1,0(a0)
+    81c01d5a:	dcc1      	sw	a2,4(a0)
+    81c01d5c:	6a00      	li	v0,0
+    81c01d5e:	e820      	jr	ra
+    81c01d60:	6500      	nop
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c01d64:	81c05ad4 	lb	zero,23252(t6)
 81c01d68:	d10863fb 	lld	t0,25595(t0)
 81c01d6c:	6209d007 	daddi	t1,s0,-12281
@@ -1878,10 +2144,21 @@ Disassembly of section .data:
 81c01fbc:	a1a00000 	sb	zero,0(t5)
 81c01fc0:	00a50001 	0xa50001
 81c01fc4:	00a50000 	0xa50000
-81c01fc8:	ea8c6aff 	swc2	$12,27391(s4)
-81c01fcc:	b409b308 	sdr	t1,-19704(zero)
-81c01fd0:	e8202a02 	swc2	$0,10754(at)
-81c01fd4:	b208db82 	sdl	t0,-9342(s0)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c01fc8:	6aff      	li	v0,255
+    81c01fca:	ea8c      	and	v0,a0
+    81c01fcc:	b308      	lw	v1,0x81c01fec
+    81c01fce:	b409      	lw	a0,0x81c01ff0
+    81c01fd0:	2a02      	bnez	v0,0x81c01fd7
+    81c01fd2:	e820      	jr	ra
+    81c01fd4:	db82      	sw	a0,8(v1)
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c01fd8:	9fa09ae0 	lwu	zero,-25888(sp)
 81c01fdc:	dbc0b607 	ldc2	$0,-18937(s8)
 81c01fe0:	b407db81 	sdr	a3,-9343(zero)
@@ -2148,23 +2425,46 @@ Disassembly of section .data:
 81c023f4:	81c0598c 	lb	zero,22924(t6)
 81c023f8:	0632ea00 	bltzall	s1,0x81bfcbfc
 81c023fc:	81c0586c 	lb	zero,22636(t6)
-81c02400:	d00763fb 	lld	a3,25595(zero)
-81c02404:	d1086209 	lld	t0,25097(t0)
-81c02408:	9b40b315 	lwr	zero,-19691(k0)
-81c0240c:	9a206704 	lwr	zero,26372(s1)
-81c02410:	6785b214 	daddiu	a1,gp,-19948
-81c02414:	6001eaa3 	daddi	at,zero,-5469
-81c02418:	1a036782 	0x1a036782
-81c0241c:	d604082c 	ldc1	$f4,2092(s0)
-81c02420:	e06db311 	sc	t5,-19695(v1)
-81c02424:	b611a380 	sdr	s1,-23680(s0)
-81c02428:	e6b13588 	swc1	$f17,13704(s5)
-81c0242c:	4fff9ce0 	c3	0x1ff9ce0
-81c02430:	3748dce0 	ori	t0,k0,0xdce0
-81c02434:	9ca0e6f1 	lwu	zero,-6415(a1)
-81c02438:	4d013708 	bc3t	0x81c1005c
-81c0243c:	c340dca0 	ll	zero,-9056(k0)
-81c02440:	b20b9604 	sdl	t3,-27132(s0)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c02400:	63fb      	addiu	sp,-40
+    81c02402:	d007      	sw	s0,28(sp)
+    81c02404:	6209      	sw	ra,36(sp)
+    81c02406:	d108      	sw	s1,32(sp)
+    81c02408:	b315      	lw	v1,0x81c0245c
+    81c0240a:	9b40      	lw	v0,0(v1)
+    81c0240c:	6704      	move	s0,a0
+    81c0240e:	9a20      	lw	s1,0(v0)
+    81c02410:	b214      	lw	v0,0x81c02460
+    81c02412:	6785      	move	a0,a1
+    81c02414:	eaa3      	sltu	v0,a1
+    81c02416:	6001      	bteqz	0x81c0241b
+    81c02418:	6782      	move	a0,v0
+    81c0241a:	1a03 082c 	jal	0x81c020b1
+    81c0241e:	d604      	sw	a2,16(sp)
+    81c02420:	b311      	lw	v1,0x81c02464
+    81c02422:	e06d      	addu	v1,s0,v1
+    81c02424:	a380      	lbu	a0,0(v1)
+    81c02426:	b611      	lw	a2,0x81c02468
+    81c02428:	3588      	sll	a1,a0,2
+    81c0242a:	e6b1      	addu	a0,a2,a1
+    81c0242c:	9ce0      	lw	a3,0(a0)
+    81c0242e:	4fff      	addiu	a3,-1
+    81c02430:	dce0      	sw	a3,0(a0)
+    81c02432:	3748      	sll	a3,v0,2
+    81c02434:	e6f1      	addu	a0,a2,a3
+    81c02436:	9ca0      	lw	a1,0(a0)
+    81c02438:	3708      	sll	a3,s0,2
+    81c0243a:	4d01      	addiu	a1,1
+    81c0243c:	dca0      	sw	a1,0(a0)
+    81c0243e:	c340      	sb	v0,0(v1)
+    81c02440:	9604      	lw	a2,16(sp)
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c02444:	1a03e2e1 	0x1a03e2e1
 81c02448:	d8c0089e 	ldc2	$0,2206(a2)
 81c0244c:	9d80b504 	lwu	zero,-19196(t4)
@@ -2176,23 +2476,41 @@ Disassembly of section .data:
 81c02464:	81c06ed8 	lb	zero,28376(t6)
 81c02468:	81c06f18 	lb	zero,28440(t6)
 81c0246c:	81c05ba4 	lb	zero,23460(t6)
-81c02470:	6c0263fd 	ldr	v0,25597(zero)
-81c02474:	6d02f705 	ldr	v0,-2299(t0)
-81c02478:	1a036205 	0x1a036205
-81c0247c:	d0040682 	lld	a0,1666(zero)
-81c02480:	067f1a03 	0x67f1a03
-81c02484:	b30c6c01 	sdl	t4,27649(t8)
-81c02488:	68019b40 	ldl	at,-25792(zero)
-81c0248c:	220dea0c 	addi	t5,s0,-5620
-81c02490:	f080b60a 	scd	zero,-18934(a0)
-81c02494:	b40a9ef8 	sdr	t2,-24840(zero)
-81c02498:	1a039ebe 	0x1a039ebe
-81c0249c:	eced066c 	swc3	$13,1644(a3)
-81c024a0:	9d80b508 	lwu	zero,-19192(t4)
-81c024a4:	066d1a03 	0x66d1a03
-81c024a8:	9705c406 	lhu	a1,-15354(t8)
-81c024ac:	ef009004 	swc3	$0,-28668(t8)
-81c024b0:	65006303 	daddiu	zero,t0,25347
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c02470:	63fd      	addiu	sp,-24
+    81c02472:	6c02      	li	a0,2
+    81c02474:	f705 6d02 	li	a1,12034
+    81c02478:	6205      	sw	ra,20(sp)
+    81c0247a:	1a03 0682 	jal	0x81c01a09
+    81c0247e:	d004      	sw	s0,16(sp)
+    81c02480:	1a03 067f 	jal	0x81c019fd
+    81c02484:	6c01      	li	a0,1
+    81c02486:	b30c      	lw	v1,0x81c024b4
+    81c02488:	9b40      	lw	v0,0(v1)
+    81c0248a:	6801      	li	s0,1
+    81c0248c:	ea0c      	and	v0,s0
+    81c0248e:	220d      	beqz	v0,0x81c024ab
+    81c02490:	b60a      	lw	a2,0x81c024b8
+    81c02492:	f080 9ef8 	lw	a3,152(a2)
+    81c02496:	b40a      	lw	a0,0x81c024bc
+    81c02498:	9ebe      	lw	a1,120(a2)
+    81c0249a:	1a03 066c 	jal	0x81c019b1
+    81c0249e:	eced      	or	a0,a3
+    81c024a0:	b508      	lw	a1,0x81c024c0
+    81c024a2:	9d80      	lw	a0,0(a1)
+    81c024a4:	1a03 066d 	jal	0x81c019b5
+    81c024a8:	c406      	sb	s0,6(a0)
+    81c024aa:	9705      	lw	a3,20(sp)
+    81c024ac:	9004      	lw	s0,16(sp)
+    81c024ae:	ef00      	jr	a3
+    81c024b0:	6303      	addiu	sp,24
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c024b4:	81c000c8 	lb	zero,200(t6)
 81c024b8:	a1c05a10 	sb	zero,23056(t6)
 81c024bc:	80000000 	lb	zero,0(zero)
@@ -2750,23 +3068,45 @@ Disassembly of section .data:
 81c02d5c:	0a2f1a03 	j	0x88bc680c
 81c02d60:	97056500 	lhu	a1,25856(t8)
 81c02d64:	6303ef00 	daddi	v1,t8,-4352
-81c02d68:	63fab24a 	daddi	k0,ra,-19894
-81c02d6c:	620bea83 	daddi	t3,s0,-5501
-81c02d70:	d009d10a 	lld	t1,-12022(zero)
-81c02d74:	d60ed50d 	ldc1	$f14,-10995(s0)
-81c02d78:	e8456001 	swc2	$5,24577(v0)
-81c02d7c:	b647b346 	sdr	a3,-19642(s2)
-81c02d80:	9e609b00 	lwu	zero,-25856(s3)
-81c02d84:	ea6be401 	swc2	$11,-7167(s3)
-81c02d88:	6d00940e 	ldr	zero,-27634(t0)
-81c02d8c:	dca0ea0c 	ld	zero,-5620(a1)
-81c02d90:	950d2240 	lhu	t5,8768(t0)
-81c02d94:	e0b1e265 	sc	s1,-7579(a1)
-81c02d98:	613bec23 	daddi	k1,t1,-5085
-81c02d9c:	6a1ff7ff 	ldl	ra,-2049(s0)
-81c02da0:	f7ffea6c 	sdc1	$f31,-5524(ra)
-81c02da4:	e90c691f 	swc2	$12,26911(t0)
-81c02da8:	ed4bd204 	swc3	$11,-11772(t2)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c02d68:	b24a      	lw	v0,0x81c02e90
+    81c02d6a:	63fa      	addiu	sp,-48
+    81c02d6c:	ea83      	sltu	v0,a0
+    81c02d6e:	620b      	sw	ra,44(sp)
+    81c02d70:	d10a      	sw	s1,40(sp)
+    81c02d72:	d009      	sw	s0,36(sp)
+    81c02d74:	d50d      	sw	a1,52(sp)
+    81c02d76:	d60e      	sw	a2,56(sp)
+    81c02d78:	6001      	bteqz	0x81c02d7d
+    81c02d7a:	e845      	break	2
+    81c02d7c:	b346      	lw	v1,0x81c02e94
+    81c02d7e:	b647      	lw	a2,0x81c02e98
+    81c02d80:	9b00      	lw	s0,0(v1)
+    81c02d82:	9e60      	lw	v1,0(a2)
+    81c02d84:	e401      	addu	s0,a0,s0
+    81c02d86:	ea6b      	neg	v0,v1
+    81c02d88:	940e      	lw	a0,56(sp)
+    81c02d8a:	6d00      	li	a1,0
+    81c02d8c:	ea0c      	and	v0,s0
+    81c02d8e:	dca0      	sw	a1,0(a0)
+    81c02d90:	2240      	beqz	v0,0x81c02e13
+    81c02d92:	950d      	lw	a1,52(sp)
+    81c02d94:	e265      	addu	s1,v0,v1
+    81c02d96:	e0b1      	addu	a0,s0,a1
+    81c02d98:	ec23      	sltu	a0,s1
+    81c02d9a:	613b      	btnez	0x81c02e13
+    81c02d9c:	f7ff 6a1f 	li	v0,65535
+    81c02da0:	ea6c      	and	v0,v1
+    81c02da2:	f7ff 691f 	li	s1,65535
+    81c02da6:	e90c      	and	s1,s0
+    81c02da8:	d204      	sw	v0,16(sp)
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c02dac:	9404ed2c 	lhu	a0,-4820(zero)
 81c02db0:	e4c5e53b 	swc1	$f5,-6853(a2)
 81c02db4:	6a1ff7ff 	ldl	ra,-2049(s0)
@@ -2827,23 +3167,46 @@ Disassembly of section .data:
 81c02e90:	003fffff 	0x3fffff
 81c02e94:	81c05c48 	lb	zero,23624(t6)
 81c02e98:	81c05990 	lb	zero,22928(t6)
-81c02e9c:	63fab230 	daddi	k0,ra,-19920
-81c02ea0:	d10aea83 	lld	t2,-5501(t0)
-81c02ea4:	620bd009 	daddi	t3,s0,-12279
-81c02ea8:	67056724 	daddiu	a1,t8,26404
-81c02eac:	e8456001 	swc2	$5,24577(v0)
-81c02eb0:	eb2cb32c 	swc2	$12,-19668(t9)
-81c02eb4:	e8452301 	swc2	$5,8961(v0)
-81c02eb8:	67912808 	daddiu	s1,gp,10248
-81c02ebc:	1a030504 	0x1a030504
-81c02ec0:	06050af8 	0x6050af8
-81c02ec4:	d4079405 	ldc1	$f7,-27643(zero)
-81c02ec8:	b5261012 	sdr	a2,4114(t1)
-81c02ecc:	ed0cd007 	swc3	$12,-12281(t0)
-81c02ed0:	e8452501 	swc2	$5,9473(v0)
-81c02ed4:	ee0eb624 	swc3	$14,-18908(s0)
-81c02ed8:	6790260a 	daddiu	s0,gp,9738
-81c02edc:	1a030504 	0x1a030504
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c02e9c:	b230      	lw	v0,0x81c02f5c
+    81c02e9e:	63fa      	addiu	sp,-48
+    81c02ea0:	ea83      	sltu	v0,a0
+    81c02ea2:	d10a      	sw	s1,40(sp)
+    81c02ea4:	d009      	sw	s0,36(sp)
+    81c02ea6:	620b      	sw	ra,44(sp)
+    81c02ea8:	6724      	move	s1,a0
+    81c02eaa:	6705      	move	s0,a1
+    81c02eac:	6001      	bteqz	0x81c02eb1
+    81c02eae:	e845      	break	2
+    81c02eb0:	b32c      	lw	v1,0x81c02f60
+    81c02eb2:	eb2c      	and	v1,s1
+    81c02eb4:	2301      	beqz	v1,0x81c02eb9
+    81c02eb6:	e845      	break	2
+    81c02eb8:	2808      	bnez	s0,0x81c02ecb
+    81c02eba:	6791      	move	a0,s1
+    81c02ebc:	0504      	addiu	a1,sp,16
+    81c02ebe:	1a03 0af8 	jal	0x81c02be1
+    81c02ec2:	0605      	addiu	a2,sp,20
+    81c02ec4:	9405      	lw	a0,20(sp)
+    81c02ec6:	d407      	sw	a0,28(sp)
+    81c02ec8:	1012      	b	0x81c02eef
+    81c02eca:	b526      	lw	a1,0x81c02f60
+    81c02ecc:	d007      	sw	s0,28(sp)
+    81c02ece:	ed0c      	and	a1,s0
+    81c02ed0:	2501      	beqz	a1,0x81c02ed5
+    81c02ed2:	e845      	break	2
+    81c02ed4:	b624      	lw	a2,0x81c02f64
+    81c02ed6:	ee0e      	xor	a2,s0
+    81c02ed8:	260a      	beqz	a2,0x81c02eef
+    81c02eda:	6790      	move	a0,s0
+    81c02edc:	0504      	addiu	a1,sp,16
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c02ee0:	06050af8 	0x6050af8
 81c02ee4:	e8ee9704 	swc2	$14,-26876(a3)
 81c02ee8:	e8452002 	swc2	$5,8194(v0)
@@ -2879,23 +3242,44 @@ Disassembly of section .data:
 81c02f60:	e0000000 	sc	zero,0(zero)
 81c02f64:	00400000 	0x400000
 81c02f68:	81c05c48 	lb	zero,23624(t6)
-81c02f6c:	63fdb212 	daddi	sp,ra,-19950
-81c02f70:	6205ea83 	daddi	a1,s0,-5501
-81c02f74:	6001d004 	daddi	at,zero,-12284
-81c02f78:	b310e845 	sdl	s0,-6075(t8)
-81c02f7c:	2301eb8c 	addi	at,t8,-5236
-81c02f80:	f580e845 	sdc1	$f0,-6075(t4)
-81c02f84:	6d073382 	ldr	a3,13186(t0)
-81c02f88:	5303ebac 	beql	t8,v1,0x81bfde3c
-81c02f8c:	6003b20c 	daddi	v1,zero,-19956
-81c02f90:	e4019a00 	swc1	$f1,-26112(zero)
-81c02f94:	9aa01009 	lwr	zero,4105(s5)
-81c02f98:	e26f6a03 	sc	t7,27139(s3)
-81c02f9c:	f580e4b9 	sdc1	$f0,-6983(t4)
-81c02fa0:	1a033760 	0x1a033760
-81c02fa4:	e6e10738 	swc1	$f1,1848(s7)
-81c02fa8:	67509705 	daddiu	s0,k0,-26875
-81c02fac:	ef009004 	swc3	$0,-28668(t8)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c02f6c:	b212      	lw	v0,0x81c02fb4
+    81c02f6e:	63fd      	addiu	sp,-24
+    81c02f70:	ea83      	sltu	v0,a0
+    81c02f72:	6205      	sw	ra,20(sp)
+    81c02f74:	d004      	sw	s0,16(sp)
+    81c02f76:	6001      	bteqz	0x81c02f7b
+    81c02f78:	e845      	break	2
+    81c02f7a:	b310      	lw	v1,0x81c02fb8
+    81c02f7c:	eb8c      	and	v1,a0
+    81c02f7e:	2301      	beqz	v1,0x81c02f83
+    81c02f80:	e845      	break	2
+    81c02f82:	f580 3382 	srl	v1,a0,22
+    81c02f86:	6d07      	li	a1,7
+    81c02f88:	ebac      	and	v1,a1
+    81c02f8a:	5303      	slti	v1,3
+    81c02f8c:	b20c      	lw	v0,0x81c02fbc
+    81c02f8e:	6003      	bteqz	0x81c02f97
+    81c02f90:	9a00      	lw	s0,0(v0)
+    81c02f92:	e401      	addu	s0,a0,s0
+    81c02f94:	1009      	b	0x81c02fa9
+    81c02f96:	9aa0      	lw	a1,0(v0)
+    81c02f98:	6a03      	li	v0,3
+    81c02f9a:	e26f      	subu	v1,v0,v1
+    81c02f9c:	e4b9      	addu	a2,a0,a1
+    81c02f9e:	f580 3760 	sll	a3,v1,22
+    81c02fa2:	1a03 0738 	jal	0x81c01ce1
+    81c02fa6:	e6e1      	addu	s0,a2,a3
+    81c02fa8:	9705      	lw	a3,20(sp)
+    81c02faa:	6750      	move	v0,s0
+    81c02fac:	9004      	lw	s0,16(sp)
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c02fb0:	65006303 	daddiu	zero,t0,25347
 81c02fb4:	003fffff 	0x3fffff
 81c02fb8:	e0000000 	sc	zero,0(zero)
@@ -3037,23 +3421,42 @@ Disassembly of section .data:
 81c031d8:	65006305 	daddiu	zero,t0,25349
 81c031dc:	a1a2501c 	sb	v0,20508(t5)
 81c031e0:	a1a25014 	sb	v0,20500(t5)
-81c031e4:	d00463fd 	lld	a0,25597(zero)
-81c031e8:	67046205 	daddiu	a0,t8,25093
-81c031ec:	e8452c01 	swc2	$5,11265(v0)
-81c031f0:	6d09b44a 	ldr	t1,-19382(t0)
-81c031f4:	6c01dca0 	ldr	at,-9056(zero)
-81c031f8:	67a46f00 	daddiu	a0,sp,28416
-81c031fc:	0c5f1a03 	jal	0x817c680c
-81c03200:	b4476e02 	sdr	a3,28162(v0)
-81c03204:	1a0367b0 	0x1a0367b0
-81c03208:	6e000280 	ldr	zero,640(s0)
-81c0320c:	b446b345 	sdr	a2,-19643(v0)
-81c03210:	1b03b046 	0x1b03b046
-81c03214:	db40040c 	ldc2	$0,1036(k0)
-81c03218:	040c1b03 	teqi	zero,6915
-81c0321c:	1b039880 	0x1b039880
-81c03220:	9881040c 	lwr	at,1036(a0)
-81c03224:	040c1b03 	teqi	zero,6915
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c031e4:	63fd      	addiu	sp,-24
+    81c031e6:	d004      	sw	s0,16(sp)
+    81c031e8:	6205      	sw	ra,20(sp)
+    81c031ea:	6704      	move	s0,a0
+    81c031ec:	2c01      	bnez	a0,0x81c031f1
+    81c031ee:	e845      	break	2
+    81c031f0:	b44a      	lw	a0,0x81c03318
+    81c031f2:	6d09      	li	a1,9
+    81c031f4:	dca0      	sw	a1,0(a0)
+    81c031f6:	6c01      	li	a0,1
+    81c031f8:	6f00      	li	a3,0
+    81c031fa:	67a4      	move	a1,a0
+    81c031fc:	1a03 0c5f 	jal	0x81c0317d
+    81c03200:	6e02      	li	a2,2
+    81c03202:	b447      	lw	a0,0x81c0331c
+    81c03204:	67b0      	move	a1,s0
+    81c03206:	1a03 0280 	jal	0x81c00a01
+    81c0320a:	6e00      	li	a2,0
+    81c0320c:	b345      	lw	v1,0x81c03320
+    81c0320e:	b446      	lw	a0,0x81c03324
+    81c03210:	b046      	lw	s0,0x81c03328
+    81c03212:	1b03 040c 	jal	0x81e01031
+    81c03216:	db40      	sw	v0,0(v1)
+    81c03218:	1b03 040c 	jal	0x81e01031
+    81c0321c:	9880      	lw	a0,0(s0)
+    81c0321e:	1b03 040c 	jal	0x81e01031
+    81c03222:	9881      	lw	a0,4(s0)
+    81c03224:	1b03 040c 	jal	0x81e01031
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c03228:	98409882 	lwr	zero,-26494(v0)
 81c0322c:	6111721c 	daddi	s1,t0,29212
 81c03230:	1b03b43f 	0x1b03b43f
@@ -3512,31 +3915,61 @@ Disassembly of section .data:
 81c03944:	00050004 	sllv	zero,a1,zero
 81c03948:	81c059bc 	lb	zero,22972(t6)
 81c0394c:	81c05c5e 	lb	zero,23646(t6)
-81c03950:	ed8c6dff 	swc3	$12,28159(t4)
-81c03954:	b406b705 	sdr	a2,-18683(zero)
-81c03958:	620563fd 	daddi	a1,s0,25597
-81c0395c:	0df01a03 	jal	0x87c0680c
-81c03960:	97056e00 	lhu	a1,28160(t8)
-81c03964:	6303ef00 	daddi	v1,t8,-4352
-81c03968:	80000000 	lb	zero,0(zero)
-81c0396c:	00051000 	sll	v0,a1,0x0
-81c03970:	d00b63f9 	lld	t3,25593(zero)
-81c03974:	6d0c6705 	ldr	t4,26373(t0)
-81c03978:	ecb8d10c 	swc3	$24,-12020(a1)
-81c0397c:	b2df620d 	sdl	ra,25101(s6)
-81c03980:	67249a40 	daddiu	a0,t9,-26048
-81c03984:	e28dec12 	sc	t5,-5102(s4)
-81c03988:	5b079b7c 	0x5b079b7c
-81c0398c:	6018f180 	daddi	t8,zero,-3712
-81c03990:	35640f04 	ori	a0,t3,0xf04
-81c03994:	8c60e7b1 	lw	zero,-6223(v1)
-81c03998:	ee00e779 	swc3	$0,-6279(s0)
-81c0399c:	65006500 	daddiu	zero,t0,25856
-81c039a0:	000f0329 	0xf0329
-81c039a4:	0321001f 	ddivu	zero,t9,at
-81c039a8:	00cd0035 	0xcd0035
-81c039ac:	58080299 	0x58080299
-81c039b0:	68076101 	ldl	a3,24833(zero)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c03950:	6dff      	li	a1,255
+    81c03952:	ed8c      	and	a1,a0
+    81c03954:	b705      	lw	a3,0x81c03968
+    81c03956:	b406      	lw	a0,0x81c0396c
+    81c03958:	63fd      	addiu	sp,-24
+    81c0395a:	6205      	sw	ra,20(sp)
+    81c0395c:	1a03 0df0 	jal	0x81c037c1
+    81c03960:	6e00      	li	a2,0
+    81c03962:	9705      	lw	a3,20(sp)
+    81c03964:	ef00      	jr	a3
+    81c03966:	6303      	addiu	sp,24
+    81c03968:	0000      	addiu	s0,sp,0
+    81c0396a:	8000      	lb	s0,0(s0)
+    81c0396c:	1000      	b	0x81c0396f
+    81c0396e:	0005      	addiu	s0,sp,20
+    81c03970:	63f9      	addiu	sp,-56
+    81c03972:	d00b      	sw	s0,44(sp)
+    81c03974:	6705      	move	s0,a1
+    81c03976:	6d0c      	li	a1,12
+    81c03978:	d10c      	sw	s1,48(sp)
+    81c0397a:	ecb8      	mult	a0,a1
+    81c0397c:	620d      	sw	ra,52(sp)
+    81c0397e:	b2df      	lw	v0,0x81c03cf8
+    81c03980:	9a40      	lw	v0,0(v0)
+    81c03982:	6724      	move	s1,a0
+    81c03984:	ec12      	mflo	a0
+    81c03986:	e28d      	addu	v1,v0,a0
+    81c03988:	9b7c      	lw	v1,112(v1)
+    81c0398a:	5b07      	sltiu	v1,7
+    81c0398c:	f180 6018 	bteqz	0x81c03cc1
+    81c03990:	0f04      	la	a3,0x81c039a0
+    81c03992:	3564      	sll	a1,v1,1
+    81c03994:	e7b1      	addu	a0,a3,a1
+    81c03996:	8c60      	lh	v1,0(a0)
+    81c03998:	e779      	addu	a2,a3,v1
+    81c0399a:	ee00      	jr	a2
+    81c0399c:	6500      	nop
+    81c0399e:	6500      	nop
+    81c039a0:	0329      	addiu	v1,sp,164
+    81c039a2:	000f      	addiu	s0,sp,60
+    81c039a4:	001f      	addiu	s0,sp,124
+    81c039a6:	0321      	addiu	v1,sp,132
+    81c039a8:	0035      	addiu	s0,sp,212
+    81c039aa:	00cd      	addiu	s0,sp,820
+    81c039ac:	0299      	addiu	v0,sp,612
+    81c039ae:	5808      	sltiu	s0,8
+    81c039b0:	6101      	btnez	0x81c039b5
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c039b4:	6c02e209 	ldr	v0,-7671(zero)
 81c039b8:	a2b0f0e0 	sb	s0,-3872(s5)
 81c039bc:	58081007 	0x58081007
@@ -3759,23 +4192,44 @@ Disassembly of section .data:
 81c03d20:	81c059a4 	lb	zero,22948(t6)
 81c03d24:	81c059b0 	lb	zero,22960(t6)
 81c03d28:	81c05d3c 	lb	zero,23868(t6)
-81c03d2c:	d00b63f9 	lld	t3,25593(zero)
-81c03d30:	68ff6e00 	ldl	ra,28160(a3)
-81c03d34:	620dd10c 	daddi	t5,s0,-12020
-81c03d38:	6724e8ac 	daddiu	a0,t9,-5972
-81c03d3c:	0504d604 	0x504d604
-81c03d40:	dd40675f 	ld	zero,26463(t2)
-81c03d44:	3488b36b 	ori	t0,a0,0xb36b
-81c03d48:	7106e389 	0x7106e389
-81c03d4c:	610ada00 	daddi	t2,t0,-9728
-81c03d50:	f7c0ec0b 	sdc1	$f0,-5109(s8)
-81c03d54:	f01f3282 	scd	ra,12930(zero)
-81c03d58:	6c046f1f 	ldr	a0,28447(zero)
-81c03d5c:	15431a03 	bne	t2,v1,0x81c0a56c
-81c03d60:	1084e757 	beq	a0,a0,0x81bfdac0
-81c03d64:	614c7108 	daddi	t4,t2,28936
-81c03d68:	6fffb463 	ldr	ra,-19357(ra)
-81c03d6c:	6e0167b0 	ldr	at,26544(s0)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c03d2c:	63f9      	addiu	sp,-56
+    81c03d2e:	d00b      	sw	s0,44(sp)
+    81c03d30:	6e00      	li	a2,0
+    81c03d32:	68ff      	li	s0,255
+    81c03d34:	d10c      	sw	s1,48(sp)
+    81c03d36:	620d      	sw	ra,52(sp)
+    81c03d38:	e8ac      	and	s0,a1
+    81c03d3a:	6724      	move	s1,a0
+    81c03d3c:	d604      	sw	a2,16(sp)
+    81c03d3e:	0504      	addiu	a1,sp,16
+    81c03d40:	675f      	move	v0,ra
+    81c03d42:	dd40      	sw	v0,0(a1)
+    81c03d44:	b36b      	lw	v1,0x81c03ef0
+    81c03d46:	3488      	sll	a0,2
+    81c03d48:	e389      	addu	v0,v1,a0
+    81c03d4a:	7106      	cmpi	s1,6
+    81c03d4c:	da00      	sw	s0,0(v0)
+    81c03d4e:	610a      	btnez	0x81c03d65
+    81c03d50:	ec0b      	neg	a0,s0
+    81c03d52:	f7c0 3282 	srl	v0,a0,31
+    81c03d56:	f01f 6f1f 	li	a3,63519
+    81c03d5a:	6c04      	li	a0,4
+    81c03d5c:	1a03 1543 	jal	0x81c0550d
+    81c03d60:	e757      	subu	a1,a3,v0
+    81c03d62:	1084      	b	0x81c03e6d
+    81c03d64:	7108      	cmpi	s1,8
+    81c03d66:	614c      	btnez	0x81c03e01
+    81c03d68:	b463      	lw	a0,0x81c03ef4
+    81c03d6a:	6fff      	li	a3,255
+    81c03d6c:	67b0      	move	a1,s0
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c03d70:	0df01a03 	jal	0x87c0680c
 81c03d74:	b7614f01 	sdr	at,20225(k1)
 81c03d78:	9ea09fc0 	lwu	zero,-24640(s5)
@@ -4551,23 +5005,42 @@ Disassembly of section .data:
 81c04980:	9106ea8c 	lbu	a2,-5492(t0)
 81c04984:	ef009005 	swc3	$0,-28667(t8)
 81c04988:	65006304 	daddiu	zero,t0,25348
-81c0498c:	6c0263fc 	ldr	v0,25596(zero)
-81c04990:	d1066207 	lld	a2,25095(t0)
-81c04994:	12401a03 	beqz	s2,0x81c0b1a4
-81c04998:	f3e0d005 	scd	zero,-12283(ra)
-81c0499c:	ea0c681f 	swc2	$12,26655(s0)
-81c049a0:	3140f500 	andi	zero,t2,0xf500
-81c049a4:	12401a03 	beqz	s2,0x81c0b1b4
-81c049a8:	ea0c6c01 	swc2	$12,27649(s0)
-81c049ac:	32683340 	andi	t0,s3,0x3340
-81c049b0:	1a036c00 	0x1a036c00
-81c049b4:	e1451240 	sc	a1,4672(t2)
-81c049b8:	ea0c9707 	swc2	$12,-26873(s0)
-81c049bc:	9106e149 	lbu	a2,-7863(t0)
-81c049c0:	ef009005 	swc3	$0,-28667(t8)
-81c049c4:	65006304 	daddiu	zero,t0,25348
-81c049c8:	d00463fd 	lld	a0,25597(zero)
-81c049cc:	1a036205 	0x1a036205
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c0498c:	63fc      	addiu	sp,-32
+    81c0498e:	6c02      	li	a0,2
+    81c04990:	6207      	sw	ra,28(sp)
+    81c04992:	d106      	sw	s1,24(sp)
+    81c04994:	1a03 1240 	jal	0x81c04901
+    81c04998:	d005      	sw	s0,20(sp)
+    81c0499a:	f3e0 681f 	li	s0,1023
+    81c0499e:	ea0c      	and	v0,s0
+    81c049a0:	f500 3140 	sll	s1,v0,20
+    81c049a4:	1a03 1240 	jal	0x81c04901
+    81c049a8:	6c01      	li	a0,1
+    81c049aa:	ea0c      	and	v0,s0
+    81c049ac:	3340      	sll	v1,v0,8
+    81c049ae:	3268      	sll	v0,v1,2
+    81c049b0:	6c00      	li	a0,0
+    81c049b2:	1a03 1240 	jal	0x81c04901
+    81c049b6:	e145      	addu	s1,v0
+    81c049b8:	9707      	lw	a3,28(sp)
+    81c049ba:	ea0c      	and	v0,s0
+    81c049bc:	e149      	addu	v0,s1,v0
+    81c049be:	9106      	lw	s1,24(sp)
+    81c049c0:	9005      	lw	s0,20(sp)
+    81c049c2:	ef00      	jr	a3
+    81c049c4:	6304      	addiu	sp,32
+    81c049c6:	6500      	nop
+    81c049c8:	63fd      	addiu	sp,-24
+    81c049ca:	d004      	sw	s0,16(sp)
+    81c049cc:	6205      	sw	ra,20(sp)
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c049d0:	6c000d0d 	ldr	zero,3341(zero)
 81c049d4:	22116800 	addi	s1,s0,26624
 81c049d8:	10471a03 	beq	v0,a3,0x81c0b1e8
@@ -5195,23 +5668,41 @@ Disassembly of section .data:
 81c05390:	81c05580 	lb	zero,21888(t6)
 81c05394:	81c05574 	lb	zero,21876(t6)
 81c05398:	81c052c5 	lb	zero,21189(t6)
-81c0539c:	620963fb 	daddi	t1,s0,25595
-81c053a0:	d108d404 	lld	t0,-11260(t0)
-81c053a4:	074a1a03 	tlti	k0,6659
-81c053a8:	1b03d007 	0x1b03d007
-81c053ac:	6500074e 	daddiu	zero,t0,1870
-81c053b0:	06851a03 	0x6851a03
-81c053b4:	1a036500 	0x1a036500
-81c053b8:	65001555 	daddiu	zero,t0,5461
-81c053bc:	b037b636 	sdl	s7,-18890(at)
-81c053c0:	d8c0b437 	ldc2	$0,-19401(a2)
-81c053c4:	987cf080 	lwr	gp,-3968(v1)
-81c053c8:	b137b236 	sdl	s7,-19914(t1)
-81c053cc:	f080eb8d 	scd	zero,-5235(a0)
-81c053d0:	d845d87c 	ldc2	$5,-10116(v0)
-81c053d4:	b135d82b 	sdl	s5,-10197(t1)
-81c053d8:	6f006d60 	ldr	zero,28000(t8)
-81c053dc:	d8aad8ee 	ldc2	$10,-10002(a1)
+
+; ==========================================
+; --- MODE SWITCH: ENTERING MIPS16 BLOCK ---
+; ==========================================
+    81c0539c:	63fb      	addiu	sp,-40
+    81c0539e:	6209      	sw	ra,36(sp)
+    81c053a0:	d404      	sw	a0,16(sp)
+    81c053a2:	d108      	sw	s1,32(sp)
+    81c053a4:	1a03 074a 	jal	0x81c01d29
+    81c053a8:	d007      	sw	s0,28(sp)
+    81c053aa:	1b03 074e 	jal	0x81e01d39
+    81c053ae:	6500      	nop
+    81c053b0:	1a03 0685 	jal	0x81c01a15
+    81c053b4:	6500      	nop
+    81c053b6:	1a03 1555 	jal	0x81c05555
+    81c053ba:	6500      	nop
+    81c053bc:	b636      	lw	a2,0x81c05494
+    81c053be:	b037      	lw	s0,0x81c05498
+    81c053c0:	b437      	lw	a0,0x81c0549c
+    81c053c2:	d8c0      	sw	a2,0(s0)
+    81c053c4:	f080 987c 	lw	v1,156(s0)
+    81c053c8:	b236      	lw	v0,0x81c054a0
+    81c053ca:	b137      	lw	s1,0x81c054a4
+    81c053cc:	eb8d      	or	v1,a0
+    81c053ce:	f080 d87c 	sw	v1,156(s0)
+    81c053d2:	d845      	sw	v0,20(s0)
+    81c053d4:	d82b      	sw	s1,44(s0)
+    81c053d6:	b135      	lw	s1,0x81c054a8
+    81c053d8:	6d60      	li	a1,96
+    81c053da:	6f00      	li	a3,0
+    81c053dc:	d8ee      	sw	a3,56(s0)
+
+; ==========================================
+; --- MODE SWITCH: RETURNING TO MIPS32 ---
+; ==========================================
 81c053e0:	d820d8a8 	ldc2	$0,-10072(at)
 81c053e4:	1a039404 	0x1a039404
 81c053e8:	d6040961 	ldc1	$f4,2401(s0)
@@ -5340,9 +5831,7 @@ Disassembly of section .data:
 81c055d4:	001f1f00 	sll	v1,ra,0x1c
 81c055d8:	00000001 	0x1
 81c055dc:	00000001 	0x1
-	...
 81c055ec:	00000001 	0x1
-	...
 81c055fc:	00003100 	sll	a2,zero,0x4
 81c05600:	00000003 	sra	zero,zero,0x0
 81c05604:	00000001 	0x1
@@ -5398,13 +5887,9 @@ Disassembly of section .data:
 81c056cc:	00000000 	nop
 81c056d0:	00000006 	srlv	zero,zero,zero
 81c056d4:	00010000 	sll	zero,at,0x0
-	...
 81c056e0:	00010000 	sll	zero,at,0x0
-	...
 81c056ec:	00010000 	sll	zero,at,0x0
-	...
 81c056f8:	00010000 	sll	zero,at,0x0
-	...
 81c05704:	00010000 	sll	zero,at,0x0
 81c05708:	00000000 	nop
 81c0570c:	00000004 	sllv	zero,zero,zero
@@ -5412,7 +5897,6 @@ Disassembly of section .data:
 81c05714:	00000000 	nop
 81c05718:	00000004 	sllv	zero,zero,zero
 81c0571c:	00050020 	add	zero,zero,a1
-	...
 81c05728:	00010000 	sll	zero,at,0x0
 81c0572c:	00000000 	nop
 81c05730:	10101000 	beq	zero,s0,0x81c09734
@@ -5421,7 +5905,6 @@ Disassembly of section .data:
 81c0573c:	08080808 	j	0x80202020
 81c05740:	00000000 	nop
 81c05744:	e0e0e000 	sc	zero,-8192(a3)
-	...
 81c05750:	01010100 	0x1010100
 81c05754:	00000000 	nop
 81c05758:	00000007 	srav	zero,zero,zero
@@ -5518,7 +6001,6 @@ Disassembly of section .data:
 81c058c4:	00010000 	sll	zero,at,0x0
 81c058c8:	00000010 	mfhi	zero
 81c058cc:	00001000 	sll	v0,zero,0x0
-	...
 81c058d8:	00000001 	0x1
 81c058dc:	81c058bc 	lb	zero,22716(t6)
 81c058e0:	00400000 	0x400000
@@ -5550,7 +6032,6 @@ Disassembly of section .data:
 81c05948:	00000000 	nop
 81c0594c:	81c05588 	lb	zero,21896(t6)
 81c05950:	fb04fa01 	sdc2	$4,-1535(t8)
-	...
 81c0597c:	a2000000 	sb	zero,0(s0)
 81c05980:	a2008000 	sb	zero,-32768(s0)
 81c05984:	a2010000 	sb	at,0(s0)
@@ -5574,7 +6055,6 @@ Disassembly of section .data:
 81c059cc:	00000002 	srl	zero,zero,0x0
 81c059d0:	00000000 	nop
 81c059d4:	0000ffff 	dsra32	ra,zero,0x1f
-	...
 81c059ec:	027a1028 	0x27a1028
 81c059f0:	03781020 	add	v0,k1,t8
 81c059f4:	0000ffff 	dsra32	ra,zero,0x1f
@@ -5584,4 +6064,3 @@ Disassembly of section .data:
 81c05a04:	00000000 	nop
 81c05a08:	01330675 	0x1330675
 81c05a0c:	81c058fc 	lb	zero,22780(t6)
-	...

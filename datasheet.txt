@@ -1,0 +1,13927 @@
+RDA8851CL Datasheet V1.05
+
+RDA8851CL GSM/GPRS Single-Chip Terminal
+FEATURES
+●
+
+●
+
+External Memory Interface
+Integrated 32Mb 1.8V Flash on chip, and also
+Supports external SPI Flash
+Integrated PSRAM on chip, 64Mb size
+Power efficient using retention technology to
+avoid floating lines
+Flexible IO voltage
+●
+
+●
+
+Multimedia
+●
+
+Support camera interface up to 3Mpix sensors
+with 8 bit parallel or 1/2/4 data series
+interface,Support CSI camera interface
+Support LCD module interface with 8 bit parallel
+interface or SPI series interface
+Support up to 480X640 resolution
+4-layers blending graphical engine capable of
+resizing and YUV2RGB conversion
+Proprietary 16/32-bit digital signal processing
+engine to improve computation performance
+●
+●
+
+User Interface
+
+Audio
+
+Debug
+Host debug interface allowing non intrusive
+in depth investigation
+GDB debugger
+Execution logger and profiling through debug
+port
+High level text based debugging using Host
+debug or USB
+
+FM
+Integrated Broadcast FM tuner which can be
+tuned world-wide frequency band
+
+Power Management
+Power On reset control
+Internal 32K OSC for standby/ shutoff/ sleep state ●
+Battery charger (from USB or AC charger)
+Integrated all internal voltages from VBAT
+Provide all LDOs for external components
+
+●
+
+USB 1.1 Device
+2 UART interface
+1 SD controller
+1 SD/SPI controller
+SPI with multiple chip select
+I2C controller
+General Purpose I/Os
+2 GPADC, 10bits, 2 channels
+
+2 channels voice ADC, 8kHz, 13 bits/sample
+for headset and on-board microphone
+Voice DAC, 8kHz, 13 bits/sample for
+receiver
+High fidelity Stereo DAC, up to 48kHz, 16
+bits per sample
+Stereo Audio speaker driver
+1.5W differential output stereo amplifier for
+loudspeaker, Class K
+Stereo analog audio line input
+
+GSM/GPRS Modem
+GPRS Class 10
+Quad bands integrated transceiver
+Supports HR, FR, EFR, AMR voice codec
+Triple SIM controller with integrated level shifters
+Provide a complete GSM/GPRS data path with
+integrated RF transceiver, Saw-Less, only needs
+external PA
+
+●
+
+Connectivity
+
+Bluetooth
+Integrated Bluetooth SoC complaint with 2.1
++ EDR standard
+
+APPLICATIONS
+
+8x8 Keypad scanner with multiple key detection,
+support ADC serial interface Keypad
+Multi-band GSM/GPRS Mobile Handsets, PDAs,
+Alerter
+data terminals and Modems: GSM 850, GSM
+Light Pulse Generator for blinking LED
+Pulse Width Modulator for Keyboard or backlight 900, DCS1800, PCS 1900.
+control
+The high level of integration achieved on
+Touch screen interface
+RDA8851CL allows for highly featured phone without
+LED drivers for LCD and keyboard backlight
+increasing the BOM.
+Calendar (Real Time Clock) with alarm
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+1 / 100
+
+RDA8851CL Datasheet V1.05
+
+GENERAL DESCRIPTION
+A high performance, high integrated system-on-chip solution for low cost, low power GSM/GPRS mobile phones.
+RDA8851CL is a high performance, highly integrated system-on-chip solution for low cost, low power,
+GSM/GPRS mobile phone.
+Integrating all essential electronic components, including baseband, quad band RF transceiver, power
+management, FM receiver onto a single system on chip, RDA8851CL offers best in class bill of material, space
+requirement and cost/feature ratio for complete phone handsets.
+Built around a cost effective 32-bit XCPU RISC core running at up to 312MHz with 4k of Instruction cache and
+4k of Data cache, RDA8851CL offers plenty of processing power for multimedia applications. A high
+performance proprietary 16/32-bit digital signal processing engine can further improve overall performance and
+user experience when performing complex multimedia tasks.
+It is also packed with impressive connectivity for easy scalability of the system, allowing glue less interfaces to
+camera and multimedia companion chips, SDMMC Memory Cards and SPI devices, LCD modules and USB
+(slave, full speed).
+RDA8851CL is GPRS Class 10 enabled, and supports Full Rate (FR), Half Rate (HR), Enhanced Full Rate
+(EFR) and Adaptive Multi Rate (AMR) voice coders. It also supports simultaneous dual network operation and
+integrates a SIM controller with integrated level shifters that can support three SIM cards.
+Additionally, RDA8851CL integrates a FM tuner and a Bluetooth module which completely include digital,
+analogue and RF function. And they can easily work only with a few passive components as filter or matching
+network..
+RDA8851CL is available in a small footprint, fine pitch, 12 X10, 203 ball TFBGA package.
+Typical Application
+
+VBAT
+
+Coolhost
+debugger
+
+SPI
+
+LCD
+32k OSC
+
+HST
+
+26M OSC
+32K/26M CLK_OUT
+
+Camera Sensor
+
+Parallel/Series
+GPIO
+
+Onboard MIC
+
+GSM PA Level
+
+Headset MIC
+
+TCO
+
+PA /
+Switch
+
+GSM RF Port
+
+Receiver Out
+
+Headset Stereo Out
+Loudspeaker Out
+FM RF Port
+
+LCD Back light
+Key Back light
+
+PWL/PWT
+LED Drivers
+
+Triple
+SIM
+
+Bluetooth
+RF Port
+
+USB 1.1
+
+UART
+IrDA
+
+SD
+MMC
+
+KEYPAD
+Matrix
+
+Figure 1: RDA8851CL Typical
+Application
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+2 / 100
+
+RDA8851CL Datasheet V1.05
+
+Table of Contents
+Features ................................................................................................................................................................1
+Applications ...........................................................................................................................................................1
+General Description ..............................................................................................................................................2
+A. Architecture Overview ......................................................................................................................................6
+B. Block Description ...........................................................................................................................................14
+B.I System Modules ......................................................................................................................................14
+B.I.1 System CPU (XCPU) .......................................................................................................................14
+B.I.2 Memory Bridge ................................................................................................................................22
+Operations ...........................................................................................................................................23
+B.I.3 Direct Memory Access (DMA) ..........................................................................................................24
+B.I.4 Page Spy .........................................................................................................................................25
+B.I.5 System Intelligent Flow Controller (Sys IFC) ....................................................................................25
+AHB2APB bridge operation ..................................................................................................................26
+DMA Operations ..................................................................................................................................26
+RF_SPI channel ...................................................................................................................................27
+Debug channel operations ...................................................................................................................27
+B.II System Peripherals .................................................................................................................................28
+B.II.1 System and Clock Control ..............................................................................................................28
+B.II.2 Trace (Normal UART) and Host (Debug UART) Port .....................................................................30
+B.II.3 Serial Peripheral Interface (SPI) .....................................................................................................36
+B.II.4 I2C ..................................................................................................................................................36
+B.II.5 Serial Peripheral Interface for RF (RF SPI) .....................................................................................38
+B.II.6 General Purpose Input Output .......................................................................................................39
+B.II.7 Keypad ...........................................................................................................................................39
+B.II.8 Pulse Width Modulation (PWM) ......................................................................................................40
+B.II.9 Sim Card Interface (SCI) ................................................................................................................40
+B.II.10 Calendar .......................................................................................................................................41
+B.II.11 Timers ..........................................................................................................................................41
+B.II.12 Debug Port (EXL, PXTS, Signal Spy) ...........................................................................................42
+B.II.13 General Purpose Analog to Digital Converter (GP ADC) ..............................................................42
+B.II.14 Timing Control Unit and Low Power Synchronizer (TCU+LPS) .....................................................43
+B.II.15 System AHB Monitor (Sys AHBC Mon) and Base Band AHB Monitor (BB AHBC Mon) ...............44
+B.II.16 System IRQ Controller (Sys IRQ) .................................................................................................44
+B.II.17 USB Controller ..............................................................................................................................45
+B.II.18 Graphic Overlay United Display Accelerator (GOUDA) .................................................................45
+B.II.19 Camera Controller ........................................................................................................................46
+B.II.20 SD/MMC Controller .......................................................................................................................49
+B.II.21 Audio Interface Analog + I2S (AIF) ...............................................................................................49
+B.III Base Band Modules ...............................................................................................................................50
+B.III.1 GSM / GPRS Modem ....................................................................................................................50
+RDA Microelectronics Inc. CONFIDENTIAL
+
+3 / 100
+
+RDA8851CL Datasheet V1.05
+
+B.III.2 Voice Coprocessor (VoC) ..............................................................................................................50
+B.IV Baseband Peripherals ...........................................................................................................................51
+B.IV.1 DIGRF Interface (RF IF) ................................................................................................................51
+B.V Analog Modules ......................................................................................................................................51
+SPI Interface for Analog IP control .......................................................................................................52
+Power Management Unit ......................................................................................................................52
+Analog BaseBand (ABB) ......................................................................................................................58
+RF Transceiver ....................................................................................................................................62
+J.I FM ............................................................................................................................................................63
+General Description .............................................................................................................................64
+Features ...............................................................................................................................................64
+Block Description .................................................................................................................................64
+Receiver Characteristics ......................................................................................................................65
+J.II Bluetooth .................................................................................................................................................66
+General Description .............................................................................................................................66
+Features ...............................................................................................................................................67
+Block Description .................................................................................................................................67
+Performance Characteristics ................................................................................................................68
+K. Memory Map ..................................................................................................................................................71
+L. Pins Description .............................................................................................................................................74
+L.I Pin-out ......................................................................................................................................................74
+M. Electrical Characteristics ...............................................................................................................................81
+M.I Absolute Maximum Rating ......................................................................................................................81
+M.II Temperature Characteristics ..................................................................................................................81
+M.III RF Characteristics .................................................................................................................................81
+M.IV Audio Characteristics ............................................................................................................................83
+M.VI DC Characteristics ................................................................................................................................84
+M.VII Digital IO DC Characteristics ...............................................................................................................94
+M.VIII Digital IO AC Characteristics (SPI Interface Timing) ...........................................................................94
+N. Packaging ......................................................................................................................................................97
+O. Ball Out .........................................................................................................................................................98
+P. Glossary ........................................................................................................................................................99
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+4 / 100
+
+RDA8851CL Datasheet V1.05
+
+Figure Index
+Figure 1: RDA8851CL Typical Application ...................................................................................................2
+Figure A.1 RDA8851CL Integrated IPs & Interfaces ..................................................................................6
+Figure A.2: Digital Baseband Diagram .........................................................................................................9
+Figure B.1: XCPU Block Diagram ..............................................................................................................15
+Figure B.2: Typical transfer operation ........................................................................................................26
+Figure B.3: Debug channel block diagram .................................................................................................28
+Figure B.4: General Message Format ........................................................................................................32
+Figure B.5: Read Return Message Format ................................................................................................32
+Figure B.6: Event Message Format ...........................................................................................................32
+Figure B.7: Tx Switch STM ........................................................................................................................34
+Figure B.8: IrDA SIR Data Format .............................................................................................................34
+Figure B.9: YUV 4:2:2 Subsampling ...........................................................................................................47
+Figure B.10: SPI Write & Read Timing .......................................................................................................52
+Figure B.11: PMU Power ON .....................................................................................................................53
+Figure B.12: POR triggered by POWKEY press ........................................................................................54
+Figure B.13: Principle schematic for Power-Profiles usage ........................................................................55
+Figure B.14: Charging I-V Curve ................................................................................................................57
+Figure B.15: PLL Clock Path ......................................................................................................................59
+Figure B.16: Audio Analog IP .....................................................................................................................60
+Figure B.17: USB PHY FS 1.1 ..................................................................................................................61
+Figure B.18: GPADC Timing Diagram .......................................................................................................62
+Figure B.19: RF transceiver block digram ..................................................................................................63
+Figure B.20: FM Tuner Block Diagram .......................................................................................................65
+Figure B.21: Bluetooth Block Diagram .......................................................................................................67
+Figure M.1: SCLK Timing Diagram ............................................................................................................95
+Figure M.2: SPI Write Timing Diagram .....................................................................................................96
+Figure M.3: SPI Read Timing Diagram ......................................................................................................96
+Figure O.1: RDA8851CL Ball out diagram ................................................................................................98
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+5 / 100
+
+RDA8851CL Datasheet V1.05
+
+A. ARCHITECTURE OVERVIEW
+RDA8851CL is a single chip GSM/GPRS solution which integrates Digital Baseband, PMIC, XCVER, Audio
+CODEC, FM, and Bluetooth, as well as all the system requirements for a simple phone application.
+
+Figure A.1 RDA8851CL Integrated IPs & Interfaces
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+6 / 100
+
+RDA8851CL Datasheet V1.05
+
+1. Analog modules
+○ ABB:
+■
+■
+■
+■
+■
+■
+■
+
+PLL generates 624MHz from 26MHz
+Clock squarer to buffer RF clock from the transceiver
+Differential 13 bit Audio ADC and 16 bit stereo DAC
+1.5W Class K stereo loudspeaker amplifier
+Audio line in
+Full Speed USB PHY 1.1
+2 Channel General Purpose ADC
+
+○ RF Transceiver:
+■ Digital low-IF receiver
+■ Direct modulation transmitter
+■ Frequency synthesizer
+■ Integrated VCO, loop filters, etc.
+■ digital AFC
+■ DigRF interface between digital baseband and transceiver
+■ RF FEM control
+○ PMU
+■
+■
+■
+■
+■
+○
+
+○
+
+Complete integrated mobile handset power management system
+Integrated LDO voltage regulators
+Configurable supplies to interface with external devices
+Implement both LCD back light and keypad LED drivers
+Support 3 SIM interfaces
+
+FM Tuner:
+■ Support worldwide frequency band 65-108MHz
+■ Digital low-IF tuner
+■ Fully integrated digital frequency synthesizer
+■ Autonomous search tuning
+■ Digital auto gain control (AGC)
+■ Digital adaptive noise cancellation
+■ Programmable de-emphasis (50/75 ms)
+■ Receive signal strength indicator (RSSI)
+■ Bass boost
+■ Volume control
+Bluetooth:
+Completely integrates bluetooth radio transceiver and baseband processor
+■ Also includes sub-controller software stack
+■ Compliant with Bluetooth 2.1 + EDR specification
+■
+
+2. Digital Baseband
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+7 / 100
+
+RDA8851CL Datasheet V1.05
+
+RDA8851CL Digital Baseband is based on two processors: the system processor (XCPU) and the
+baseband dedicated processor (BCPU). Each of these processor is on an AHB bus (AMBA AHB
+compliant). Those buses can communicate through an AHB to AHB interface module. Each AHB bus
+has a dedicated APB bus (AMBA APB compliant).
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+8 / 100
+
+RDA8851CL Datasheet V1.05
+
+Baseband Architecture
+
+ROM
+
+SRAM
+
+PSRAM
+
+EBC
+
+MEMORY BRIDGE
+CP2
+ICACHE
+DCACHE
+
+DSRAM
+
+XCPU
+
+BCPU
+AHB2AHB
+
+VOC
+BIST
+
+GEA/DMA
+
+SYS AHB
+
+BB AHB
+
+BCPU ROM
+
+BIST
+
+SYS IFC
+BB IFC
+BB SRAM
+
+BB AHBC
+Arbiter
+
+BB IFC
+AIF
+
+ICACHE
+DCACHE
+SRAM
+I2S/DAI
+PADS
+DAC
+ADC
+
+GOUDA LT
+
+LCD
+PADS
+
+SPI FLASH
+CTL
+
+SPI FLASH
+PADS
+
+SYS AHBC
+Arbiter
+
+COM REGS
+
+VITAC
+
+SD/MMC IF
+
+Flash Card
+PADS
+
+RTC
+
+RTC
+PADS
+
+ITLV
+XCOR
+
+SYS IRQ CTL
+
+BB IRQ CTL
+
+BB APB
+
+BB AHBC
+MONITOR
+
+DBG
+PADS
+
+SYS AHBC
+MONITOR
+
+CAMERA IF
+
+SYS TIMERS
+
+DBG HST
+TRACE
+
+HST
+PADS
+
+GPIO
+
+GPIO
+PADS
+
+UART
+
+UART
+PADS
+
+GPO
+
+GPO
+PADS
+
+RST CTRL
+
+SPI
+
+PMU
+Control
+
+PLL CTRL
+
+PWL/PWT
+
+PWM
+PADS
+
+KEYPAD
+
+KEYPAD
+PADS
+
+EXCOR
+SYS CTRL
+EVITAC
+CORDIC
+
+CLK CTRL
+
+RF IF
+
+SYS APB
+
+CIPHER
+
+EXL/DBG
+PXTS
+
+I2C
+
+I2C
+PADS
+
+RF SPI
+SIM IF
+
+SIM card
+PADS
+
+USB Device
+
+USB PHY
+PADS
+
+Ext Control
+
+PLL
+
+TCU
+
+SPI
+PADS
+
+GPADC
+
+XCVER IP (DigRF)
+DigRF PADS (Backup)
+
+ANALOG
+PADS
+
+DIGITAL
+PADS
+
+RDA
+IP
+
+Figure A.2: Digital Baseband Diagram
+● Memory Bridge
+○ Shared external access for both BB and SYS sides
+○ internal ROM 20kB for critical constants and code, XCPU boot monitor
+○ internal SRAM 64kB for critical data and code. Shared communication memory between the 2
+CPUs
+○ External Bus Controller (EBC)
+16 bit data bus, up to 32MB memory space
+● System Modules
+RDA Microelectronics Inc. CONFIDENTIAL
+
+9 / 100
+
+RDA8851CL Datasheet V1.05
+
+○ System CPU (XCPU)
+RDA RISC Core
+32x32 bits Multiplier Accumulator (MAC)
+16/32 bit instruction set
+4 kByte Instruction Cache
+4 kByte Data Cache
+○ Voice Co-Processor (VoC) (GSM voice option only)
+Bi-MAC, dual operation unit
+16-bit instruction set with 32-bit extension
+20 kByte + 20 kByte data RAM on 32 bits
+32 kByte instruction RAM on 32 bits
+○ Sys AHB to BB AHB (AHB2AHB)
+Transparent bridge to allow accessing registers on the Base Band side from the System side.
+4 words read/write buffer for bus efficiency.
+○ Direct Memory Access (DMA)
+All size, all alignment and all source and destination possible
+32-bit word pattern mode
+Autonomous GEA-1 and GEA-2 computation
+FCS computation for GPRS/Fax
+○ Page Spy
+Six memory spaces can be spied
+○ System Intelligent Flow Controller (Sys IFC) 7 channels
+AHB2APB bridge
+Four 8-bit or 32-bit DMA channels to accelerate data transfer between peripherals and
+memory
+Dedicated specialized channels for RF SPI and DBG Host
+○ Audio Interface (AIF)
+DTMF and Comfort Tone generator
+4 samples In and Out Fifos
+I2S / DAI Interface
+Serial Input / Output at 8/16 ks/s
+Can be used for test purpose in DAI mode
+Audio Interface To ABB
+13 bit RX Data from audio ADC
+16 bit TX Data to stereo DAC
+○ SPI Flash Controller
+Up to size 512Mb x 1, or 256Mb x 1, or 128Mb x 2
+● System Peripherals
+○ System, PLL and Clock Control (Sys & PLL & Clk Ctrl)
+Provides general controls over the whole system, including:
+Reset controls
+Power management controls
+Clock selection
+Some debug features
+○ Host Port
+Software Flow Control (XON/XOFF)
+Host Port auto-reseted when a break is detected
+RDA Microelectronics Inc. CONFIDENTIAL
+
+10 / 100
+
+RDA8851CL Datasheet V1.05
+
+Multiplexed trace mechanism
+Clock input allowing up to 1840kbps baud rate independent from the system clock
+Secured protocol with 8 bits CRC (no error correction)
+○ Serial Peripheral Interface (SPI)
+Master interface with multi-chip selects
+16 bytes FIFO
+○ I2C Master Peripheral Interface (I2C)
+Master interface
+○ RF Serial Peripheral Interface (RF SPI) for internal use
+1 chip select
+Synchronization from TCU
+DMA capabilities via Sys IFC
+○ General Purpose Input Output (GPIO)
+Up to 21 GPIOs
+6 GPIOs can generate interruptions
+○ General Purpose Output (GPO)
+Up to 7 general purpose outputs for external control
+○ Keypad
+8x8 matrix support with de-bouncing and interrupt generation
+Key On input with de-bouncing and interrupt generation
+○ Pulse Width Modulation (PWM)
+1 PWL, 1 PWT and 1 LPG
+○ GOUDA
+4 distinct video sources can be blended to produce final output
+Region Of Interest (ROI) handling for partial refresh of the LCD screen
+Background color (color filled where no layer is defined)
+Embedded LCD controller for direct output (LCD commands buffer in dedicated SRAM)
+○ SD/MMC Card Controller
+can support 2 peripherals
+SD Card specification Version 2.0
+SDIO Version 1.10
+MMC specification Version 3.1
+○ Camera Sensor Controller
+On the fly cropping and decimation
+Supports up to 3M pixel sensor with ISP
+Supports any arbitrary size scaling down from 4096x4096
+latch RAM FIFO Size 160*16 bit
+Support data format: RGB565, YUV422 and compression data
+8-bit parallel data interface from camera sensors
+○ Sim Card Interface (SCI)
+can support 3 SIM cards
+T0 protocol for communication
+Even parity handled
+DMA capabilities via Sys IFC
+○ Timers
+1 Real Time Clock Timer (Calendar)
+1 24 bits general purpose interval Timers at 16384Hz
+RDA Microelectronics Inc. CONFIDENTIAL
+
+11 / 100
+
+RDA8851CL Datasheet V1.05
+
+1 32 bits uptime counter at 16384Hz
+1 Watchdog Timer
+○ Debug Port
+CPU Execution Logger (EXL): Generate strobe and output the selected CPU's program
+counter
+Program Execution Time Stamp (PXTS): Allow to profile running code
+Hardware Signal Spy, selection of several hardware signal connected to pins.
+Access to the last PC of the selected CPU when a watchdog reset occurs
+○ General Purpose Analog to Digital Converter (GP ADC)
+2 channel inputs
+generate IRQ when programmed threshold is passed
+○ Timing Control Unit (TCU)
+Quarter bit precision
+60 entries event table
+○ System AHB Monitor (Sys AHB Monitor)
+Measure some bandwidth information from the System AHB bus:
+Global Bus usage
+Master Bus usage and latency
+Slave Bus usage and access duration
+Special resource measurement
+Write detection to a single word location
+○ Base Band AHB Monitor (BB AHB Monitor)
+(Same features as System AHB Monitor)
+○ System IRQ Controller (Sys IRQ)
+Several masking levels:
+Module level
+IRQ Control level
+○ BIST
+Internal RAMs and ROM test to reduce testing cost in production
+○ COM Registers
+Communication registers for inter-CPU communication and synchronization
+○ USB Controller
+Fully compliant to USB Specification Version 1.1
+Slave Full Speed (12Mbps) Device
+● Base Band Modules
+○ Base Band CPU (BCPU) and Base Band Process Accelerator Modules
+RDA RISC Core
+32x32 bits Multiplier Accumulator (MAC)
+16/32 bit instruction set
+1 kByte Instruction Cache
+1 kByte Data Cache
+GSM/GPRS Dedicated accelerators
+○ BB AHB to Sys AHB (AHB2AHB)
+(See AHB System Modules for details)
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+12 / 100
+
+RDA8851CL Datasheet V1.05
+
+● Base Band Peripherals
+○ RF Interface (RF IF)
+2 words of 32 bits Tx Fifo and 16 words of 32 bits Rx Fifo
+DigRF interface for communication with the integrated transceiver
+○ BIST
+(See System Peripherals for details)
+○ COM Registers
+(See System Peripherals for details)
+○ BBROM
+Internal ROM 96kB for critical constants and code
+○ BBSRAM
+Internal SRAM 16kB for critical data and code
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+13 / 100
+
+RDA8851CL Datasheet V1.05
+
+B. BLOCK DESCRIPTION
+B.I System Modules
+B.I.1 System CPU (XCPU)
+The XCPU RISC is a 16/32-bits processor. Using a Reduced Instruction Set Architecture, an efficient 6-stage
+instruction pipeline and separated Instruction and Data caches, it provides high performance to the system. The
+Pipeline Stages are as follows:
+● PC. Program Counter. Calculate the address of the next instruction and send it to the instruction cache.
+● IF. Instruction Fetch. In this stage the instruction cache is being accessed and the instruction
+information is retrieved.
+● RF. Register File. The register file is being accessed and the instruction is decoded.
+● EX. Execution. The instruction is executed
+● DC. Data Memory read and write access.
+● WB. Write Back. Results are written back to the register file.
+
+Features
+● RDA RISC Core.
+○ 32x32-bit Multiplier.
+○ 32x32-bit -> 64-bit Multiplier Accumulator (MAC) in 2 cycles (pipelined).
+○ Read / Write Buffer.
+○ 16/32 bit instruction set.
+● 32 interrupt sources.
+● 4 kByte Instruction Cache.
+● 4 kByte Data Cache.
+● 16 byte streaming buffer to accelerate uncached instruction accesses.
+
+Block Diagram
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+14 / 100
+
+RDA8851CL Datasheet V1.05
+
+AMBA AHB
+
+System
+SystemInterface
+Interface
+&&Rd
+Rd//Wr
+WrBuffer
+Buffer
+
+Instruction
+InstructionCache
+Cache
+
+Data
+DataCache
+Cache
+
+Exceptions
+
+Address Translation
+
+Exception
+Exception
+Co-processor
+Co-processor
+
+Memory
+Memory
+Management
+Management
+
+Integer
+IntegerPipeline
+Pipeline
+
+Multiply Instructions
+and Operands
+
+Multiplier
+Multiplier
+Divider
+Divider
+
+Figure B.1: XCPU Block Diagram
+
+32-bit Instruction Set
+Instruction Formats
+The RISC processor supports three instruction formats:
+
+0
+
+RS
+
+RT
+
+RD
+
+SHAMT
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+R – Register base instruction format
+● RD –Target register
+● RS – First operand
+● RT – Second operand
+● SHAMT – Shift amount for shift instructions
+● S Code – Instruction code for R type Instructions
+
+S Code
+
+I – Immediate operand instruction format
+● Opcode –Instruction Code
+● RS – Source or Base register
+● RT – Target Register or Reg-Immediate
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+15 / 100
+
+RDA8851CL Datasheet V1.05
+
+4
+
+3
+
+2
+
+1
+
+0
+
+4
+
+3
+
+2
+
+1
+
+0
+
+6
+
+7
+
+8
+
+5
+
+RT
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+RS
+
+5
+
+Opcode
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+● Immediate – 16 bit Immediate or Displacement
+
+Immediate
+
+Opcode
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+J – Jump instruction format
+● Opcode –Instruction Code
+● Jump Immediate – Immediate 26 bit for jump instruction address
+
+Jump Immediate
+
+Supported Instructions
+Arithmetic Instructions.
+Name
+
+Type
+
+Description
+
+Opcode
+
+S-Code
+
+ADD
+
+R
+
+RD = RS + RT
+
+0x00
+
+0x20
+
+ADDU
+
+R
+
+Unsigned[RD = RS + RT]
+
+0x00
+
+0x21
+
+SUB
+
+R
+
+RD = RS – RT
+
+0x00
+
+0x22
+
+SUBU
+
+R
+
+Unsigned[ RD = RS – RT]
+
+0x00
+
+0x23
+
+ADDI
+
+I
+
+RT = RS + Signed(Immediate)
+
+0x08
+
+n/a
+
+ADDIU
+
+I
+
+RT = RS + Unsigned(Immediate)
+
+0x09
+
+n/a
+
+Logical Instructions. Logical instructions are all bit wise operations.
+Name
+
+Type
+
+Description
+
+Opcode
+
+S-Code
+
+AND
+
+R
+
+RD = RS and RT
+
+0x00
+
+0x24
+
+OR
+
+R
+
+RD = RS or RT
+
+0x00
+
+0x25
+
+XOR
+
+R
+
+RD = RS xor RT
+
+0x00
+
+0x26
+
+NOR
+
+R
+
+RD = not(RS or RT)
+
+0x00
+
+0x27
+
+ANDI
+
+I
+
+RT = RS and Zero-extend(Immediate)
+
+0x0c
+
+n/a
+
+ORI
+
+I
+
+RT = RS or Zero-extend(Immediate)
+
+0x0d
+
+n/a
+
+XORI
+
+I
+
+RT = RS xor Zero-extend(Immediate)
+
+0x0e
+
+n/a
+
+Shift Instructions.
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+16 / 100
+
+RDA8851CL Datasheet V1.05
+
+Name
+
+Type
+
+Description
+
+Opcode
+
+S-Code
+
+SLL
+
+R
+
+RD = RS << SHAMT
+
+0x00
+
+0x00
+
+SRL
+
+R
+
+RD = RS >> SHAMT
+
+0x00
+
+0x02
+
+SRA
+
+R
+
+RD = signed(RS) >> SHAMT
+
+0x00
+
+0x03
+
+SLLV
+
+R
+
+RD = RS << (RT)
+
+0x00
+
+0x04
+
+SRLV
+
+R
+
+RD = RS >> (RT)
+
+0x00
+
+0x06
+
+SRAV
+
+R
+
+RD = signed(RS) >> (RT)
+
+0x00
+
+0x07
+
+Conditional Set Instructions. These instructions are used for magnitude conditional test. If the condition is
+true, the result register is set to 0x1 otherwise it is set to 0x0.
+Name
+
+Type
+
+Description
+
+Opcode
+
+S-Code
+
+SLT
+
+R
+
+RD = 0x1 if(RS < RT)
+
+0x00
+
+0x2a
+
+SLTU
+
+R
+
+RD = 0x1 when unsigned (RS < RT)
+
+0x00
+
+0x2b
+
+SLTI
+
+I
+
+RD = 0x1 when (RS < signed(Immediate))
+
+0x0a
+
+n/a
+
+SLTIU
+
+I
+
+RD = 0x1 when unsigned (RS < signed(Immediate))
+
+0x0b
+
+n/a
+
+Branch Instructions. BEQ and BNE test 2 operands for equal and non equal conditions. The rest of the branch
+instructions test a single operand with 0. BLTZAL and BGEZAL save the address of the instruction following the
+delay slot in R31.
+Name
+
+Type
+
+Description
+
+Opcode
+
+S-Code
+
+BEQ
+
+I
+
+Branch to ((Immediate + 1) << 2) when RS = RT
+
+0x04
+
+BNE
+
+I
+
+Branch to ((Immediate + 1) << 2) when RS != RT
+
+0x05
+
+BGEZ
+
+I
+
+Branch to ((Immediate + 1) << 2) when RS >= 0
+
+0x01
+
+0x01
+
+BLEZ
+
+I
+
+Branch to ((Immediate + 1) << 2) when RS <= 0
+
+0x06
+
+n/a
+
+BGTZ
+
+I
+
+Branch to ((Immediate + 1) << 2) when RS > 0
+
+0x07
+
+n/a
+
+BLTZ
+
+I
+
+Branch to ((Immediate + 1) << 2) when RS < 0
+
+0x01
+
+0x00
+
+BLTZAL
+
+I
+
+Branch to ((Immediate + 1) << 2) when RS < 0
+
+0x01
+
+0x10
+
+BGEZAL
+
+I
+
+Branch to ((Immediate + 1) << 2) when RS >= 0
+
+0x01
+
+0x11
+
+Jump Instructions. Jump is performed by combining bit (31:28) of PC with the
+J_IMME field of the instructions and 0b00 to form the target address. Link instructions
+also save the address of the instruction following the branch delay slot in R31.
+Name
+
+Type
+
+Description
+
+Opcode
+
+S-Code
+
+J
+
+J
+
+Jump
+
+0x02
+
+n/a
+
+JAL
+
+J
+
+Jump and link
+
+0x03
+
+n/a
+
+JR
+
+R
+
+Jump register
+
+0x00
+
+0x08
+
+JALR
+
+R
+
+Jump register and link
+
+0x00
+
+0x09
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+17 / 100
+
+RDA8851CL Datasheet V1.05
+
+Move To and From Multiply and Divide registers.
+Name
+
+Type
+
+Description
+
+Opcode
+
+S-Code
+
+MFHI
+
+R
+
+Move from High
+
+0x00
+
+0x10
+
+MTHI
+
+R
+
+Move to High
+
+0x00
+
+0x11
+
+MFLO
+
+R
+
+Move from Low (RS = Low)
+
+0x00
+
+0x12
+
+MTLO
+
+R
+
+Move to Low (Low = RS)
+
+0x00
+
+0x13
+
+Multiply and Divide Instructions.
+Name
+
+Type
+
+Description
+
+Opcode
+
+S-Code
+
+MULT
+
+R
+
+Multiply (Low, High) = RS x RT
+
+0x00
+
+0x18
+
+MULTU
+
+R
+
+Multiply unsigned (Low, High) = RS x RT
+
+0x00
+
+0x19
+
+DIV
+
+R
+
+Divide (Low, High) = RS x RT
+
+0x00
+
+0x1a
+
+DIVU
+
+R
+
+Divide unsigned (Low, High) = RS x RT
+
+0x00
+
+0x13
+
+Load Upper Immediate.
+Name
+LUI
+
+Type
+I
+
+Description
+RT[31:16] = Immediate
+
+Opcode
+
+S-Code
+
+0x0f
+
+Load and Store Instructions. The address for the load or store is calculated by adding the DISP field to the
+content of RS. The value read from or written to the memory is from RT.
+Name
+
+Type
+
+Description
+
+Opcode
+
+LB
+
+I
+
+Load Byte (sign extend)
+
+0x20
+
+LH
+
+I
+
+Load Half (sign extend)
+
+0x21
+
+LW
+
+I
+
+Load Word
+
+0x23
+
+LBU
+
+I
+
+Load Byte (unsigned)
+
+0x24
+
+LHU
+
+I
+
+Load Half (unsigned)
+
+0x25
+
+SB
+
+I
+
+Store Byte
+
+0x28
+
+SH
+
+I
+
+Store Half
+
+0x29
+
+SW
+
+I
+
+Store Word
+
+0x2b
+
+S-Code
+
+Miscellaneous. In addition to the standard instructions described above, the RISC processor supports the
+following instructions.
+Name
+CACHE
+
+Type
+n/a
+
+Description
+See the code below.
+
+Opcode
+
+S-Code
+
+0x2f
+
+Cache instruction format:
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+18 / 100
+
+Opcode
+
+OP1
+
+Address
+
+Name
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+RDA8851CL Datasheet V1.05
+
+Code
+
+Description
+
+Code
+Bits [2:0]
+
+Command code as follows:
+"000" invalidate all lines of both caches ('A' is ignored)
+"001" invalidate all lines of icache ('A' is ignored, dcache is unaffected)
+"010" invalidate all lines of dcache ('A' is ignored, icache is unaffected)
+“011” not specified, do not use.
+"100" invalidate an Icache line whos address is specified by register OP1
+"101" invalidate a single line specified by 'A' from icache
+"110" invalidate a single line specified by 'A' from dcache
+"111" invalidate a Dcache line whos address is specified by register OP1
+
+Address
+Bits [13:3]
+or bits [11:3]
+or bits [9:3]
+
+The cache line byte address to invalidate. The actual bits used are (RAM_HIGH
+downto TAG_LOW).
+The XCPU has a 4K of data and instruction cache with 4W line, so the bits used are
+(11 downto 3). The BCPU has a 1K of data and instruction cache with 4W line, so the
+bits used are (9 downto 3).
+
+OP1
+Bits [25:21]
+
+Register operand. The content of the CPU register is used as the Address parameter.
+
+Opcode
+Bits [31:26]
+
+Value: 0x2f.
+
+MAC Instructions. The multiply and accumulate (MAC) option adds supports for the following instructions.
+Name
+
+Type
+
+Description
+
+Opcode
+
+S-Code
+
+MADD
+
+R
+
+Signed multiply and accumulate.
+{hi, lo} = {hi, lo} + RS * RT
+
+0x00
+
+0x1c
+
+MADDU
+
+R
+
+Unsigned multiply and accumulate.
+{hi, lo} = {hi, lo} + RS * RT
+
+0x00
+
+0x1d
+
+MSUB
+
+R
+
+Signed multiply and subtract.
+{hi, lo} = {hi, lo} - RS * RT
+
+0x00
+
+0x1e
+
+MSUBU
+
+R
+
+Unsigned multiply and subtract.
+{hi, lo} = {hi, lo} - RS * RT
+
+0x00
+
+0x1f
+
+16-bit Instruction Set
+The 16 Bit Instruction mode is an option in the configuration file. This chapter assumes that the user chose to
+enable this mode. The 16 bit instruction set is provided for situations where reducing code size is a priority.
+16 Bit and 32 Bit Instruction Modes
+The processor determines the Instruction Mode base on bit 0 of the address of the instruction. When bit 0 of the
+address of the instruction is 0, the processor is in 32 bit mode, and it interprets the instruction as a 32 bit
+instruction. When bit 0 of the address of the instruction is set, the processor is in 16 bit mode, and it interprets
+the instruction as a 16 bit instruction.
+In this 32 bit mode:
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+19 / 100
+
+RDA8851CL Datasheet V1.05
+
+1. The instruction counter is incremented by 4 from 1 instruction to the next.
+2. For Branch and Link instructions, the processor save the address of the instruction + 8 as the return address.
+This is the instruction after the delay slot.
+3. The processor will take an Illegal Instruction Exception, if either bit 0 or bit 1 are set.
+In this 16 bit mode:
+1. The instruction counter is incremented by 2 from 1 instruction to the next.
+2. For Branch and Link instructions, the processor save the address of the instruction + 4 as the return address.
+This is the instruction after the delay slot.
+3. The processor passes bit 1 of the instruction address to the memory subsystem.
+Bit 0 is always sent as 0 to the memory subsystem.
+Switching between 32 Bit and 16 Bit modes.
+To switch between the modes, bit 0 of the instruction address must be changed from 1 to 0 and back. There are
+2 basic mechanisms to achieve this.
+JALX instruction. This instruction exists in both 32 bit and 16 bit modes. In addition to changing the execution
+path to the target address, it also toggles bit 0 of the instruction and hence the mode.
+JR, JALR instructions. These instructions take the 32 bit contents of a register and use it as the target
+address. Bit 0 of the register can be set to reflect the mode of the instructions at the target address.
+The 16 Bit Mode Instructions
+The following instructions are supported:
+Name
+
+15 .. 11
+
+ADDIU2
+
+01001
+
+rx
+
+ADDIU3
+
+01000
+
+rx
+
+ADDIUPC
+
+00001
+
+rx
+
+ADDIU2SP
+
+01100
+
+ADDIU3SP
+
+00000
+
+rx
+
+ADDU3
+
+11100
+
+rx
+
+ry
+
+AND
+
+11101
+
+rx
+
+ry
+
+B
+
+00010
+
+BEQZ
+
+00100
+
+rx
+
+offset
+
+BNEZ
+
+00101
+
+rx
+
+offset
+
+BREAK
+
+11101
+
+BTEQZ
+
+01100
+
+0
+
+0
+
+0
+
+offset
+
+BTNEZ
+
+01100
+
+0
+
+0
+
+1
+
+offset
+
+CMP
+
+11101
+
+rx
+
+CMPI
+
+01110
+
+rx
+
+DIV
+
+11101
+
+rx
+
+ry
+
+DIVU
+
+11101
+
+rx
+
+ry
+
+EXTEND
+
+11110
+
+JAL
+
+00011
+
+JAL 2nd
+
+10
+
+0
+
+9
+
+8
+
+7
+
+6
+
+5
+
+4
+
+3
+
+2
+
+1
+
+0
+
+0
+
+1
+
+imm8
+ry
+
+0
+
+imm4
+
+imm8
+
+1
+
+1
+
+imm8
+imm8
+rz
+0
+
+1
+
+1
+
+0
+
+0
+
+0
+
+1
+
+0
+
+1
+
+1
+
+0
+
+1
+
+0
+
+1
+
+1
+
+0
+
+1
+
+0
+
+1
+
+1
+
+0
+
+1
+
+1
+
+offset
+
+code
+
+0
+
+ry
+
+imm8
+
+imm(10:5)
+0
+
+0
+
+target(20:16)
+
+imm(15:11)
+target(25:21)
+
+target(15:0)
+RDA Microelectronics Inc. CONFIDENTIAL
+
+20 / 100
+
+RDA8851CL Datasheet V1.05
+
+Name
+
+15 .. 11
+
+JALR
+
+11101
+
+JALRC
+
+11101
+
+JALX
+
+00011
+
+10
+
+9
+
+7
+
+6
+
+5
+
+4
+
+3
+
+2
+
+1
+
+0
+
+rx
+
+0
+
+1
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+rx
+
+1
+
+1
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+1
+
+8
+
+target(20:16)
+
+JALX 2nd
+
+target(25:21)
+
+target(15:0)
+
+JRRA
+
+11101
+
+0
+
+0
+
+0
+
+0
+
+0
+
+1
+
+0
+
+0
+
+0
+
+0
+
+0
+
+JRRAC
+
+11101
+
+0
+
+0
+
+0
+
+1
+
+0
+
+1
+
+0
+
+0
+
+0
+
+0
+
+0
+
+JRRX
+
+11101
+
+rx
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+JRRXC
+
+11101
+
+rx
+
+1
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+LI
+
+01101
+
+rx
+
+LB
+
+10000
+
+rx
+
+ry
+
+offset
+
+LBU
+
+10100
+
+rx
+
+ry
+
+offset
+
+LH
+
+10001
+
+rx
+
+ry
+
+offset
+
+LHU
+
+10101
+
+rx
+
+ry
+
+offset
+
+LW
+
+10011
+
+rx
+
+ry
+
+offset
+
+LWPC
+
+10110
+
+rx
+
+offset
+
+LWSP
+
+10010
+
+rx
+
+offset
+
+MFHI
+
+11101
+
+rx
+
+0
+
+0
+
+0
+
+1
+
+0
+
+0
+
+0
+
+0
+
+MFLO
+
+11101
+
+rx
+
+0
+
+0
+
+0
+
+1
+
+0
+
+0
+
+1
+
+0
+
+MOVEmt32
+
+01100
+
+1
+
+0
+
+1
+
+r32(2:0)
+
+MOVEmf32
+
+01100
+
+1
+
+1
+
+1
+
+ry
+
+MULT
+
+11101
+
+rx
+
+ry
+
+1
+
+1
+
+0
+
+0
+
+0
+
+MULTU
+
+11101
+
+rx
+
+ry
+
+1
+
+1
+
+0
+
+0
+
+1
+
+NEG
+
+11101
+
+rx
+
+ry
+
+0
+
+1
+
+0
+
+1
+
+1
+
+NOT
+
+11101
+
+rx
+
+ry
+
+0
+
+1
+
+1
+
+1
+
+1
+
+OR
+
+11101
+
+rx
+
+ry
+
+0
+
+1
+
+1
+
+0
+
+1
+
+RESTORE
+
+01100
+
+1
+
+0
+
+0
+
+0
+
+ra
+
+s0
+
+s1
+
+frame size
+
+SAVE
+
+01100
+
+1
+
+0
+
+0
+
+1
+
+ra
+
+s0
+
+s1
+
+frame size
+
+SB
+
+11000
+
+SDBBP
+
+11110
+
+SEB
+
+11101
+
+rx
+
+1
+
+0
+
+SEH
+
+11101
+
+rx
+
+1
+
+0
+
+SH
+
+11001
+
+rx
+
+ry
+
+SLL
+
+00110
+
+rx
+
+ry
+
+SLLV
+
+11101
+
+rx
+
+ry
+
+0
+
+0
+
+SLT
+
+11101
+
+rx
+
+ry
+
+0
+
+SLTI
+
+01010
+
+rx
+
+imm8
+
+SLTIU
+
+01011
+
+rx
+
+imm8
+
+SLTU
+
+11101
+
+rx
+
+offset
+
+rx
+
+r32(4:3)
+
+rz
+r32
+
+ry
+
+offset
+
+code
+
+0
+
+0
+
+0
+
+0
+
+1
+
+0
+
+1
+
+0
+
+0
+
+0
+
+1
+
+1
+
+1
+
+0
+
+0
+
+0
+
+1
+
+0
+
+0
+
+1
+
+0
+
+0
+
+0
+
+0
+
+1
+
+0
+
+0
+
+0
+
+1
+
+1
+
+ry
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+offset
+sa
+
+0
+
+21 / 100
+
+RDA8851CL Datasheet V1.05
+
+Name
+
+15 .. 11
+
+10
+
+SRA
+
+00110
+
+rx
+
+ry
+
+SRAV
+
+11101
+
+rx
+
+ry
+
+SRL
+
+00110
+
+rx
+
+ry
+
+SRLV
+
+11101
+
+rx
+
+ry
+
+SUBU
+
+11101
+
+rx
+
+ry
+
+SW
+
+11011
+
+rx
+
+ry
+
+SWSPRX
+
+01100
+
+rx
+
+SWSPRA
+
+01100
+
+XOR
+
+11101
+
+rx
+
+ZEB
+
+11101
+
+rx
+
+0
+
+0
+
+ZEH
+
+11101
+
+rx
+
+0
+
+0
+
+0
+
+9
+
+1
+
+8
+
+7
+
+6
+
+5
+
+4
+
+3
+
+2
+
+sa
+0
+
+0
+
+1
+
+sa
+0
+
+0
+
+1
+
+rz
+
+1
+
+0
+
+1
+
+1
+
+1
+
+1
+
+1
+
+0
+
+1
+
+0
+
+1
+
+1
+
+offset
+offset
+
+0
+
+offset
+ry
+
+0
+
+1
+
+1
+
+1
+
+0
+
+0
+
+1
+
+0
+
+0
+
+0
+
+1
+
+1
+
+1
+
+0
+
+0
+
+0
+
+1
+
+Memory Map
+Processor Address Mapping
+The addresses are all byte addresses. The Size description is also in byte. The processor offers four different
+memory spaces.
+Segment Name
+
+Base Address
+
+Size
+
+Description
+
+kseg2
+
+0xc000,0000
+
+0x4000,0000
+
+1 GB mapped and cached
+
+kseg1
+
+0xa000,0000
+
+0x2000,0000
+
+0,5 GB unmapped and uncached
+
+kseg0
+
+0x8000,0000
+
+0x2000,0000
+
+0,5 GB unmapped and cached
+
+kuseg
+
+0x0000,0000
+
+0x8000,0000
+
+2 GB mapped and cached
+
+Note that kuseg and kseg2 are available only with the use of a MMU. As there is no MMU in RDA8851CL,
+attempts to access those memory segments will trigger an exception.
+Memory Access Types
+In case of cache miss, a cached access will occur and a full line of 4 x 32 bits ( = 16 bytes) will be loaded.
+An uncached access will be a single access or a streaming buffer fill (16 bytes), in case of a streaming buffer
+miss, if this feature is enabled. A configuration bit allows to enable / disable the streaming feature.
+Multiplier & Divider
+The RISC processor’s multiplier unit implements a 2 cycle fall through algorithm.
+The divider uses a step divide algorithm, which takes 36 cycles to complete a divide operation.
+
+B.I.2 Memory Bridge
+The memory bridge is the interface to general memory used by the system, including internal rom, internal sram
+RDA Microelectronics Inc. CONFIDENTIAL
+
+22 / 100
+
+RDA8851CL Datasheet V1.05
+
+and access to external memory.
+
+Features
+● Dual AHB Slave
+○ A rom/sram controller
+○ An Asynchronous FIFO to external controller
+● The bridge is implemented as a crossbar between the 2 AHB and the 2 controller (rom/sram and FIFO)
+● The rom/sram controller can insert wait cycle to the AHB Slave (to manage read/write conflicts and to
+allow using slower instance if needed).
+● The rom/sram controller integrate a BIST engine to test the ROM by computing a CRC and test the
+rams with the March C algorithm
+● All AHB burst size are supported
+○ Wrap will be split at wrap address
+○ Burst longer than the data buffer size of the FIFO will be split
+○ Read INCR will read a fixed data size
+● FIFO data buffer can store 2 requests either read or write (each 4x32 bytes) from either AHB slave
+interface.
+● APB slave for configuration
+
+External Bus Controller Features
+● The controller handles 16 bits data bus width only, however 8 bit memory chips can still be used; by
+groups of 2. 8 bit peripherals must be connected to the 8 LSBs of data and accessed through even
+addresses only.
+● Manage page mode SRAM or FLASH.
+● Manage burst mode PseudoSRAM.
+● Manage AD-Mux and AD-Mux burst mode PseudoSRAM.
+● 1 Control Register Enable (M_CRE) Output pin in same power domain than other memory IO for
+PseudoSRAM register control.
+● FIFO interface for address/data path
+● APB interface for configuration (subset of the mem bridge APB address space)
+
+AHB Master Features
+● AHB Compliant master
+● except the 1K crossing limit defined by AMBA (additional logic required)
+● Memory space divided in 5 spaces with a base address for each (aligned on n Word address, n=FIFO
+data buffer size)
+● Do not use WRAP (due to FIFO organization)
+● use INCR4, SINGLE or INCR (for 2 or 3 data only) burst type
+● FIFO interface for address/data path
+● APB interface for configuration (subset of the mem bridge APB address space)
+● External clock is provided from outside the IP (and synthesized in the outside clock tree)
+
+Operations
+Dual AHB Operation
+RDA Microelectronics Inc. CONFIDENTIAL
+
+23 / 100
+
+RDA8851CL Datasheet V1.05
+
+The Slave allow simultaneous access to rom/sram controller and FIFO from the two slaves.
+Access to the rom/sram controller are sequenced using WAIT on AHB (HReady low).
+Access to the FIFO are sequenced using split when the FIFO busy on the other AHB slave (other split conditions
+are described bellow in FIFO Operation section).
+Arbitration in case of simultaneous access to the same controller: Should try to serve each side (BB and Sys)
+alternatively.
+Simultaneous access to rom/sram controller: memorize the last accepted burst. when the two arrives exactly
+simultaneously reply wait to the memorized side and process the other side.
+Simultaneous access to FIFO: First serve read of data if data are available for this read. Serve the side that did
+not enter the FIFO on last Burst in priority.
+
+FIFO Operation
+The FIFO can store 2 requests either read or write from either AHB Slave interface. But only one at a time.
+For each request there is an associated Write Data Buffer and a Read Data Buffer.
+If the FIFO is full the master is split, this master will be released when one spot is free in the FIFO (all masters
+split because FIFO was full are released at the same time).
+Write
+A burst is stored to the Data buffer until the burst is finished. If the Data buffer is full or the Wrap address of a
+wrap burst is reached, the Split response is send (the master will be released in the same condition as above).
+Read
+The request is stored (address, length ...) and the master is split.
+The master will be released when the Data buffer has been filled by the external controller (EBC or AHB Master).
+When the Master comes back, the Data are provided, if the master end the burst the transfer is complete (even
+if there is still some data in the buffer, in this case they are lost) if the master request more than the available
+Data it receive the Split response and will be released in the same conditions as for FIFO full: the request is not
+stored.
+FIFO Flush status: Read in FIFO at special address space does not impact the external controller but returns
+when the command has reached the end of the FIFO (so the read returns only when previous writes are done,
+no pooling is required)
+If external controller has error (disabled space for EBC or AHB Error response for master) the FIFO data reads
+as and error code. “0xD15AB1ED”
+
+EBC Operation
+FIFO access are translated to external memory access.
+Configuration of Chip select are validated only between access (atomic change)
+● Flash block address remapping and M_CRE control registers are placed in the FIFO space to keep
+accesses in sequence and avoid using FIFO Flush each time.
+
+B.I.3 Direct Memory Access (DMA)
+The DMA controller relieve the CPU from doing generic memory transfers. A data FIFO is integrated to allow
+burst transfers. It can generate an interrupt to the system CPU at transfer completion.
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+24 / 100
+
+RDA8851CL Datasheet V1.05
+
+Read and Write transfers are supported from and to any memory mapped location (external memory, internal
+SRAM, modules FIFO…). The addresses can be word, halfword or byte aligned. The DMA can also be used in
+pattern mode. In this case, a 32-bit word will be used to fill the destination memory zone.
+The DMA includes a GEA, which can automatically encode and decode blocks of GPRS data (using the GEA-1
+and GEA-2 algorithm) during transfer. The DMA controller is also capable to compute the Frame Check
+Sequence field for GPRS or Data transfer.
+
+Features
+● Support for linear memory transfers.
+● Support for word, halfword and byte aligned addresses.
+● Burst transfer mode and internal FIFO for best performances.
+● Autonomous transfer up to 64K byte per transfer.
+● Interrupt generation at completion of the transaction.
+● Can fill a part of the memory with a 32-bit pattern.
+● Autonomous GEA-1 and GEA-2 computation.
+● Frame Check Sequence computation
+
+B.I.4 Page Spy
+This module is a System spy that detects read or write access into predefined ranges of memory addresses and
+triggers an interrupt in case of selected access.
+
+Features
+● Six memory spaces can be spied.
+● Memory space described with a start address (inclusive) and an end address (exclusive) and mode
+(detect read, write or both).
+● For each space a status register gives the master that triggered the spy, the address that caused it and
+the mode.
+
+B.I.5 System Intelligent Flow Controller (Sys IFC)
+The System Intelligent Flow Controller (SYS_IFC) is a bridge between the system bus and the peripheral bus.
+The IFC also provides DMA capabilities to allow data transfer from or to peripherals. It supports 7 DMA standard
+channels for 8-bit or 32-bit and a dedicated DMA channel for the RF SPI module.
+
+Features
+● 7 independent DMA channels. internal FIFO of four 32-bit words per channel.
+● 1 dedicated DMA channel for the RF SPI module
+● 1 dedicated DMA channel for the debug host
+● Burst mode on AHB bus to enhance transfer rate
+● Support 2 types of transfer: memory to peripheral and peripheral to memory
+● Incremental address for AHB master access and non-incremental address for APB access.
+RDA Microelectronics Inc. CONFIDENTIAL
+
+25 / 100
+
+RDA8851CL Datasheet V1.05
+
+● Dynamic allocation of the 7 DMA channels, request lines among the following peripherals:
+a) SCI
+b) SPI1
+c) SPI2
+d) SPI3
+e) TRACE UART (DBG Host)
+f) UART
+g) UART2
+h) SDMMC
+i) Camera
+● Hardware semaphore registers which indicate to the CPU which channel must be used and a global
+status register indicating which channel is free.
+● AHB to APB bridge, write buffer for a single write access the master isn't stalled, no wait state inserted
+
+AHB2APB bridge operation
+The SYS_IFC include a bridge between the AHB bus and the APB bus. The SYS_IFC bus is the only one master
+on the APB bus. The APB bus is a low bandwidth and low power bus mainly used to configure peripheral register
+or transfer data with the IFC DMA.
+Arbitration
+The IFC includes some DMA capability which can access to APB bus, in case of 2 accesses simultaneously
+(AHB slave and DMA channel), request from the AHB has the highest priority. But if processor requests an
+access to the APB, and the DMA already have an access in progress, the processor will be stalled until the DMA
+access is finished.
+
+DMA Operations
+The SYS IFC includes 7 DMA channels. Each channel can perform data movements between devices in the
+AHB bus and peripheral on the APB bus.
+Typical transfer
+The DMA feature is used to automatically transfer data from memory to peripheral or from peripheral to memory.
+A typical transfer is defined by a start address, the number of bytes to transfer (TC), a direction (Rx or Tx) and a
+peripheral address.
+
+memory
+
+start_addr
+
+TC
+
+RDA8851CL Datasheet V1.05
+
+START_ADDR register gives the first address of the data to transfer.
+TC register gives the number of bytes to transfer.
+The direction and the peripheral to access is given by the field REQ_SRC in the control register.
+
+Typical data flow for memory to peripheral transfer
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+
+Check which channel to use and which channel is busy.
+Configure in the given channel of the IFC, the AHB start address.
+Configure in the given channel of the IFC, the number of bytes to transfer (TC register)
+Program the peripheral in which to write and enable the IFC channel to start.
+The IFC start a read burst access on its AHB master interface.
+If the programmable DMA request line (of the peripheral associated to this transfer) is high (meaning the
+peripheral needs data), writes are performed on the APB interface and the current transfer counter (TC)
+is decremented. This sequence is made until the FIFO of the IFC is empty.
+8. When the FIFO of the IFC is empty; another read burst access is performed on the AHB bus and return
+to the step (6).
+9. If the transfer is complete (current transfer counter reaches zero), the associated Done signals goes
+high and the channel is disabled (if the autodisable bit is set)
+This is the same flow for peripheral to memory transfer.
+Auto-disable bit
+At the end of the transfer when TC=0 the channel is not necessary disabled. The state of the autodisable bit
+determines whether or not the channel is automatically disabled. This allows for one resource to keep the
+channel, and this resource can launch a new transfer just by writing a new value to the TC.
+Incremental TC
+It is possible during the transfer to write several time in the TC register. The new TC value will be added to the
+current value of the TC and the total number of bytes transferred is a the addition of all writes in TC.
+For example, at first the processor programs the IFC with TC=50, and the IFC start the transfer.
+Later during the transfer the processor again writes TC=30. The total number of transfers will be 80 bytes which
+is 80=50+30.
+
+RF_SPI channel
+The SYS_IFC includes a dedicated channel for the RF_SPI peripheral. This channel only works in FIFO mode
+and the number of bytes to transfer is given by the TC register. It is possible to write several time in the TC
+register (TC incremental). The End FIFO address register is given by a supplementary field END_AHB_ADD.
+
+Debug channel operations
+The SYS IFC includes an additional channel dedicated for debug purpose only. This feature allows access to all
+the resources of the chip through the Debug Host Port.
+The debug channel receive request from the host port. A typical debug request is composed of an address, a
+command (read or write), a size and a data to write. The read/write command is the MSB bit of the address (0
+for read, 1 for write). The size of the transfer is given by bit 30 and 29 of the address.
+The debug channel include a 2 words receive FIFO for receiving debug request from a peripheral and a one
+word transmit FIFO.
+The following figure shows a brief diagram of the architecture.
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+27 / 100
+
+RDA8851CL Datasheet V1.05
+
+AHB
+master
+
+Address + R/W
+read data
+data to write
+Debug
+Channel
+Peripheral
+Figure B.3: Debug channel block
+diagram
+For a write debug command, the host peripheral transmits by a first DMA request the Address, the R/W bit and
+the Size and by a second DMA request the DATA to write. Then the debug channel makes an AHB write access
+to desired resource.
+For a read debug command, the host peripheral transmits by a first DMA request the Address, the R/W bit and
+the Size and by a second DMA request a data to only fill the internal debug command FIFO. The data loaded in
+the FIFO during this second access is not used. With the address loaded, the IFC performs an AHB read
+access, the recovered data is stored in the transmit FIFO. When the host peripheral performs a DMA transmit
+request, a write access is performed on the APB bus for sending data to the peripheral.
+
+B.II System Peripherals
+B.II.1 System and Clock Control
+The system control provides general controls over the whole system, including reset controls, power
+management controls, clock selection, and some debug features.
+
+Features
+● Registers for reset control, clock control, fast clock div control, AHBC, some debug feature(like Debug
+Breakpoints,Lock / Unlock the protected registers),.
+● Automatic clock gating signal generation for APB module (PCLK_DATA and PCLK_CONF)
+● XCPU and BCPU special signals for clock management and breakpoint management
+
+Reset Control
+After a hardware reset, the XCPU will automatically boot and perform the system initialization. The BCPU is held
+in reset until released by the XCPU.
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+28 / 100
+
+RDA8851CL Datasheet V1.05
+
+The reset control allows resetting independently most of the modules of the design. In normal use, there should
+be no need to reset an individual module and caution must be taken when doing so to avoid crashing the
+system. This is provided mainly for debug purposes.
+A global software reset feature is provided. This feature allows resetting the whole system from the software
+running on any of the CPUs. The effect of the software reset is the same as a hardware reset except that it does
+not reset the host interface.
+A watchdog timer allows recovering from software crashes. Once enabled, the watchdog timer must be reloaded
+periodically by the software. If the software fails to do so because of a software crash, the watchdog timer will
+reach 0 and trigger a software reset automatically. The system will then restart. When the XCPU reboots, it can
+detect that a watchdog has triggered a reset and can save the context at the time of the watchdog
+expiration(Program counter, register values, stack location), this should allow for easier software debug.
+It is also possible to trigger a software reset from the host interface. A special feature allows preventing the
+XCPU from booting after this reset. This allows avoiding the XCPU to set the system in an invalid configuration
+in case the boot code is not valid (flash not programmed or badly programmed) and gaining access to the whole
+system from the host port to find the cause of the issue or reprogram the boot code in flash.
+
+Clock management
+The system has three main sources for the internal clocks generation:
+● a 32.768kHz generated by 26MHz clock
+● a 26MHz clock from the RF transceiver
+● a PLL that generates 624MHz from 26MHz provided by the clock RF Squarer, this PLL allows to
+generate a 26MHz, 39MHz, 52MHz, 78MHz, 89MHz, 104MHz, 113MHz, 125MHz, 139MHz, 156MHz,
+178MHz, 208MHz, 250MHz, 312MHz;
+The other clock source can go only to some part of the design:
+● a dedicated clock input for the HST clock : used by the host module.
+● an audio clock input (BCK) : used for the I2S audio module, note that this pin is actually bidirectional
+(depending on the connection to a I2S master or I2S slave, this pin is configured as a clock input i_BCK
+or a clock output o_BCK).
+All internal clocks in the design except the clocks for host and in some case audio, derive from one of the three
+main clock sources. The selection is made through configuration registers. Thanks to glitch free muxes, it is
+possible to change the internal clock frequency on the fly. Caution must be taken when changing the main clock
+frequency as some interfaces clocks are divided versions of this main clock. For example, the SPI baud rate
+directly depends on the main clock frequency so when changing the main clock, it is recommended to make
+sure that the SPI is not transmitting during the change.
+To reduce the power consumption, it is possible to gate the clock signal going to most of the modules individually
+when a module is not in use. Enabling or disabling the clock going to a module can be automatic (all the
+modules needing to run over short period of times are able to control their clock themselves. For example the
+DMA only has a clock while doing a transfer) or manual (for the modules running all the time once they are
+enabled. For example, the audio interface which needs to output samples continuously once enabled)
+
+Debug features
+Hardware breakpoints
+This feature allows defining one hardware breakpoint for each CPU. This breakpoint can be either on an
+instruction fetch, a data read or a data write.
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+29 / 100
+
+RDA8851CL Datasheet V1.05
+
+When the breakpoint is reached, the CPU is stalled. A status bit allows to know if the breakpoint has been
+reached or not. When the CPU is stalled, all its internal registers are accessible through the host port. If the
+breakpoint is released, the CPU resumes its execution.
+Debug clock
+It is possible to output any internal clock of the design on the pin DBG_CLK (also used for EXL/PXTS Clock) for
+debug purposes (check frequency, power saving feature...).
+The Debug clock register is defined in the debug_port module.
+
+B.II.2 Trace (Normal UART) and Host (Debug UART) Port
+RDA8851CL Debug Host module contains 1 normal Universal Asynchronous Receiver Transmitter channels
+(UART) and 1 Debug UART. The two UARTs share the same Tx/Rx engines, which sends and receives byte
+data from serial interface. Each UART has its own control sub-module and own APB interface. RDA8851CL
+Debug Host module parses the incoming data from serial interface to switch between the normal UART and the
+Debug UART.
+● Normal UART
+The normal UART can be used for traces and other purposes. For APB interface, it is exactly the same to the
+other UARTs in the RDA8851CL system. However, if Debug UART is enabled, it should have the same serial
+interface configuration as the Debug UART. Some of its configuration options will be masked in this case. To
+Adapt different clock frequency, the normal UART uses asynchronous FIFO, which uses gray code to represent
+the read and write pointer positions.
+● Debug UART
+The Debug UART is specially designed for communicating debug information with a PC host. The serial
+interface of Debug UART is a simplified version of the normal UART and is less configurable. Each sample is
+sent serially, has 1 start bit (always zero), 8 data bits, and 1 stop bits (always one). Breaks (data line held low)
+can be generated and detected allowing resynchronizing the two devices.
+
+Features
+● Auto normal/Debug UART select by parsing incoming message.
+● Separate UART APB and Debug UART APB interfaces.
+Normal UART features:
+● Fully programmable transfer word format.
+○ 7 or 8 data bits.
+○ 1 or 2 stop bits.
+○ Odd, even, mark, space or none parity.
+● Smooth stop feature (the UART stops after the end of the current word transfer).
+● Break generation and detection.
+○ Break length programmable.
+○ Interrupt can be generated.
+● Supports Automatic Software Flow Control (XON/XOFF).
+● Programmable receive and transmit fifos (16 bytes deep).
+● Supports low speed IrDA 1.0 SIR mode by adding external hardware.
+● DMA capabilities (through the System IFC) to allow fully automated data transfers.
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+30 / 100
+
+RDA8851CL Datasheet V1.05
+
+● Wide selection of programmable interrupts to allow interrupt driven data transfer management.
+○ Rx or Tx Fifo trigger reached.
+○ Timeout: No characters in or out of the Rx Fifo during the last 4 character times and there is at
+least one character in the Rx Fifo during this time.
+○ DMA timeout: After Rx Sys IFC DMA is started, no characters in or out of the Rx Fifo during the
+last 4 character times.
+○ End of the Sys IFC DMA transfer.
+○ CTS detection.
+○ Tx or Rx overflow, parity or framing (bad sample format received) error or break.
+● Loop Back capabilities for test purposes.
+● Up to 1843.2 Kbit/s for serial and 115.2 Kbit/s for IrDA.
+Debug UART features:
+● Transfer word format.
+○ 1 start bit.
+○ 8 data bits.
+○ 1 stop bit.
+● Tx Break generation when pin reset and Rx break detection.
+● HW reset event.
+● Programmable events allowing CPU directly write to Debug UART.
+● Some serial interface read/write internal registers.
+● DMA capabilities (through the System IFC Debug Channel) for automated data transfers.
+● Up to 1843.2 Kbit/s for serial.
+
+Message Frame
+In case of Debug UART is disabled, the message has no format requirement. If Debug UART is enabled, the
+General message received by the Debug Host should be of the following format:
+○ 1 Start byte.
+○ 2 Size bytes.
+○ 1 Flow Identification byte.
+○ N Message Body bytes.
+○ 1 CRC byte.
+The start byte is 0xAD, which starts a message frame. The 2 size bytes indicates the length of the message ( the
+length of how many bytes after SIZE field, equals to N Message Body byte + 1 CRC byte = N+1). The Flow
+Identification byte identifies what kind of Flow is this message, the definition of the Flow Ids can be found in the
+REMOTE specifications. The message body field length is variable, and has different data structure according to
+the Flow ID. The CRC field is calculated by an XOR between the Flow ID and each Message body byte.
+
+1 byte
+
+2 bytes
+
+1 byte
+
+n bytes
+
+1 byte
+
+0xAD
+
+Size
+
+ID
+
+Message Body
+
+CRC
+
+Debug
+
+1 byte
+
+4 bytes
+
+CMD
+
+Addr
+
+1/2/4/4m bytes
+Data
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+31 / 100
+
+RDA8851CL Datasheet V1.05
+
+Figure B.4: General Message Format
+
+For Debug Messages, the Flow_ID = 255, and the Message Body field is composed of:
+○ 1 command byte ( bit 7,bits 2 to 0 used).
+○ x00 for byte.
+○ x01 for half word.
+○ x10 for word.
+○ x11 for block.
+○ 1xx for internal registers.
+○ Bit 7 for Write_H (0 for read, 1 for write)
+○ 4 address bytes (bits 28 to 0 used).
+○ Byte, half word, word or 4m data bytes(block) in case of write, 1 data byte in case of read (RID).
+● Block mode is only for write, in case of read, only byte, half word and word data is supported. The read
+return message of Debug Message is:
+1 byte
+
+2 bytes
+
+1 byte
+
+1 byte
+
+4/2/1 bytes
+
+1 byte
+
+0xAD
+
+Size
+
+255
+
+RID
+
+Data
+
+CRC
+
+Figure B.5: Read Return Message Format
+
+● If the CPU send an event, the RID is 0, the format will be:
+1 byte
+
+2 bytes
+
+1 byte
+
+1 byte
+
+4 bytes
+
+1 byte
+
+0xAD
+
+Size
+
+255
+
+0
+
+Data
+
+CRC
+
+Figure B.6: Event Message Format
+
+IFC DMA Data
+The Debug UART read and write data from memory by using the IFC DMA. It will encapsulate the received
+message into a 4-byte command and a 4-byte data. The 4-byte command includes the read or write indicator (bit
+31), the type(bit 30 to 29) and the address(bit 28 to 0). The 4-byte data is formed from data field in the message
+(in case of byte and half word, replicate the data to fill the 4 bytes). When the Command and Data is ready, the
+Debug UART will generate an IFC Debug Request. In case of block data, the address is recalculate for each 4byte data.
+
+Normal/Debug UART Select
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+32 / 100
+
+RDA8851CL Datasheet V1.05
+
+● Clock Select
+The Debug Host detects if there is a host clock. If the host clock exists (an UART Dongle is plugged), it will
+enable the Debug UART and use this clock for both Debug UART and normal UART. There is also a software
+configure Force_Host_On signal, which force to enable the Debug UART, in this case, if no host clock is
+detected, the CLK_UART will be used for the both 2 UARTs. If no host clock is detected and Force_Host_On
+signal is inactive low, the Debug UART will be disabled, and CLK_UART is used for the normal UART. The
+following table illustrates the clock selection and the enabling of different function groups. In the table, the
+columns on left have the priority.
+HST_CLK Plugged
+
+Force_HST_ON
+
+UART_CLK only
+
+HOST_Func Enabled
+
+Yes
+
+Yes
+
+No
+
+Clock used
+
+CLK_Host
+
+CLK_UART
+
+CLK_UART
+
+Mask UART Config
+
+Yes
+
+Yes
+
+No
+
+● RX UART Select
+If host clock exists, the Debug Host parses the Incoming Data from Rx engine permanently. The
+messages with Flow ID = 255 is a Debug flow and thus host will select the Debug UART, otherwise, the
+normal UART. The Rx parser will send to Debug Uart only the message body, but if Normal Uart is
+destined, the Rx parser will send the whole package including the head and CRC.
+The Debug Uart has separate Rx and Tx state machines. By de-assert UART RTS, The Rx state machine will
+be blocked before the next command if previous Debug IFC channel DMA is not finished, to avoid lost of the old
+command's address and data.
+Another case which needs to block Rx is: a new read command comes but previous read has not finished
+sending its data. In fact, each read operation uses both Rx and Tx machines: The Rx state machine finishes by
+sending the read request to IFC. On the other side, Tx state machine is triggered either by a event sending
+request or by read data ready signal. If the current Tx state machine has not finishes, the Rx process will need to
+wait in order not to lose the old RID and read data.
+A CRC checker is enabled if the Rx flow is for Debug UART. When command is Read, if the CRC is bad, the
+command received will be rejected and not be sent to IFC. When Write, if the destination is host internal register
+and CRC is bad, the command will be ignored. If the destination is memory, the command will be executed
+before CRC is calculated. The CRC check result will be put to the CRC check result internal register and can be
+read through the serial interface. For normal UART, the CRC is checked by software.
+
+● TX UART Select
+By default, The Debug UART TX is given priority, so if the normal UART continues to send messages, the TX
+will switch to Debug UART once the current message is finished. Further more, there is an internal register bit
+Debug_Force_Prio which is by default to be active high. In this case, whenever the host wants to send anything,
+it can insert them into the normal Uart package.
+If the Debug_force_prio is inactive low, A parser in the normal UART TX path analyzes if the current read
+operation for normal UART is finished or not, in order that the process is not disturbed by a read request or
+event from Debug UART. In this case, the arbitration process for TX UART select can be illustrated in the
+following:
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+33 / 100
+
+RDA8851CL Datasheet V1.05
+
+Any byte,
+Status=0
+No
+0xAD
+
+Yes, status=0
+
+Recv
+
+N=N+1
+
+N=SIZE
+
+NO
+Host
+Req
+
+CRC
+
+YES
+
+HOST
+TX
+
+Figure B.7: Tx Switch STM
+When the normal UART receives any data from the APB, it will clear the status to 0 which no more grant the
+Debug UART for TX and waits for start byte 0xAD. Once it founds a 0xAD, the parser will count until number of
+data declared in SIZE field has been received before it checks the CRC. The CRC result will be put in an internal
+register and can be read from the host interface. Then the status will be reset to 1, and the Debug UART can
+send its data if there is a request.
+
+IrDA SIR Operation
+IrDA 1.0 SIR mode is available only if the Debug UART is not enabled and can be activated when the user
+opens a UART. IrDA 1.0 SIR mode supports bi-directional data communications with remote devices using
+infrared radiation as the transmission medium. IrDA 1.0 SIR mode specifies a maximum baud rate of 115.2
+KBaud.
+Transmitting an infrared pulse corresponds to a zero, while one is represented by not sending any pulse. The
+width of a infrared pulse is 3/16 th of a normal serial bit time (depending on the baudrate). Each sample begins
+with a pulse (the start bit)
+Received data is inverted (due to the IrDA physical purposes). Therefore, the Uart_Rx port, has the correct
+UART polarity. See the following figure for more details.
+Uart_Tx
+
+Start
+
+Stop
+3/16
+bit period
+
+Uart_Tx (IrDA mode)
+Uart_Rx (IrDA mode)
+Uart_Rx
+
+Start
+
+Stop
+
+Figure B.8: IrDA SIR Data Format
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+34 / 100
+
+RDA8851CL Datasheet V1.05
+
+The UART module operation when IrDA SIR mode is enabled is similar to when the mode is disabled, with one
+exception: data transfers can only occur in half-duplex fashion when IrDA SIR mode is enabled. This is because
+the IrDA SIR physical layer specifies a minimum of 10ms delay between transmission and reception. This 10ms
+delay must be handled by the software.
+
+Break Generation and Reset
+A break is generated by the sending UART holds the TXD line to 0 for quite a long time. It can be used to avoid
+the case RTS line is always inactive and thus blocks the data to be sent any more. When a break is detected, it
+will reset the state machine of the Rx/Tx engines. If Host is enabled, the break will be sent to both two UART.
+For debug UART, It will write into the CFG internal register bit Disable_UART to temporarily disconnect the
+normal UART to the serial interface (in this state, all data destined for normal UART received by RX engine will
+be discarded, all data in the normal UART FIFO are still kept but will not send to the TX engine, the RTS from
+normal UART will also be disconnected to the RX engine), this will allow the Debug UART to diagnostic what
+happens in case of normal UART errors. It will also reset the Debug Host baud-rate. For normal UART, the
+break will also generate an error IRQ, which can ask soft to perform operations such as a reset for the FIFO etc.
+The normal UART can be enabled later by clear the Disable UART bit.
+If the reset source is coming from pin reset, a break should be sent by the debug host to let the other-side UART
+configure the baud-rate. This break lasts at least 12 bit long in 115.2K baud-rate, which should be the lowest
+baud-rate. A hardware reset event should be sent by the debug host in case of system reset.
+
+Clock Detector
+This sub-module detects if the Host clock is present or not. This module is located in clock control module, it will
+generate a Host_Clock_On signal. The Host_Clock_On signal helps to select the system clock or host clock as
+the input for debug host. When Host_Clock_On is active high, host clock is used, otherwise, UART clock. The
+Host_Clock_On signal is also send to Debug host to enable or disable the host functionality.
+The clock Detector uses 32.768KHz clock to detect 14.7468MHz host clock. There is a 10 bit counter in the host
+clock domain, and the highest bit is used to generate a 14.4KHz slow clock. The 32KHz clock detects the rising
+edge of this slow clock, and launch a 2-bit incremental counter. Every time a rising edge detected, the counter
+will be added by one, until the counter reaches 3. At this moment, the Host_clock_on signal will be asserted and
+host clock is considered to be connected. There is another 6-bit timeout counter, each time a new rising edge is
+detected, the timeout counter will be reset to “111111”, otherwise, it will be decremented by one at each 32KHz
+clock rising edge. If the timeout counter reaches 0, the incremental counter will be reset and Host_clock_on
+signal will be de-asserted, the host clock is considered to be disconnected.
+
+Software flow control
+If sending of characters must be postponed, the character XOFF is sent on the line, to restart the
+communication again XON is used. Sending the XOFF character only stops the communication in the direction
+of the device which issued the XOFF.
+The XON/XOFF character can be programmed by register bits. However, two bytes have been predefined in the
+ASCII character set to be used with software flow control. These bytes are named XOFF and XON, because
+they can stop and restart transmitting. The byte value of XOFF is 19, it can be simulated by pressing Ctrl-S on
+the keyboard. XON has the value 17 assigned which is equivalent to Ctrl-Q.
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+35 / 100
+
+RDA8851CL Datasheet V1.05
+
+Backslash '/' can be added before XON, XOFF and '/' to signifies their original values instead of flow control
+marks.
+
+B.II.3 Serial Peripheral Interface (SPI)
+This module is a master interface for a synchronous serial link, it can be configured to be compatible with
+Motorola SPI or to comply with some various synchronous serial protocols.
+RDA8851CL includes 2 general purpose SPIs and 1 SPI dedicated to PMU, ABB integrated modules.
+
+Features
+● SPI1 has 3 chip selects
+● SPI2 has 2 chip selects
+● 2 selectable data input.
+● programmable clock polarity.
+● programmable data frame size (from 4 to 32 bits).
+● 16 x 8 bits transmit FIFO.
+● 16 x 8 bits receive FIFO.
+● a few delay options (time between CS, clocks and data).
+● received pattern matching before filling RX FIFO (SD-MMC read block feature)
+● transmit zero when TX FIFO empty (for generating dummy data during pattern matching read)
+● can be controlled by LPS (an new frame is not started until LPS allows it)
+● direct pin control to force value to 0, 1 or input.
+● special read mode with output enable control of the DO pin (selected input should be multiplexed with
+
+DO pin to use this feature)
+
+B.II.4 I2C
+I2C is a two-wire, bi-directional serial bus that provides a simple and efficient method of data exchange between
+devices. It is most suitable for applications requiring occasional communication over a short distance between
+many devices. The I2C standard is a true multi-master bus including collision detection and arbitration that
+prevents data corruption if two or more masters attempt to control the bus simultaneously.
+The interface defines 3 transmission speeds:
+•
+Normal: 100Kbps
+•
+Fast: 400Kbps
+•
+High speed: 3.5Mbps
+Only 100Kbps and 400Kbps modes are supported directly.
+RDA8851CL Chip includes 3xI2C masters.
+
+Features
+•
+
+Compatible with Philips I2C standard
+RDA Microelectronics Inc. CONFIDENTIAL
+
+36 / 100
+
+RDA8851CL Datasheet V1.05
+
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+
+Multi Master Operation
+Software programmable clock frequency
+Clock Stretching and Wait state generation
+Software programmable acknowledge bit
+Interrupt or bit-polling driven byte-by-byte data-transfers
+Arbitration lost interrupt, with automatic transfer cancellation
+Start/Stop/Repeated Start/Acknowledge generation
+Start/Stop/Repeated Start detection
+Bus busy detection
+Supports 7 and 10bit addressing mode
+Operates from a wide range of input clock frequencies
+
+Operations
+•
+
+I2C System configuration
+
+The I2C system uses a serial data line (SDA) and a serial clock line (SCL) for data transfers. All devices
+connected to these two signals must have open drain or open collector outputs. The logic AND function is
+exercised on both lines with external pull-up resistors.
+Data is transferred between a Master and a Slave synchronously to SCL on the SDA line on a byte-by-byte
+basis. Each data byte is 8 bits long. There is one SCL clock pulse for each data bit with the MSB being
+transmitted first. An acknowledge bit follows each transferred byte. Each bit is sampled during the high period of
+SCL; therefore, the SDA line may be changed only during the low period of SCL and must be held stable during
+the high period of SCL. A transition on the SDA line while SCL is high is interpreted as a command (see START
+and STOP signals).
+•
+
+I2C protocol
+
+START signal
+When the bus is free/idle, meaning no master device is engaging the bus (both SCL and SDA lines are high), a
+master can initiate a transfer by sending a START signal. A START signal, usually referred to as the S-bit, is
+defined as a high-to-low transition of SDA while SCL is high. The START signal denotes the beginning of a new
+data transfer. A Repeated START is a START signal without first generating a STOP signal. The master uses
+this method to communicate with another slave or the same slave in a different transfer direction (e.g. from
+writing to a device to reading from a device) without releasing the bus.
+The I2C master generates a START signal when the STA-bit in the Command Register is set and the RD or WR
+bits are set. Depending on the current status of the SCL line, a START or Repeated START is generated.
+Slave address transfer
+The first byte of data transferred by the master immediately after the START signal is the slave address. This is
+a seven-bits calling address followed by a RW bit. The RW bit signals the slave the data transfer direction. No
+two slaves in the system can have the same address. Only the slave with an address that matches the one
+transmitted by the master will respond by returning an acknowledge bit by pulling the SDA low at the 9 th SCL
+clock cycle.
+Note: The I2C master supports 10bit slave addresses by generating two address transfers. See the Philips I2C
+specifications for more details.
+The I2C master treats a Slave Address Transfer as any other write action. Store the slave device’s address in
+the Transmit Register and set the WR bit. The I2C master will then transfer the slave address on the bus.
+Data Transfer
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+37 / 100
+
+RDA8851CL Datasheet V1.05
+
+Once successful slave addressing has been achieved, the data transfer can proceed on a byte-by-byte basis in
+the direction specified by the RW bit sent by the master. Each transferred byte is followed by an acknowledge bit
+on the 9th SCL clock cycle. If the slave signals a No Acknowledge, the master can generate a STOP signal to
+abort the data transfer or generate a Repeated START signal and start a new transfer cycle.
+If the master, as the receiving device, does not acknowledge the slave, the slave releases the SDA line for the
+master to generate a STOP or Repeated START signal.
+To write data to a slave, store the data to be transmitted in the Transmit Register and set the WR bit. To read
+data from a slave, set the RD bit. During a transfer the core set the TIP flag, indicating that a Transfer is In
+Progress. When the transfer is done the TIP flag is reset, the IF flag set and, when enabled, an interrupt
+generated. The Receive Register contains valid data after the IF flag has been set. The user may issue a new
+write or read command when the TIP flag is reset.
+Stop signal
+The master can terminate the communication by generating a STOP signal. A STOP signal, usually referred to
+as the P-bit, is defined as a low-to-high transition of SDA while SCL is at logical ‘1’.
+
+•
+
+Arbitration Procedure
+
+Clock Synchronization
+The I2C bus is a true multi-master bus that allows more than one master to be connected on it. If two or more
+masters simultaneously try to control the bus, a clock synchronization procedure determines the bus clock.
+Because of the wired-AND connection of the I2C signals a high to low transition affects all devices connected to
+the bus. Therefore a high to low transition on the SCL line causes all concerned devices to count off their low
+period. Once a device clock has gone low it will hold the SCL line in that state until the clock high state is
+reached. Due to the wired-AND connection the SCL line will therefore be held low by the device with the longest
+low period, and held high by the device with the shortest high period.
+Clock stretching
+Slave devices can use the clock synchronization mechanism to slow down the transfer bit rate. After the master
+has driven SCL low, the slave can drive SCL low for the required period and then release it. If the slave’s SCL
+low period is greater than the master’s SCL low period, the resulting SCL bus signal low period is stretched, thus
+inserting wait-states.
+
+B.II.5 Serial Peripheral Interface for RF (RF SPI)
+This module is a master interface for a synchronous serial link, it can be configured to be compatible with
+Motorola SPI or to comply with some various synchronous serial protocols.
+
+Features
+● 1 chip select with programmable polarity
+● synchronization from TCU
+● programmable clock polarity
+● programmable data frame size (from 4 to 32 bits) for output and input data
+● 2 transmit scheme
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+38 / 100
+
+RDA8851CL Datasheet V1.05
+
+● 1 command FIFO, 20 commands (size), 16 bytes + IFC (data)
+● 1 gain command table, 1 command size, 15 bytes
+● 4 bytes receive FIFO
+● 2 read modes : SPI like (read while writing), DigRF like (write then read, can be on a bidirectional pin)
+● a few delay options (time between CS, clocks and data)
+
+B.II.6 General Purpose Input Output
+RDA8851CL GPIO modules has configurable number of General Purpose Input or Output ports (GPIO) and
+General Purpose Output port(GPO). There are up to 32 GPIOs and 12 GPOs. GPIO are used to control external
+chips, or to get external events. They can be used as inputs or outputs. As input, 8 of them can be configured to
+trigger an interruption (GPIO0 to GPIO7). The IRQ could be generated on edge or level.
+
+Features
+● *Up to 32 GPIOs configurable as input or output.
+● *Up to 12 GPOs.
+● 8 of the GPIOs can generate interrupt. Various Interrupt triggered mode.
+○ Rising/Falling edge.
+○ High/Low level.
+*Maybe not all of the GPIOs/GPOs can be used because a few are not packaged to the pin pad due to the
+limitation of the total pin numbers. Please refer to the details of reference design.
+
+B.II.7 Keypad
+The RDA8851CL keypad is a matrix of 8 rows and 8 columns. Keypad module provides key press, key release
+detecting mechanism. Each time a key is pressed, keypad module will sense it and will begin to scan the keypad
+by alternatively driving each column until all keys are released. Besides the keypad matrix, the module also
+detects key ON, which is an independent input.
+The Keypad will send IRQ when either key press or key release event occurs. It can also send IRQ repeatedly
+when one or several keys are pressed long time. Debounce mechanism is provided to avoid glitches, the time of
+debounce is programmable.
+Any combination of two keys pressed can be detected simultaneously, if certain rules are expected, up to 10
+keys can be detected at the same time. However, the following case should be avoided: Note the key at column
+i1 and row i2 as key(i1, i2). If key(a,b) and key(c,d) is pressed at the same time, then press either key(a,d) or
+key(b,c) will cause a detection error. The key scanner will consider all of the four keys have been pressed.
+
+Features
+● Generate IRQ for both key press and release events.
+● Generate IRQ if one or several keys are pressed long time. The IRQ is repeated with a configurable
+interval from 1*debounce time to 64*debounce time.
+● provide debounce mechanism. Configurable debounce time maximum 480 ms.
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+39 / 100
+
+RDA8851CL Datasheet V1.05
+
+● Detect two simultaneous key press with any combination. Detect up to 10 keys at the same time if
+certain patterns are excluded. (i.e. Keypad module can detect entire one row and one column without
+crossed key).
+● Key ON detection.
+● Possible to disable some rows and columns of keypad matrix.
+
+B.II.8 Pulse Width Modulation (PWM)
+The PWM module generates four independent PWM outputs, utilizing three specialized modulation schemes.
+There are two Pulse Width Light (PWL) outputs designed for driving LEDs with varying brightness, one Pulse
+Width Tone (PWT) output for generating tones, and one Light Pulse Generator (LPG) output for blinking an LED
+at visibly recognizable frequencies.
+
+Features
+● Pulse Width Tone (PWT)
+○ Generates square wave output capable of driving piezo electric speaker
+○ Variable frequency between 349Hz and 5276Hz with 12 half-tone frequencies per octave
+○ Volume control (coarse)
+● Light Pulse Generation (LPG)
+○ Adjustable blinking period from 125 ms to 3 seconds
+○ Adjustable on-time from 15 ms to ¼ second.
+● Two separate Pulse Width Light (PWL)
+○ Pseudo random bit sequence with output on-time proportional to a programmed threshold value
+○ Minimizes flicker
+
+Typical Operation
+The PWT module generates a 'symmetric' square wave whose duty cycle is variable between 0 and 50% (as
+opposed to the pseudo-random output in the case of PWL). The generated tones have been tested for half-tone
+frequency increments between 349Hz and 5276Hz. Basic volume control can be achieved by varying the duty
+cycle, but the actual values depend on the final frequency and the buzzer being used. Also, changing the duty
+cycle will change the harmonics, and thus will have an effect on the pitch of the note, but for very coarse
+operation, this mechanism should suffice.
+The Light Pulse Generator (LPG) can be used for blinking a LED at adjustable periods for various signaling
+purposes. The period is variable between 125 ms through 3 seconds. The length of time the LED will stay on is
+also programmable multiples of 256/16kHz up to ¼ of a second.
+The two PWL modules are optimized for driving back lights and LEDs where pseudo-random pulses with a
+programmable average on-time are desired. The resulting output will be non-symmetric and will help reduce
+flicker effects. A low-pass filter can be added to convert the PWL output to an analog value.
+
+B.II.9 Sim Card Interface (SCI)
+The SIM Card Interface is a module that automates the communication between the Baseband and the SIM card
+and works with software drivers to interface with the SIM protocol code. At the physical level, the communication
+protocol is a character-based, half-duplex, asynchronous, serial protocol, much like half-duplex UART. The
+RDA8851CL's SIM Card Interface is compatible USIM (T0 only).
+RDA Microelectronics Inc. CONFIDENTIAL
+
+40 / 100
+
+RDA8851CL Datasheet V1.05
+
+Features
+● One transmit channel with 5 byte FIFO (5 bytes is the standard command size)
+● One receive channel with 4 byte FIFO
+● Receive character count flag and interrupt
+● Parity bit generation & checking (with inversion)
+● NULL character filtering
+● Programmable receive timeout
+● Automatic reset sequence and protocol format detection
+● Hardware assisted direct/inverse convention encoding and decoding
+● Programmable guard time and turnaround guard time
+● Automatic clock-stop mechanism
+
+B.II.10 Calendar
+The Calendar module provides date and time information. It works on the 32.768 KHz oscillator with independent
+power supply. Calendar module is able to generate an IRQ repetitively at certain interval, which can be
+programmed to 1 second, 1 minute or 1 hour. In addition to provide timing data, alarm interrupt is generated and
+it is also used to power-up the baseband core by sending wakeup signal. The year span is supported from 2000
+to 2127, the maxim day of each month is stored in the calendar block, which depends on the leap year condition.
+
+Features
+● Independent power supply.
+● Counters for second, minute, hour, day, month, year and day of week.
+● Maxim day of each month stored in module, leap year supported.
+● Alarm generate, wakeup triggered by alarm. Alarm IRQ.
+● Periodical IRQ for certain intervals.
+
+B.II.11 Timers
+RDA8851CL includes 1 OS timer, 1 watchdog timer and 1 hardware delay timers. The OS timer serves for OS,
+and has Ticks of 16384 Hz. It is a decrement timer and the initial value can be programmed. When the OS timer
+reaches 0, it will cause an interruption. After that, the OS timer will either stop or restart with the initial value (loop
+mode) or wrap to maximum value (wrap mode).
+The watchdog timer can be used to protect against system failure or software mistakes by reinitializing the
+system. When it’s no longer servicing the watchdog timer, the Watchdog Timer operations are almost identical
+to the OS Timer. In addition when the counter reaches 0 it can trigger a System Reset. To use the Watchdog
+function, the software should reload the Watchdog Timer on a periodic basis to avoiding the Watchdog Timer to
+reach 0 and trigger an interrupt or a system reset (depending on configuration).
+The hardware delay timer is an incremental timer. It has Ticks of 16384 Hz. This timer is free running, and the
+value will be reset to 0. The timer value will wrap to 0 after 0xfffffff, and will generate an IRQ when wrap. The
+hardware delay timer can also generate an interval IRQ which can be configured to every 1/8 second,1/4
+second, 1/2 second, or 1 second.
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+41 / 100
+
+RDA8851CL Datasheet V1.05
+
+The timers module has two IRQs. One dedicated for OS timer, the other is used by all the other timers.
+(including watchdog timer, hardware delay timer)
+
+Features
+● 1 24-bit decremental timer for OS.
+● 1 32-bit incremental hardware delay timer.
+● 1 24-bit decremental watchdog timer.
+● Multiple IRQ sources: timers wrap, interval arrives.
+
+B.II.12 Debug Port (EXL, PXTS, Signal Spy)
+The DEBUG_PORT module:
+- Provide 4 watches.
+- Storing the last execution address of the selected CPU in the event of a watchdog reset.
+This value is not reset on any system reset and can be read when the system was recovered
+from the watchdog reset.
+- Data packet transfer: debugging tool configurable in 4 different modes:
+
+Features
+● Access to the last PC of the selected CPU when a watchdog reset occurs.
+● Mode Debug_Port_Off : This mode switch off the module
+● Mode Exl : This mode record all the CPU Jump start address send to the Romulator. Generate a
+strobe and output the selected CPU's PC.
+● Mode Pxts : This mode record all the serial events analyzed by Coolprofile. Generate a Strobe and
+output the Pxts tag.Through Pxts Enable decoding, we will be able to select one Pxts_tag into 16
+Pxts_tag defined.
+● Mode Pxts_Exl: this mode enable both mode PXTS and EXL. PXTS mode has a highest priority
+compare to mode EXL.
+● Mode Signal_Spy : This mode spy the signals for the debug purpose(Describe the IOCore muxing for
+IO mode configuration)
+
+B.II.13 General Purpose Analog to Digital Converter (GP ADC)
+The GPADC module controls the analog module of general purpose analog to digital converter, which is capable
+of measuring one of 2 analog external inputs of the chip. The 2 external inputs can be connected to sensors to
+measure battery voltage, battery temperature, handset temperature, accessory ID, remote control, or other low
+frequency analog signal within the specified voltage range.
+The GPADC is active periodically at a variable rate if at least one channel is enabled. The value of each channel
+is readable through the APB interface.
+
+Features
+● Up to 2 analog external channels.
+RDA Microelectronics Inc. CONFIDENTIAL
+
+42 / 100
+
+RDA8851CL Datasheet V1.05
+
+● Automatic measurement at variable rate.
+● Interrupt when programmed threshold is passed.
+
+Operation
+By default, GPADC works in functional mode, GPADC is active periodically at a variable rate and measures all
+the enabled channel (up to 2) each time.
+There is also a test mode for debug purpose, in which GPADC receives a start measure command from APB,
+and do a measurement once.
+Usually, the one GPADC is used for mic detect, and another is for user defined function.
+
+B.II.14 Timing Control Unit and Low Power Synchronizer
+(TCU+LPS)
+The Timing Control Unit handle the scheduling of individual events with a quarter bit precision.
+The TCU is based on a quarter bit counter (13/12 MHz = 1.083 MHz), which wraps at a programmable value. An
+interruption is generated when the counter wraps (Frame interrupt). The current value of this counter is available
+at any time. The wrap value can be set at any time. To assure a predictable behavior this value should only be
+set by the programmer “far” from the wrap time, to make sure this new value will be taken into account the next
+time.
+The programmer can define events associated to particular counter values (dates). When the counter equals the
+given date, the action associated to the event will take place.
+The event are contained in a table of events split into a programming table and an active table. Only the events
+in the active table are compared to the counter value. The programming table table allows to prepare a full
+sequence of events which will be transfered to the active table when the counter wraps.
+A force signal allows to transfer events from the programming table to the active table immediately.
+The LPS Low Power Synchronizer is a part of the TCU, it is responsible for maintaining the time base while
+running at a slower clock (32kHz) for power saving.
+
+TCU Features
+● Quarter bit precision.
+● 60 entries event table.
+● Programmable counter wrap value.
+
+LPS Features
+● Allow skipping frames by masking the TCU Frame Interrupt.
+● Calibration of the 32kHz clock against the System Clock with an accuracy of 4 System clocks during a
+programmable time to reach wanted rate accuracy.
+● Low power counters (32kHz) can maintain timebase while System clock is suspended.
+● A hardware state machine can assist the CPU for the power up after each exit of the low power mode.
+RDA Microelectronics Inc. CONFIDENTIAL
+
+43 / 100
+
+RDA8851CL Datasheet V1.05
+
+B.II.15 System AHB Monitor (Sys AHBC Mon) and Base Band
+AHB Monitor (BB AHBC Mon)
+These monitors respectively connected to the System and the Base Band AHB bus can measure several
+bandwidth and latency information.
+
+Features
+● 8 configurable time windows:
+● 4 asynchronous for gradually going from accuracy to reactivity of the measures.
+● 4 based on frame for GMS related measurements
+● Peak or mean measures.
+● Selection between several resources:
+● Global bus usage.
+● Bus usage and latency of access for a particular master.
+● Bus usage, number of access and duration of access for a slave.
+● High time, number of rise and duration of high time for a resource selected via the signal select of the
+debug port.
+
+Mean calculation
+Measures are always relative to the time window. Mean latency or duration has to be calculated by dividing the
+total latency / duration measured by the number of accesses.
+
+Special resource monitoring
+The Signal_Select0 and Signal_Select1 signals can be monitored to estimate latency of IRQ handling, or
+measure any latency/usage of software part. This last case can be achieved by setting Signal_Select0 to
+Watch(n) in the debug port configuration, monitoring the Signal_Select0 signal; by setting and clearing the
+Watch(n) during code to profile, you can measure the mean time spent.
+
+B.II.16 System IRQ Controller (Sys IRQ)
+In RDA8851CL, the interruptions are generated by the modules, they can be filtered at the module level (the
+mask must be configured in each corresponding module's registers), then they are filtered by the System or
+Base Band IRQ Controller (the mask is set in System IRQ Control or Base Band IRQ Control registers). The
+interrupts must be cleared in the corresponding module.
+For power saving, one CPU can shut down its own clock. A special wakeup mask allows re-enabling the clock
+when an interruption enabled in this mask is triggered..
+
+Features
+● A mask at the module level.
+● A mask at the IRQ Control level.
+RDA Microelectronics Inc. CONFIDENTIAL
+
+44 / 100
+
+RDA8851CL Datasheet V1.05
+
+● A second Mask for Pulse IRQ (that are not masked in the module)
+● Wakeup mask.
+● Sleep Register
+● Driving IRQ inputs to the CPU (6 lines)
+
+B.II.17 USB Controller
+Features
+● Fully compliant to USB Specification Version 1.1
+● Slave Full Speed (12Mbps) Device
+● Integrated USB Transceiver
+● Supports Control, Interrupt, Bulk and Isochronous transfer
+● 4 Endpoint with FIFO:
+○ One Bi-directional Control Endpoint (EP0)
+○ Three soft configurable Bi-directional Endpoints
+● SRAM FIFO : 264 words (32bits)
+
+B.II.18 Graphic Overlay United Display Accelerator (GOUDA)
+The GOUDA module handles various graphic operations used to compose and display images on LCD.
+These operations : colour space conversion, resizing, landscape/portrait rotation and layer blending and overlay
+are very CPU-cycle consuming, and also especially bandwidth hungry as for every single operation, one or
+several images have be loaded, processed and temporary rewritten into memory before being actually sent to
+the LCD display.
+GOUDA module relieve the CPU by both handling the pixel processing itself and also by using the minimum
+memory bandwidth as it only loads once needed data and outputs the final result directly.
+GOUDA can handle 4 video layers and output the resulting image composition directly to the LCD interface. The
+graphic subsystem have the following capabilities:
+–
+
+–
+–
+–
+
+4 distinct video sources can be blended to produce final output :
+– Layer 0 (aka video layer) :
+– Input formats : YUV4:2:0 planar (IYUV, YV12), YUV4:2:2 pixel-packed (UYVY, YUY2),
+RGB565
+– YUV to RGB565 conversion (CCIR601 component video standard definition)
+– Image resizing (separate H and V ratios, from 1/4th to 4x each direction, 8bit fractional step)
+– adjustable layer depth
+– per-layer alpha blending
+– chroma-key with simple range handling (bit-masking based)
+– Layer 1-3 (aka overlay layers):
+– Input formats : RGB565, ARGB8888
+– fixed depth
+– per-layer alpha blending
+– chroma-key with simple range handling (bit-masking based)
+– per-pixel alpha blending (for ARGB)
+Region Of Interest (ROI) handling for partial refresh of the LCD screen.
+Background colour (colour filled where no layer is defined)
+Embedded LCD controller for direct output (LCD commands buffer in dedicated SRAM).
+RDA Microelectronics Inc. CONFIDENTIAL
+
+45 / 100
+
+RDA8851CL Datasheet V1.05
+
+Output to AHB also available for both LCD on memory bus or frame buffer compositing.
+The GOUDA module provides two sets of interface for supporting parallel and SPI LCD. And pins of two
+interfaces are re-used to minimize the total amounts of chip's pins. The pin re-used map is described as
+following table,
+Parallel interface
+
+Series interface
+
+LCD_RS
+
+SPI_LCD_CLK
+
+LCD_RD
+
+SPI_LCD_CS
+
+LCD_DATA0
+
+SPI_LCD_DIO
+
+LCD_DATA1
+
+SPI_LCD_SDC
+
+Other pins
+
+B.II.19 Camera Controller
+The Camera module is an interface between the APB bus and a camera sensor.
+The controller only handles the data and synchronization signals of the sensor. The control is usually done
+through an I2C interface which is not integrated in the camera controller module.
+
+Features
+● On the fly cropping and decimation.
+● Supports up to 3M pixel sensor with ISP.
+● Supports any arbitrary size scaling down from 4096x4096
+● latch Ram FIFO Size 160*16 bit
+● Support data format: RGB565, YUV422 and compression data
+● Support 8-bit parallel interface
+● Support SPI interface with 1/2/4 data mode.
+● Support CSI Camera interface
+Data Formats
+Following are some data format examples:
+● YUV422 (YUYV)
+Data
+
+First pixel
+
+First Pixel
+
+Even/Odd
+
+Y[7:0]
+
+U[7:0]
+
+Second Pixel Second Pixel
+Y[7:0]
+
+V[7:0]
+
+Third Pixel
+
+Third Pixel
+
+Y[7:0]
+
+U[7:0]
+
+● YUV422 (YVYU)
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+46 / 100
+
+RDA8851CL Datasheet V1.05
+
+Data
+
+First pixel
+
+First Pixel
+
+Even/Odd
+
+Y[7:0]
+
+V[7:0]
+
+Second Pixel Second Pixel
+Y[7:0]
+
+Third Pixel
+
+Third Pixel
+
+Y[7:0]
+
+V[7:0]
+
+Third Pixel
+
+Third Pixel
+
+U[7:0]
+
+Y[7:0]
+
+Third Pixel
+
+Third Pixel
+
+V[7:0]
+
+Y[7:0]
+
+U[7:0]
+
+● YUV422 (UYVY)
+Data
+
+First pixel
+
+First Pixel
+
+Even/Odd
+
+U[7:0]
+
+Y[7:0]
+
+Second Pixel Second Pixel
+V[7:0]
+
+Y[7:0]
+
+● YUV422 (VYUY)
+Data
+
+First pixel
+
+First Pixel
+
+Even/Odd
+
+V[7:0]
+
+Y[7:0]
+
+Second Pixel Second Pixel
+U[7:0]
+
+Y[7:0]
+
+● RGB565
+Bytes
+
+D7
+
+D6
+
+D5
+
+D4
+
+D3
+
+D2
+
+D1
+
+D0
+
+even
+
+R7
+
+R6
+
+R5
+
+R4
+
+R3
+
+G7
+
+G6
+
+G5
+
+odd
+
+G4
+
+G3
+
+G2
+
+B7
+
+B6
+
+B5
+
+B4
+
+B3
+
+Cropping & Decimation
+Input data from CMOS sensors are first cropped with specified start and end point, which may then followed by a
+decimation. Decimation can be done in both horizontal and vertical directions. For horizontal decimation, it
+depends on whether data format is RGB or YUV.
+
+Figure B.9: YUV 4:2:2 Subsampling
+
+If data format is RGB565, horizontal decimation is done at pixel level. For example, if 1:2 rate is chosen:
+Src Data: R0G0B0 R1G1B1 R2G2B2 R3G3B3 R4G4B4 R5G5B5
+RDA Microelectronics Inc. CONFIDENTIAL
+
+47 / 100
+
+RDA8851CL Datasheet V1.05
+
+Dst Data: R0G0B0 R2G2B2 R4G4B4
+If data format is YUV422, horizontal decimation is should regroup some pixels. For example, if 1:2 rate is
+chosen:
+Src Data: Y0U0Y1V0 Y2U1Y3V1 Y4U2Y5V2 Y6U3Y7V3 Y8U4Y9V4 Y10U5Y11V5
+Dst Data: Y0U0Y2V0 Y4U2Y6V2 Y8U4Y10V4
+Another example, if YUV422 1:3 rate is chosen:
+Src Data: Y0U0Y1V0 Y2U1Y3V1 Y4U2Y5V2 Y6U3Y7V3 Y8U4Y9V4 Y10U5Y11V5
+Dst Data: Y0U0Y3V0 Y6U3Y9V3
+For Vertical decimation, data format RGB565/555/444 or YUV422 will be the same, vertical decimation is done
+at line level. For example, if 1:2 rate is chosen:
+Src Data: Line0 Line1 Line2 Line3 Line4 Line5
+Dst Data: Line0 Line2 Line4
+
+FIFO
+Rx Data FIFO is in APB domain. So FIFO_Write signal from CAM_PIXCLK domain will be synchronized to APB
+domain. This requires APB clock frequency faster than CAM_PIXCLK frequency * 0.75. For example, if RGB565
+QXGA 15 frame/s is required, APB CLK freq should > 3.1M pixel * 2 byte per pixel * 15 frame per sec * 0.75 =
+70 MHz.
+Interface
+The Camera module provides two types of interface for camera sensor. One is the traditional 8-bit parallel
+interface, the other is SPI interface which uses less signal. The two interfaces are share the same pin so that it
+does not increase the total amounts of chip pins.
+The typical connect of 1 data series interface is as following, here the GC6113 and PA6167/6175 are chose for
+examples.
+Parallel Interface
+
+SPI interface
+
+CAM_D0
+
+/
+
+CAM_D1
+
+SPI_CAM_CTS
+
+GC6113 (1 data mode)
+
+PAS6167/6175
+
+CSI Interface
+
+CTS
+
+CAM_D2
+
+CSI_DN2
+
+CAM_D3
+
+CSI_DP2
+
+CAM_D4
+
+SPI_CAM_OF
+
+OVERFLOW_M
+
+CSI_DN1
+
+CAM_D5
+
+SPI_CAM_RD
+
+OVERFLOW_S
+
+CSI_DP1
+
+CAM_D6
+
+SPI_CAM_SSN
+
+SSN
+
+CSI_CKP
+
+CAM_D7
+
+SPI_CAM_SCK
+
+SCLK
+
+CSI_CKN
+
+SCK
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+48 / 100
+
+RDA8851CL Datasheet V1.05
+
+CAM_PCLK
+
+SPI_CAM_DI
+
+SDO0
+
+SDO
+
+CAM_CLK
+
+CAM_CLK
+
+MCLK
+
+SYS_CLK
+
+CAM_RST
+
+I2C_SCL
+
+SBCL
+
+I2C_SCL
+
+CAM_PDN
+
+I2C_SDA
+
+SBDA
+
+I2C_SDA
+
+CAM_VSYNC
+
+B.II.20 SD/MMC Controller
+This module connects inner bus and outer SD or MMC card. It receives the inner command and data, transfers it
+to outer SD or MMC card, and transfer response or data back.
+
+Features
+● SD Card Specification Version 2.0
+● SDIO Version 1.10
+● MMC specification Version 3.1
+● Hot insertion and removal of media cards will be considered by GPIO module
+
+B.II.21 Audio Interface Analog + I2S (AIF)
+The Audio Interface (AIF) module is the audio interface between the RDA8851CL system and multimedia chip.
+AIF can work in master mode in which it generates synchronization signals needed by the multimedia chip,
+which contains the audio ADC and DAC to convert the serial digital output data to analog audio signal and the
+input analog signal to serial digital audio data. It can also works in slave mode which uses synchronization
+signals sent from multimedia chip. Please see below for more details about serial data format.
+AIF includes both serious and parallel interface. It is able to support multiple sample rate including 8 kHz, 11.025
+kHz, 12kHz, 16 kHz, 22,05 kHz, 24kHz, 32kHz, 44,1 kHz, 48kHz and various data format. AIF can also generate
+common DTMF, comfort tones and side tone with a configurable gain.
+In a special test mode, AIF can act as a 3GPP DAI interface. In this mode, a special reset line comes from a
+RDA8851CL pin and the data are output and input as described by the GSM Specifications.
+
+Features
+● Common features.
+○ 4*32-bit RX and 4*32-bit TX FIFO.
+○ All common DTMF and Comfort Tones can be generated and gained from -15 dB to 0 dB.
+○ Side Tone fully configurable: Mute or amplification from -36 dB to +6 dB.
+○ Loop back capabilities for test purposes.
+● Serial Interfaces.
+○ 16-bit mono or stereo samples.
+RDA Microelectronics Inc. CONFIDENTIAL
+
+49 / 100
+
+RDA8851CL Datasheet V1.05
+
+○ MSB/LSB configurable.
+○ Configurable as master or slave.
+○ LRCK/BCLK ratio from 16 to 31.
+○ Supports multiple sample rates (8 kHz; 11.025 kHz; 12kHz; 16 kHz; 22,05 kHz; 24kHz; 32kHz;
+44,1 kHz; 48kHz).
+○ Fully configurable clock polarity: Data can be sampled or sent independently at either rising edge
+or falling edge of the clock.
+○ Configurable TX/RX data delays: Digital audio data in can be aligned or 1/2/3 cycles delayed to
+LRCK edge. Digital audio data out can be aligned or 1 cycle delayed to LRCK edge. 1 cycle
+supplementary delay is possible for TX data in slave mode.
+○ Support Audio mode: I2S compatible but can have more configurations.
+○ Support voice mode: One cycle strobe pulse at the beginning of each new sample. Compatible to
+Maxim 9851/9853 voice mode.
+● DAI interface.
+○ 13-bit mono sample.
+○ Generate 104 kHz master clock.
+○ Starts after a pulse on the DAI_RST line. See GSM 44014-500 page 40 for more details about
+DAI.
+● Parallel Interface
+○ 13-bit mono samples from ADC.
+○ 16-bit x 2 stereo samples to stereo DAC.
+○ Separate TX and RX strobe lines for synchronization.
+
+B.III Base Band Modules
+B.III.1 GSM / GPRS Modem
+RDA8851CL integrates a GSM / GPRS Modem. This modem is made up of two parts: the software code
+running on a dedicated RDA 32-bit RISC CPU and several hardware acceleration modules. This modem is
+based on an AHB and APB bus interfaces.
+RDA8851CL's GSM / GPRS Modem is connected to the System part of the chip by the 2 bridge AHB2AHB. The
+Memory Bridge is connected to both System and Base band side.
+
+B.III.2 Voice Coprocessor (VoC)
+The Voice Co-Processor (VoC) is designed to process the GSM Vocoders (FR, HR, EFR, AMR) in RDA's
+Baseband Solution. It is developed as a target-specific DSP core, including basic function-call support, able to
+execute the code with very little (or no) control intervention from the CPU. It is controlled and configured by the
+CPU through the AMBA bus.
+
+Features
+● Bi-MAC, single test/logic Computational Unit with two 16x16 -> 32-bit multipliers
+RDA Microelectronics Inc. CONFIDENTIAL
+
+50 / 100
+
+RDA8851CL Datasheet V1.05
+
+● Eight 16-bit general purpose registers, that can be combined in four 32-bit general purpose registers.
+● All 16-bit registers can be used as pointers, four of them are incremental (for easy array addressing).
+● Four 32-bit general purpose registers.
+● 2 x 20 Kbytes data RAM + 32 Kbytes instruction RAM.
+● Double stack with random access: for 32-bit & 16-bit values (push, pop).
+● Function call support (jal, return).
+● Two zero-cycle loop counters.
+● Pointer & Direct addressing modes.
+● DMA sub-module for block transfers between external memory and VoC memories.
+● Simple DAI Interface for Analog test Audio Loop (Loop between DAI interface and Analog Interface
+designed to test the Audio Filters implemented by VoC)
+● Clock speed : 26MHz, 39MHz, 52MHz, 78MHz, 89MHz, 104MHz, 113MHz, 125MHz, 139MHz,
+156MHz, 178MHz, 208MHz, 250MHz, 312MHz.
+
+B.IV Baseband Peripherals
+B.IV.1 DIGRF Interface (RF IF)
+The RF modules (RF_IF) is the control interface of the DigRF interface which is a standard digital interface
+between digital baseband and the integrated RF transceiver.
+
+Features
+● Rx and Tx analog front end interface
+● DigRF interface with
+Stream mode and block mode supported for Tx
+16-bit per sample, 2 samples per symbol or 1 sample per symbol supported for Rx
+● 2 words of 32 bits Tx FIFO
+● 16 words of 32 bits Rx FIFO
+● DMA operation supported on Rx and Tx
+
+B.V Analog Modules
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+51 / 100
+
+RDA8851CL Datasheet V1.05
+
+SPI Interface for Analog IP control
+All the IPs connected to DBB feature an SPI interface dedicated to IP control.
+The Power Management Unit(PMU) and the Analog Baseband(ABB) are controlled by the same SPI of DBB
+(with different chip-select). On the other hand the RF Transceiver has it's dedicated SPI as part of DigRF
+interface.
+For simplicity sake and ease of use, the SPI protocol settings for PMU and ABB.
+The chosen SPI setting is the following:
+–
+–
+–
+–
+
+Data from DBB are issued on falling edge of clock and can be latched on rising edge by the slave.
+Data from the slave are issued on rising edge of the clock and will be latched on falling edge of
+clock.
+the SPI frame is 26 bits long : first bit is the R/W selection, then 9 bits of address A 8 to A0, then 16
+bits of data D15 to D0.
+Maximum SPI_CLK frequency : 26 MHz
+
+SPI_CLK
+
+SPI_CS_X
+
+SPI_DO
+
+R/W
+
+A8->1
+
+A0
+
+D15
+
+D0
+
+SPI Write Timing
+
+SPI_CLK
+
+SPI_CS_X
+
+SPI_DO
+
+R/W
+
+A8->1
+
+A0
+D15
+
+SPI_DI_X
+
+D0
+
+SPI Read Timing
+Figure B.10: SPI Write & Read Timing
+
+Power Management Unit
+The PMU is controlled from the DBB through SPI (see for details).
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+52 / 100
+
+RDA8851CL Datasheet V1.05
+
+B.V.0.0.a
+
+Power System Management
+
+The PMU performs a POR either when POWKEY is asserted (i.e. Power-ON/OFF button pressed) or when then
+WAKEUP line is raised (RTC Alarm) or when the charger (or USB) is plugged.
+
+CHG_IN
+
+Charger / USB
+Detect
+
+PMU
+
+ChargerON
+CHG_MASK
+
+PowerON
+
+WAKEUP
+POWKEY
+V_CORE
+
+KEYON
+
+Figure B.11: PMU Power ON
+In the presented principle schematic, PowerON is an internal signal of the PMU that reflects that the system
+needs power. It can either be raised when the Power-ON key is pressed, when the WAKEUP line from DBB is
+raised or when the charger (or USB) is plugged. When a rising edge of PowerON is detected, the PMU should
+go through its POR sequence.
+The POR sequence consists in turning ON the relevant power supplies then wait for RST delay that is be long
+enough to ensure that all LDOs are in steady state and that all the chip is correctly powered, then raise the
+RESETB signal.
+In case the POR is trigged by POWKEY, It's DBB responsibility to set the WAKEUP line high when it considers
+that POWKEY has been pressed long enough. As POWKEY is a VBAT level input, a V_CORE version of
+POWKEY (named KEYON) is generated for DBB.
+POR can also be initiated when the WAKEUP line is being raised directly because of an RTC Alarm (the
+POWKEY is not pressed).
+As long as PowerON is high, the PMU provides voltages supplies that are specified by the current Power-Profile
+that describes the LDO and DC/DC settings.
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+53 / 100
+
+RDA8851CL Datasheet V1.05
+
+POWKEY
+
+LDO's supplies
+RSTdelay
+
+RESETB
+DBB boots and sets WAKEUP
+
+WAKEUP
+
+PowerON
+
+Figure B.12: POR triggered by POWKEY press
+
+B.V.0.0.b
+The PMU implements multiple power profiles defining the LDOs and DC/DC activation in various modes.
+•
+
+Default_powerOFF_profile: used when the system is OFF( system has been shut-off or first time battery
+is plugged...). In this case only V_RTC is provided.
+
+•
+
+Default_powerON_profile: used when PowerON is asserted and the POR is trigged, all LDOs that have
+“reset state ON” are activated.
+
+•
+
+Active_power_profile: used once system has booted
+Default_powerON_profile. This profile is programmable.
+
+•
+
+LP_power_profile: used when the system goes to low-power mode (switch from Active to Low-power
+through LP_MODE line). This profile is programmable.
+
+and
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+decided
+
+to
+
+switch
+
+from
+
+54 / 100
+
+RDA8851CL Datasheet V1.05
+
+PowerON
+0
+
+Defaut_powerOFF_profile
+Defaut_powerON_profile
+
+0
+
+1
+
+LP_power_profile
+
+1
+
+Active_power_profile
+
+0
+
+LP_MODE
+
+To LDOs and
+DC/DC control
+
+1
+
+Software selectable:
+default to '0', reset to '0'
+when PowerON goes low.
+
+Figure B.13: Principle schematic for Power-Profiles usage
+If the PowerON line goes low, the RESETB signal will be set to Low level then all power supplies excepted
+V_RTC are switched OFF.
+It can be useful to be able to go back to Default_powerOFF_profile (i.e. shut-off all supplies except RTC) even
+when a charger is plugged. The CHG_MASK (RTC domain) line is used for this purpose, by masking the
+ChargerON line.
+The RF Transceiver IP integrate it's own LDOs and are powered directly with VBAT.
+V_USB is not power-on automatically when USB is detected. The USB PHY remains OFF until the software
+decides to turn it ON.
+
+C. LDOs
+Name
+
+Type
+
+Voltage
+
+Max Current
+
+Usage (power domain)
+
+V_CORE
+
+DC-DC
+
+1.2V
+
+300mA
+
+Core
+
+V_CORE
+
+LDO
+
+1.2V
+
+20mA
+
+Core
+
+V_BUCK_2V4
+
+DC-DC
+
+300mA
+
+Internal transceiver
+
+AVDD_2V4
+
+LDO
+
+200mA
+
+Internal transceiver
+
+V_BOOST
+
+DC-DC
+
+600mA
+
+LCD backlight, VBAT_ABB, or Audio PA
+
+V_PAD
+
+LDO
+
+200mA
+
+Digital IO
+
+V_ANA
+
+LDO
+
+200mA
+
+Analog module
+
+V_MEM
+
+LDO
+
+1.8V / 2.8V
+
+200mA
+
+External Combo flash / ram
+
+V_SPIMEM
+
+LDO
+
+1.8V / 2.8V
+
+200mA
+
+External SPI Memory
+
+V_ASW
+
+LDO
+
+1.8V / 2.8V
+
+200mA
+
+Supplies periphery device
+
+V_CAM
+
+LDO
+
+1.8V / 2.8V
+
+200mA
+
+Camera
+
+V_LCD
+
+LDO
+
+1.8V / 2.8V
+
+200mA
+
+LCD module
+
+V_MMC
+
+LDO
+
+2.8V / 3.2V
+
+150mA
+
+Memory Card
+
+V_VIB
+
+LDO
+
+2.3V / 3.3V
+
+300mA
+
+Vibrator
+
+1.8V / 2.8V
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+55 / 100
+
+RDA8851CL Datasheet V1.05
+
+Name
+
+Type
+
+Voltage
+
+Max Current
+
+Usage (power domain)
+
+V_USB
+
+LDO
+
+3.3V
+
+300mA
+
+USB PHY
+
+V_MIC
+
+LDO
+
+1.4V/1.75V
+
+200mA
+
+Microphone
+
+V_RTC
+
+LDO
+
+1.2V
+
+0.6mA
+
+Real time clock
+
+V_SIM (all)
+
+LDO
+
+1.8V / 3.0V
+
+80mA
+
+SIM
+
+C.0.0.0.a
+
+LED Drivers
+
+The PMU implements both LCD backlight and Keypad LED drivers.
+There are 4 current sink sources provided for the LCD backlight use, which named as LED1-4.. Each of them
+can sink 30mA.
+The Keypad LED drivers include 3 sink sources as KP_LEDR, KP_LEDG, and KP_LEDB. Each of them can
+provide 30mA sink current. KP_LED_OUT is voltage feedback current regulator which is suggested to connect
+to the anode of the keypad LEDs.
+Both LCD backlight and Keypad LED drivers can be adjusted driver capability by software via changing current
+or PWM settings.
+
+D. Charger Circuit
+The RDA8851CL integrates the most of charger circuits, except for a few components such as one PMOS, one
+accurate resistor and one diode, which should be applied externally.
+When the charger is on, this block controls the charging phase and turns on the appropriate LDOs according to
+the battery status. If the voltage is greater than 4.2~ 4.4 V, charging is stopped immediately to prevent
+permanent damage to the battery.
+Battery charging states include No Charge mode, Constant Current (CC) charge mode (pre-charge, constant
+current), and Constant Voltage (CV) charge mode. No matter what state the phone is in, the PMIC charger
+handles the charging state transition. A typical charging process is described as what the Figure 5 shows.
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+56 / 100
+
+RDA8851CL Datasheet V1.05
+
+Pre
+charging
+
+CC mode
+
+CV mode
+
+Charge voltage
+Charge current
+
+Li-ion cell voltage
+
+t(pre-charge)
+
+t(charge)
+
+Figure B.14: Charging I-V Curve
+The charge current is calculated by the following expression,
+I_charge = I_ref * (200/0.2)
+I_ref is 0.05mA in pre_charge mode and 0.5mA in constant mode, and these two mode can be switched by
+internal charger circuit.
+
+D.0.0.0.a
+
+SIM Interface
+
+This interface can provide power supply, clock, reset and data I/O lines to the SIM cards. While all of SIM cards
+can be powered simultaneously, only one of them can be accessed at a time by DBB.
+The SIM cards interface can be either 1.8V or 3V hence there are independent internal LDOs respectively for
+each.
+All of SIM cards can be enabled at the same time but only one can be selected at a time.
+Due to special requirements of some SIM cards, SIM channel(s) are able to keep their CLK and RST lines to
+either high or low level when not selected.
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+57 / 100
+
+RDA8851CL Datasheet V1.05
+
+D.0.0.0.b
+
+Touchscreen Interface
+
+The touchscreen provide a mode where X and Y measures (and associated switching) are performed
+automatically, the results being stored in dedicated registers.
+The measure will be trigged by an SPI command sent by DBB. The touchscreen interface will then:
+–
+–
+–
+–
+–
+–
+–
+
+switch the X+, X-, Y+ and Y- lines to perform the X measurement,
+wait for a programmable time (accounting for settling time to the final steady-state value prior to the
+ADC sampling),
+then perform the X measure and store it (and also set the End Of Conversion for X).
+switch the X+, X-, Y+ and Y- lines to perform the Y measurement
+wait for a programmable time (same time as for X)
+then perform the Y measure and store it (and also set the End Of Conversion for Y)
+generate the End of Measurement Interrupt, EOMIRQ to DBB (see B.V).
+
+When the touchscreen interface is in IDLE mode (when it is not performing measurements), it will be able to
+detect that the touchscreen panel is pressed through the X+, X-, Y+ and Y- lines. The PENIRQ line reflects the
+detection result. When the touchscreen interface is performing measurements the PENIRQ line is not expected
+to be valid and can be set to '0'.
+
+E. Interrupt management
+The PMU has two lines of interruption to DBB:
+•
+•
+
+the PENIRQ line dedicated to touchscreen
+the PMU_INT line that handles several other causes of interruption.
+
+Analog BaseBand (ABB)
+E.0.0.0.a
+
+PLL and clock squarer
+
+ABB includes a PLL that generates 624MHz from a 26MHz input (x24 integer frequency multiplier). It also
+includes a “clock squarer” that buffers the clock coming from the internal transceiver to provide a clean version
+(at VCORE levels) of this clock.
+In order for the system to be synchronized to the GSM network, the 26 MHz must be the same as the one used
+by the transceiver.
+The following drawing summarizes the PLL clock path:
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+58 / 100
+
+RDA8851CL Datasheet V1.05
+
+Clock_Squarer
+
+XCVR
+CLK_RF_26M
+CLK_PLL_IN
+
+PLL
+
+ABB
+
+BBCLK_OUT_624M
+
+Figure B.15: PLL Clock Path
+
+E.0.0.0.b
+
+AUDIO
+
+The Audio part includes ADC, DAC, Audio Amplifiers and Audio Muxes. The following diagram provides a global
+view of audio blocks. Voice data can be input from microphone. Voice and audio data can be output to a stereo
+DAC and connected to peripherals such as receiver, headset and loudspeaker. It is able to support multiple
+sample rate audio data including 8 kHz, 11.025 kHz, 12kHz, 16 kHz, 22,05 kHz, 24kHz, 32kHz, 44,1 kHz,
+48kHz.
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+59 / 100
+
+RDA8851CL Datasheet V1.05
+
+Figure B.16: Audio Analog IP
+
+E.0.0.0.c
+
+F. USB PHY
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+60 / 100
+
+RDA8851CL Datasheet V1.05
+
+USB PHY
+USB_OEN
+USB_DIP
+USB_DIM
+USB_SUSPEND
+USB_DP
+
+USB_RXD
+
+USB_DM
+
+USB_RXDP
+USB_RXDM
+
+Figure B.17: USB PHY FS 1.1
+DIP and DIM pins are really reflecting DP and DM, therefore the following decoding must be done in DBB USB
+controller:
+Mode
+
+Input
+
+Output
+
+OEN DIP DIM DP DM DP DM RXDP RXDM RXD
+Output
+
+Input
+
+0
+
+1
+
+Suspend = HIGH X
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+0
+
+X
+
+X
+
+X
+
+X
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+1
+
+1
+
+1
+
+1
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+0
+
+0
+
+1
+
+1
+
+1
+
+1
+
+0
+
+G.
+G.0.0.0.a
+
+General Purpose ADC
+
+ABB includes a 2-channels A to D converter. A functional timing diagram is given below:
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+61 / 100
+
+RDA8851CL Datasheet V1.05
+
+Figure B.18: GPADC Timing Diagram
+
+RF Transceiver
+H. General Description
+RDA8851CL Integrates a complete RF front end for GSM/GPRS wireless communication. The RF receiver employs a
+digital low-IF architecture, and supports DigRF 1.12 digital interface. The receive section interfaces between the RF bandselect SAW filter and the digital baseband. The transmit section provides a direct modulation PLL transmitter path from the
+baseband subsystem to the power amplifier (PA). A fast settling fractional-N synthesizer is fully integrated, including RF
+VCO, loop filters, and varactors, etc. The RF transceiver includes a digitally-controlled crystal (DCXO) and completely
+integrates the reference oscillator and frequency tuning varactors.
+
+I. Features
+●
+
+●
+●
+●
+
+Integrated GSM transceiver including the following:
+➢
+Digital low-IF receiver
+➢
+Direct modulation transmitter
+➢
+Frequency synthesizer
+➢
+Integrated VCO, loop filters, etc.
+Support digital AFC
+DigRF digital interface for communication between digital baseband and transceiver
+
+RF FEM control
+
+J. Block Description
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+62 / 100
+
+RDA8851CL Datasheet V1.05
+
+Figure B.19: RF transceiver block digram
+Receive Path
+The receive path uses a digital low-IF architecture that avoids the difficulties associated with direct conversion
+while delivering lower solution cost and reduced complexity. It consists of two sections; the first section is the RF
+front-end, which integrates four differential input LNAs and a qudarature image-reject mixer, and supports
+GSM850, GSM900, DCS1800 and DCS1900 band. The RF front-end amplifies the signal from antenna, and
+down-converts it to a low IF of 100kHz or 200KHz (software configurable). The second section is the IF section,
+which downmixer the wanted signal to baseband and further amplifies the chosen channel and performs gain
+control to adjust the output level to the desired value. The IF gain range can vary over more than 100 dB.
+Transmit Path
+The transmit path consists of a direct modulation block, an SDM PLL and pre-amplifier block. Firstly the
+baseband signal is sampled to digital domain by ADC. Then SDM PLL direct modulation the signal to RF band
+and filters out the out-of-band noise to meet the GSM standard. The following block, pre-amplifier, further
+powers the transmit signal and send it to PA.
+Synthesizer Section
+The Local Oscillator (LO) signals are provided by an on-chip Voltage Controlled Oscillator (VCO) for operation of
+the RX and TX section. The frequency of the VCO is set by internal PLL circuits, which are programmable via
+the SPI bus.
+
+J.I FM
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+63 / 100
+
+RDA8851CL Datasheet V1.05
+
+General Description
+RDA8851CL Integrates a broadcast FM stereo radio tuner with fully integrated synthesizer, IF selectivity and
+MPX decoder. The tuner requires the least external component. It has a powerful low-IF digital audio processor,
+this make it have optimum sound quality with varying reception conditions. It can be tuned to the worldwide
+frequency band.
+Features
+● Low Power Consumption
+➢
+Total Current consumption Lower than 22 mA at 3.0 V power supply
+● Support worldwide frequency band
+➢
+65-108MHz
+● Digital low-IF tuner
+➢
+Image-reject down-converter
+➢
+High performance A/D converter
+➢
+IF selectivity performed internally
+● Fully integrated digital frequency synthesizer
+➢
+Fully integrated on-chip RF and IF VCO
+➢
+Fully integrated on-chip loop filter
+● Autonomous search tuning
+● Support 32.768KHz crystal oscillator
+● Digital auto gain control (AGC)
+● Digital adaptive noise cancellation
+➢
+Mono/stereo switch
+➢
+Soft mute
+➢
+High cut
+● Programmable de-emphasis (50/75 ms)
+● Receive signal strength indicator (RSSI)
+● Bass boost
+● Volume control
+● FM Record through digital audio interface
+● Line-level analog output voltage
+● 32.768 KHz 12M,24M,13M,26M,19.2M,38.4MHz Reference Clock
+● SPI control bus interface
+● Directly support 32Ω resistance loading
+Block Description
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+64 / 100
+
+RDA8851CL Datasheet V1.05
+
+Figure B.20: FM Tuner Block Diagram
+The FM receiver uses a digital low-IF architecture that avoids the difficulties associated with direct conversion
+while delivering lower solution cost and reduces complexity, and integrates a low noise amplifier (LNA)
+supporting the FM broadcast band (65 to 108MHz), a quadrature image-reject mixer, a programmable gain
+control (PGA), a high resolution analog-to-digital converters (ADCs).
+The LNA has differential input ports (LNAP and LNAN) and supports any input port by set according registers
+bits. It default input common mode voltage is GND.
+The limiter prevents overloading and limits the amount of intermodulation products created by strong adjacent
+channels.
+The quadrature mixer down converts the LNA output differential RF signal to low-IF, it also has image-reject
+function.
+The PGA amplifies the mixer output IF signal and then digitized with ADCs.
+The DSP core finishes the channel selection, FM demodulation, stereo MPX decoder and output audio signal.
+The MPX decoder can autonomous switch from stereo to mono to limit the output noise.
+The frequency synthesizer generates the local oscillator signal which divide to quadrature, then be used to downconvert the RF input to a constant low intermediate frequency (IF). The synthesizer reference clock is 32.768
+kHz. The synthesizer frequency is defined by register bits with the range from 65MHz to 108MHz.
+Receiver Characteristics
+(VDD = 2,7 to 5,5V, TA = -25°C to 85 °C, unless otherwise specified)
+SYMBOL
+
+PARAMETER
+
+CONDITIONS
+
+MIN
+
+TYP
+
+MAX
+
+UNIT
+
+General Parameters
+RDA Microelectronics Inc. CONFIDENTIAL
+
+65 / 100
+
+RDA8851CL Datasheet V1.05
+
+SYMBOL
+Fin
+
+PARAMETER
+FM Input Frequency
+
+Vrf
+
+Sensitivity1,2,3
+
+Rin
+
+LNA Input Resistance
+
+Cin
+
+LNA Input Capacitance
+
+IP3in
+
+Input IP3
+
+aam
+
+AM Suppression
+
+S200
+
+CONDITIONS
+
+MIN
+
+BAND=00
+
+MAX
+
+UNIT
+
+87
+
+108
+
+MHz
+
+BAND=01
+
+76
+
+91
+
+MHz
+
+BAND=02
+
+76
+
+106
+
+MHz
+
+BAND=03
+
+65
+
+76
+
+MHz
+
+1.5
+
+µV EMF
+
+(S+N)/N=26dB
+
+TYP
+
+1
+150
+
+7
+
+2
+
+7
+
+4
+
+Ω
+6
+
+pF
+
+AGCD=1
+
+80
+
+-
+
+dBµV
+
+M=0.3
+
+40
+
+-
+
+dB
+
+Adjacent Channel Selectivity
+
+± 200kHz
+
+45
+
+-
+
+dB
+
+VAFL;VAFL
+
+Left and Right Audio
+Frequency output Voltage
+
+Volume [3:0]=1111
+
+(S+N)/N
+
+Maximum Signal Plus Noise to
+Noise Ratio 1,2
+
+55
+
+60
+
+-
+
+dB
+
+aSCS
+
+Stereo Channel Separation
+
+35
+
+-
+
+-
+
+dB
+
+THD
+
+Audio Total Harmonic
+Distortion1,3,6
+
+0.03
+
+0.05
+
+%
+
+aAOI
+
+Audio Output L/R Imbalance
+
+0.1
+
+dB
+
+RL
+
+Audio Output Loading
+Resistance
+
+-
+
+Ω
+
+4
+1,2
+
+Single-ended
+
+200
+
+32
+
+-
+
+mV
+
+Pins LNAN, LNAP
+Vcom_rfin
+
+Pins LNAN and LNAP Input
+Common Mode Voltage
+
+Vcom
+
+Audio Output Common Mode
+Voltage
+
+Notes:
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+
+0
+0.95
+
+1
+
+V
+1.05
+
+V
+
+Fin=65 to 108MHz, Fmod=1KHz, de-emphasis=75µS,MONO=1;L=R unless noted otherwise.
+Δf =22.5KHz.
+BA =300Hz to 15KHz, RBW <= 10Hz.
+| f2-f1|>1MHz, f0=2xf1-f2, AGC disable, Fin=76 to 108MHz.
+PRF=60dbµV.
+Δf =75KHz.
+Measured at VEMF=1mV, FRF=65 to 108MHz.
+
+J.II Bluetooth
+General Description
+RDA8851CL Integrates a highly integrated Bluetooth SoC with radio transceiver and baseband processor, which
+is compliant with Bluetooth 2.1 + EDR specification and provides an optimal solution for data and voice
+application.
+It has been designed on highest level of integration to extremely reduce the number of external component.
+RDA Microelectronics Inc. CONFIDENTIAL
+
+66 / 100
+
+RDA8851CL Datasheet V1.05
+
+Features
+● CMOS single-chip fully-integrated radio and baseband
+● Compliant with Bluetooth 2.1 + EDR specification
+● Bluetooth Piconet and Scatternet support
+● Support AFH
+● Meet class1, class2 and class3 transmitting power requirement
+● Provides +4dbm transmitting power
+● NZIF receiver with -90dBm sensitivity
+● Up to 4Mbps high speed UART HCI support
+● Low power consumption
+● Minimum external component
+Block Description
+
+Figure B.21: Bluetooth Block Diagram
+As shown in Figure above, the Bluetooth module on-chip integrates radio unit, baseband core, ARM7 core and
+memory which provides a complete lower Bluetooth protocol stack including the LC, LM and HCI interface.
+The description of individual section is following,
+● Radio Front
+◦ Build-in TX/RX switch
+◦ Fully integrated synthesizer without any external component
+◦ Support DCXO or external reference clock direct input
+◦ Class1，class2 and class3 transmit output power supported and over 30dB dynamic control range
+◦ Supports π/4 DQPSK and 8DPSK modulation
+◦ High performance in receiver sensitivity and over 80dB dynamic range
+◦ Integrated channel filter
+● Baseband
+◦ Internal RAM allows fully speed data transfer, mixed voice and data, and fully piconet operation
+◦ Logic for forward error correction, header error control, access code correlation, CRC, demodulation
+, encryption bit stream generation, whitening and transmit pulse shaping
+◦ Support eSCO and AFH
+◦ Support up to Bluetooth v2.1 + EDR
+◦ Support A-law, μ-law and CVSD digitize audio CODEC in PCM interface
+● Stack
+◦ Compliant with Bluetooth 2.1 + EDR specification
+RDA Microelectronics Inc. CONFIDENTIAL
+
+67 / 100
+
+RDA8851CL Datasheet V1.05
+
+Performance Characteristics
+Power consumption specification (VBAT = 4.0 V, TA = +27℃, unless otherwise specified)
+
+STATE
+
+DESCRIPION
+
+Condition
+
+TYP.
+
+UNIT
+
+DH1 / DM1
+
+26
+
+mA
+
+DH3 / DM3
+
+28
+
+mA
+
+DH5 / DH5
+
+29
+
+mA
+
+HCI only active
+
+5.5
+
+mA
+
+Sleep
+
+100
+
+uA
+
+Shut off
+
+15
+
+uA
+
+Receiver Characteristics --- Basic Data Rate (VBAT = 4.0 V, TA = +27℃, unless otherwise specified)
+
+SYMBOL
+
+PARAMETER
+
+CONDITION
+
+MIN
+
+TYP.
+
+MAX
+
+UNIT
+
+Sensitivity @ 0.1% BER
+
+/
+
+-90
+
+/
+
+dBm
+
+Maximum input @ 0.1% BER
+
+0
+
+/
+
+/
+
+dBm
+
+C/I co-channel
+
+/
+
+10
+
+/
+
+dB
+
+F = F0 + 1 MHz
+
+/
+
+/
+
+-5
+
+dB
+
+F = F0 - 1 MHz
+
+/
+
+/
+
+0
+
+dB
+
+F = F0 + 2 MHz
+
+/
+
+/
+
+-33
+
+dB
+
+F = F0 - 2 MHz
+
+/
+
+/
+
+-30
+
+dB
+
+F = F0 + 3 MHz
+
+/
+
+/
+
+-45
+
+dB
+
+F = F0 - 3 MHz
+
+/
+
+/
+
+-40
+
+dB
+
+F = F_image
+
+/
+
+/
+
+0
+
+dB
+
+30MHz–2000MHz
+
+-10
+
+/
+
+/
+
+dBm
+
+2000MHz–2400MHz
+
+-27
+
+/
+
+/
+
+dBm
+
+2500MHz–3000MHz
+
+-27
+
+/
+
+/
+
+dBm
+
+3000MHz–12.5GHz
+
+-10
+
+/
+
+/
+
+dBm
+
+Inter-modulation
+
+-35
+
+/
+
+/
+
+dBm
+
+Spurious output level
+
+-150
+
+/
+
+/
+
+dBm
+
+General Specification
+
+Adjacent channel selectivity C/I
+
+Out-of-band blocking
+
+Transmitter Characteristics --- Basic Data Rate (VBAT = 4.0 V, TA = +27℃, unless otherwise specified)
+
+SYMBOL
+
+PARAMETER
+
+CONDITION
+
+MIN
+
+TYP.
+
+MAX
+
+UNIT
+
+Max RF output power
+
+/
+
+4
+
+/
+
+dBm
+
+Power control range
+
+30
+
+/
+
+/
+
+dB
+
+20dB bandwidth
+
+/
+
+0.9
+
+/
+
+MHz
+
+/
+
+-35
+
+/
+
+dBm
+
+General Specification
+
+Adjacent channel transmitter power
+
+F = F0 + 1 MHz
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+68 / 100
+
+RDA8851CL Datasheet V1.05
+
+F = F0 - 1 MHz
+
+/
+
+-34
+
+/
+
+dBm
+
+F = F0 + 2 MHz
+
+/
+
+-55
+
+/
+
+dBm
+
+F = F0 - 2 MHz
+
+/
+
+-55
+
+/
+
+dBm
+
+F = F0 + 3 MHz
+
+/
+
+-58
+
+/
+
+dBm
+
+F = F0 - 3 MHz
+
+/
+
+-58
+
+/
+
+dBm
+
+F = F0+ > 3 MHz
+
+-58
+
+/
+
+/
+
+dBm
+
+F = F0- > 3 MHz
+
+-58
+
+/
+
+/
+
+dBm
+
+△f1avg Maximum modulation
+
+/
+
+164
+
+/
+
+kHz
+
+△f2max Minimum modulation
+
+/
+
+145
+
+/
+
+kHz
+
+△f2avg/△f1avg
+
+0.8
+
+/
+
+/
+
+/
+
+ICFT
+
+/
+
+4
+
+/
+
+kHz
+
+Drift rate
+
+/
+
+0.1
+
+/
+
+kHz/50
+us
+
+Drift (1 slot packet)
+
+/
+
+-2
+
+/
+
+kHz
+
+Drift (5 slot packet)
+
+/
+
+-2
+
+/
+
+kHz
+
+Receiver Characteristics --- Enhanced Data Rate (VBAT = 4.0 V, TA = +27℃, unless otherwise specified)
+
+SYMBOL
+
+PARAMETER
+
+CONDITION
+
+MIN
+
+TYP.
+
+MAX
+
+UNIT
+
+Sensitivity @0.01% BER
+
+/
+
+-89
+
+/
+
+dBm
+
+Maximum input @ 0.1% BER
+
+0
+
+/
+
+/
+
+dBm
+
+C/I co-channel
+
+/
+
+/
+
+13
+
+dB
+
+F = F0 + 1 MHz
+
+/
+
+/
+
+5
+
+dB
+
+F = F0 - 1 MHz
+
+/
+
+/
+
+0
+
+dB
+
+F = F0 + 2 MHz
+
+/
+
+/
+
+-30
+
+dB
+
+F = F0 - 2 MHz
+
+/
+
+/
+
+-20
+
+dB
+
+F = F0 + 3 MHz
+
+/
+
+/
+
+-40
+
+dB
+
+F = F0 - 3 MHz
+
+/
+
+/
+
+-40
+
+dB
+
+F = F_image
+
+/
+
+/
+
+-7
+
+dB
+
+Sensitivity @0.01% BER
+
+/
+
+-83
+
+/
+
+dBm
+
+Maximum input @ 0.1% BER
+
+0
+
+/
+
+/
+
+dBm
+
+C/I co-channel
+
+/
+
+/
+
+18
+
+dB
+
+F = F0 + 1 MHz
+
+/
+
+/
+
+5
+
+dB
+
+F = F0 - 1 MHz
+
+/
+
+/
+
+5
+
+dB
+
+F = F0 + 2 MHz
+
+/
+
+/
+
+-25
+
+dB
+
+F = F0 - 2 MHz
+
+/
+
+/
+
+-13
+
+dB
+
+π/4 DQPSK
+
+Adjacent channel selectivity C/I
+
+8DPSK
+
+Adjacent channel selectivity C/I
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+69 / 100
+
+RDA8851CL Datasheet V1.05
+
+F = F0 + 3 MHz
+
+/
+
+/
+
+-33
+
+dB
+
+F = F0 - 3 MHz
+
+/
+
+/
+
+-33
+
+dB
+
+F = F_image
+
+/
+
+/
+
+0
+
+dB
+
+Transmitter Characteristics --- Enhanced Data Rate (VBAT = 4.0 V, TA = +27℃, unless otherwise specified)
+
+SYMBOL
+
+PARAMETER
+
+CONDITION
+
+MIN
+
+TYP.
+
+MAX
+
+UNIT
+
+Max RF output power
+
+/
+
+2
+
+/
+
+dBm
+
+Relative transmit control
+
+/
+
+1.6
+
+/
+
+dB
+
+π/4 DQPSK max w0
+
+/
+
+7.4
+
+/
+
+kHz
+
+π/4 DQPSK max wi
+
+/
+
+6.7
+
+/
+
+kHz
+
+π/4 DQPSK max |wi + w0|
+
+/
+
+2.4
+
+/
+
+kHz
+
+8DPSK max w0
+
+/
+
+7.1
+
+/
+
+kHz
+
+8DPSK max wi
+
+/
+
+4.4
+
+/
+
+kHz
+
+8DPSK max |wi + w0|
+
+/
+
+2.7
+
+/
+
+kHz
+
+RMS DEVM
+
+/
+
+4.7
+
+/
+
+%
+
+99% DEVM
+
+/
+
+/
+
+30
+
+%
+
+Peak DEVM
+
+/
+
+8.8
+
+/
+
+%
+
+RMS DEVM
+
+/
+
+4.6
+
+/
+
+%
+
+99% DEVM
+
+/
+
+/
+
+20
+
+%
+
+Peak DEVM
+
+/
+
+11.3
+
+/
+
+%
+
+F = F0 + 1 MHz
+
+/
+
+-14.7
+
+/
+
+dBm
+
+F = F0 - 1 MHz
+
+/
+
+-15.2
+
+/
+
+dBm
+
+F = F0 + 2 MHz
+
+/
+
+-51
+
+/
+
+dBm
+
+F = F0 - 2 MHz
+
+/
+
+-52.2
+
+/
+
+dBm
+
+F = F0 + 3 MHz
+
+/
+
+-55.5
+
+/
+
+dBm
+
+F = F0 - 3 MHz
+
+/
+
+-55.8
+
+/
+
+dBm
+
+F = F0+ > 3 MHz
+
+/
+
+/
+
+-55
+
+dBm
+
+F = F0- > 3 MHz
+
+/
+
+/
+
+-55
+
+dBm
+
+/
+
+100
+
+/
+
+%
+
+General Specification
+
+π/4 DQPSK Modulation Accuracy
+
+8PSK Modulation Accuracy
+
+In-band spurious emissions
+
+EDR Differential Phase Coding
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+70 / 100
+
+RDA8851CL Datasheet V1.05
+
+K. MEMORY MAP
+
+Memory Name
+
+Description
+
+Address
+
+Size
+
+External CS1
+
+External memory
+
+0x02000000 ~ 0x03ffffff
+
+32MB
+
+FIFO_regs
+
+Internal register
+
+0x018c0000 ~ 0x018fffff
+
+256KB
+
+BB APB
+
+BB apb slave
+
+0x01900000 ~ 0x0193ffff
+
+256KB
+
+VOC
+
+Voice codec
+
+0x01940000 ~ 0x0197fffff
+
+256KB
+
+BB SRAM
+
+BB internal sram
+
+0x01980000 ~ 0x01987fff
+
+32KB
+
+SYS APB
+
+Sys apb slave
+
+0x01a00000 ~ 0x01a7ffff
+
+512KB
+
+USB
+
+Usb controller
+
+0x01a80000 ~ 0x01abffff
+
+256KB
+
+XCPU RAM
+
+Xcpu internal sram
+
+0x01ac0000 ~ 0x01adffff
+
+128KB
+
+GOUDA
+
+Graphic processor
+
+0x01ae0000 ~ 0x01ae3fff
+
+16KB
+
+MPMC REG
+
+MPMC REG
+
+0x01ae4000~0x01ae7ffff
+
+16KB
+
+MAILBOX
+
+MAILBOX
+
+0x01b00000~0x01b00800
+
+2KB
+
+Internal sram
+
+Internal sram
+
+0x01c00000 ~ 0x01c0ffff
+
+64KB
+
+Regs for bcpu patch
+
+Regs for bcpu patch
+
+0x01d00000~0x01d00100
+
+256B
+
+Internal rom
+
+Internal rom
+
+0x01e00000 ~ 0x01e04fff
+
+20KB
+
+External spi flash
+
+External spi flash
+
+0x08000000 ~ 0x0fffffff
+
+128MB
+
+External psram
+
+External psram
+
+0x02000000 ~ 0x03ffffff
+
+32MB
+
+XCPU APB
+Sys_ctrl
+
+0x01A00000
+
+Irq
+
+0x01A01000
+
+Timer
+
+0x01A02000
+
+Gpio
+
+0x01A03000
+
+Ebc
+
+0x01A04000
+
+Keypad
+
+0x01A05000
+
+Pwm
+
+0x01A06000
+
+I2c
+
+0x01A07000
+
+Dma
+
+0x01A08000
+
+Ifc
+
+0x01A09000
+
+Calendar
+
+0x01A0a000
+RDA Microelectronics Inc. CONFIDENTIAL
+
+71 / 100
+
+RDA8851CL Datasheet V1.05
+
+Comregs
+
+0x01A0b000
+
+Page_spy
+
+0x01A0c000
+
+Debug_port
+
+0x01A0d000
+
+Rf_spi
+
+0x01A0e000
+
+Tcu
+
+0x01A0f000
+
+Sci
+
+0x01A10000
+
+Spi
+
+0x01A11000
+
+Spi2
+
+0x01A12000
+
+Spi3
+
+0x01A13000
+
+Debug_uart
+
+0x01A14000
+
+Uart
+
+0x01A15000
+
+Uart2
+
+0x01A16000
+
+Sdmmc
+
+0x01A17000
+
+Camera
+
+0x01A18000
+
+Xcpu_reg
+
+0x01A19000
+
+Xcpu_tag
+
+0x01A1a000
+
+Xcpu_idata
+
+0x01A1b000
+
+Xcpu_ddata
+
+0x01A1c000
+
+Sys_ahb_mon
+
+0x01A1d000
+
+Bb_ahb_mon
+
+0x01A1e000
+
+Bist
+
+0x01A1f000
+
+IFC2
+
+0x01A20000
+
+Gouda
+
+0x01A21000
+
+I2C2
+
+0x01A22000
+
+I2C3
+
+0x01A23000
+
+EXT_APB
+
+0x01A24000
+
+Spi Flash Reg
+
+0x01A25000
+
+Nand Flash Cs0
+
+0x01A26000
+
+Nand Flash Cs1
+
+0x01A27000
+
+Nand Flash Cs2
+
+0x01A28000
+
+Nand Flash Cs3
+
+0x01A29000
+
+Nand Flash RS
+
+0x01A2a000
+
+Sdmmc2
+
+0x01A2b000
+
+Debug_host
+
+0x01A3f000
+RDA Microelectronics Inc. CONFIDENTIAL
+
+72 / 100
+
+RDA8851CL Datasheet V1.05
+
+AIF
+
+0x01907000
+
+BCPU APB
+BB_Xcor
+
+0x01900000
+
+BB_ifc
+
+0x01901000
+
+BB_irq
+
+0x01902000
+
+BB_itlv
+
+0x01903000
+
+BB_viterbi
+
+0x01904000
+
+BB_A5
+
+0x01905000
+
+BB_RF
+
+0x01906000
+
+BB_cp2
+
+0x01908000
+
+BB_bist
+
+0x01909000
+
+BB_bcpu_reg
+
+0x0190a000
+
+BB_bcpu_tag
+
+0x0190b000
+
+BB_bcpu_idata
+
+0x0190c000
+
+BB_bcpu_ddata
+
+0x0190d000
+
+BB_comregs
+
+0x0190e000
+
+EXCOR
+
+0x0190f000
+
+EVITAC
+
+0x01910000
+
+CORDIC
+
+0x01911000
+
+MEMBRIDGE
+
+0x01912000
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+73 / 100
+
+RDA8851CL Datasheet V1.05
+
+L. PINS DESCRIPTION
+L.I Pin-out
+Pin Name
+
+I/O
+
+Type
+
+First Usage
+
+Second
+Usage
+
+Third Usage
+
+Power Ball
+Domain No
+
+LCD Parallel Interface
+LCD_DATA_0
+
+I/O
+
+D
+
+Data Bus
+
+SPI_LCD_DIO
+
+LCD
+
+J5
+
+LCD_DATA_1
+
+I/O
+
+D
+
+Data Bus
+
+SPI_LCD_SD
+C
+
+LCD
+
+H3
+
+LCD_DATA_2
+
+I/O
+
+D
+
+Data Bus
+
+LCD
+
+H8
+
+LCD_DATA_3
+
+I/O
+
+D
+
+Data Bus
+
+LCD
+
+J4
+
+LCD_DATA_4
+
+I/O
+
+D
+
+Data Bus
+
+LCD
+
+H7
+
+LCD_DATA_5
+
+I/O
+
+D
+
+Data Bus
+
+LCD
+
+H2
+
+LCD_DATA_6
+
+I/O
+
+D
+
+Data Bus
+
+LCD
+
+H5
+
+LCD_DATA_7
+
+I/O
+
+D
+
+Data Bus
+
+LCD
+
+H4
+
+LCD_WR
+
+O
+
+D
+
+Write Strobe
+
+LCD
+
+G2
+
+LCD_RS
+
+O
+
+D
+
+Register Select
+
+LCD
+
+G7
+
+LCD_CS_0
+
+O
+
+D
+
+Chip Select 0
+
+LCD
+
+G8
+
+LCD_RD
+
+O
+
+D
+
+Read Strobe
+
+SPI__LCD_CS
+
+LCD
+
+G5
+
+LCD_CS_1
+
+O
+
+D
+
+Chip Select 1
+
+GPO_7
+
+LCD
+
+G4
+
+SPI_LCD_CLK
+
+External Memory Controller
+M_SPI_CLK
+
+O
+
+D
+
+CLK for SPI flash
+
+MEM
+
+B12
+
+M_SPI_D0
+
+I/O
+
+D
+
+Data0 for SPI flash
+
+MEM
+
+A12
+
+M_SPI_D1
+
+I/O
+
+D
+
+Data1 for SPI flash
+
+MEM
+
+A13
+
+M_SPI_D2
+
+I/O
+
+D
+
+Data2 for SPI flash
+
+MEM
+
+B13
+
+M_SPI_D3
+
+I/O
+
+D
+
+Data3 for SPI flash
+
+MEM
+
+B11
+
+M_SPI_CS
+
+O
+
+D
+
+Chip Select 0 for SPI flash
+
+MEM
+
+C12
+
+M_SPI_CS_1
+
+O
+
+D
+
+Chip Select 1 for SPI flash
+
+MEM
+
+C11
+
+CAM_PCLK
+
+I/O
+
+D
+
+Camera Pixel Clock
+
+SPI_CAM_DI
+
+CAM
+
+J15
+
+CAM_HREF
+
+I/O
+
+D
+
+Camera Horizontal
+Synchronous Output
+
+SPI2_DI_1
+
+CAM
+
+H12
+
+CAM_VSYNC
+
+I/O
+
+D
+
+Camera Vertical
+Synchronous Output
+
+SPI2_DI_0
+
+CAM
+
+F13
+
+CAM_CLK
+
+O
+
+D
+
+Camera Clock
+
+CAM
+
+J13
+
+CAM_RST
+
+O
+
+D
+
+Camera Reset
+
+I2C_SCL
+
+CAM
+
+G13
+
+CAM_PDN
+
+I/O
+
+D
+
+Camera Power Down
+
+I2C_SDA
+
+CAM
+
+H13
+
+Camera
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+74 / 100
+
+RDA8851CL Datasheet V1.05
+
+Pin Name
+
+I/O
+
+Type
+
+First Usage
+
+Second
+Usage
+
+Third Usage
+
+Power Ball
+Domain No
+
+CAM_DATA_0
+
+I/O
+
+D
+
+Camera Data bus
+
+SPI2_CS_0
+
+CAM
+
+K16
+
+CAM_DATA_1
+
+I/O
+
+D
+
+Camera Data bus
+
+SPI_CAM_CT
+S
+
+CAM
+
+J17
+
+CAM_DATA_2
+
+I/O
+
+D
+
+Camera Data bus
+
+SPI2_DO
+
+CSI_DN2
+
+CAM
+
+J16
+
+CAM_DATA_3
+
+I/O
+
+D
+
+Camera Data bus
+
+SPI2_CLK
+
+CSI_DP2
+
+CAM
+
+E12
+
+CAM_DATA_4
+
+I/O
+
+D
+
+Camera Data bus
+
+SPI_CAM_OF CSI_DN1
+
+CAM
+
+E13
+
+CAM_DATA_5
+
+I/O
+
+D
+
+Camera Data bus
+
+SPI_CAM_RD CSI_DP1
+
+CAM
+
+C14
+
+CAM_DATA_6
+
+I/O
+
+D
+
+Camera Data bus
+
+SPI_CAM_SS CSI_CKP
+N
+
+CAM
+
+E15
+
+CAM_DATA_7
+
+I/O
+
+D
+
+Camera Data bus
+
+SPI_CAM_SC CSI_CKN
+K
+
+CAM
+
+C13
+
+I2C2_SCL
+
+I/O
+
+D
+
+I2C2 Clock
+
+GPIO_24
+
+STD
+
+M15
+
+I2C2_SDA
+
+I/O
+
+D
+
+I2C2 Data
+
+GPIO_25
+
+STD
+
+L15
+
+I2C2
+
+Memory Card Interface
+SSD_CLK
+
+O
+
+D
+
+SD Clock
+
+MMC
+
+E10
+
+SSD_CMD
+
+I/O
+
+D
+
+SD Command
+
+MMC
+
+F11
+
+SDAT_0
+
+I/O
+
+D
+
+SD data bit 0
+
+MMC
+
+E11
+
+SDAT_1
+
+I/O
+
+D
+
+SD data bit 1
+
+MMC
+
+F10
+
+SDAT_2
+
+I/O
+
+D
+
+SD data bit 2
+
+MMC
+
+K10
+
+SDAT_3
+
+I/O
+
+D
+
+SD data bit 3
+
+MMC
+
+J9
+
+SPI1_CLK
+
+I/O
+
+D
+
+SPI_1 Clock.
+
+GPIO_12
+
+SSD2_CLK
+
+STD
+
+K12
+
+SPI1_CS_0
+
+I/O
+
+D
+
+SPI_1 Chip Select 0
+
+GPIO_6
+
+KEYIN_7
+
+STD
+
+J11
+
+SPI1_CS_1
+
+I/O
+
+D
+
+SPI_1 Chip Select 1
+
+GPIO_14
+
+I2C3_SDA
+
+STD
+
+M13
+
+SPI1_DIO
+
+I/O
+
+D
+
+SPI_1 Data InOut
+
+GPIO_15
+
+SSD2_DAT1
+
+STD
+
+G11
+
+SPI1_DI
+
+I/O
+
+D
+
+SPI_1 Data In
+
+GPIO_16
+
+I2C3_SCL
+
+STD
+
+H11
+
+SPI
+
+Time Controlled Output
+TCO_3
+
+O
+
+D
+
+Time Controlled Outputs 3
+
+GPO_8
+
+SSD2_DAT2
+
+STD
+
+N14
+
+TCO_4
+
+O
+
+D
+
+Time Controlled Outputs 4
+
+GPO_9
+
+SSD2_DAT3
+
+STD
+
+K13
+
+HST_CLK
+
+I
+
+D
+
+Host Clock input
+
+STD
+
+N12
+
+HST_RXD
+
+I
+
+D
+
+Host data receive.
+
+STD
+
+M14
+
+HST_TXD
+
+O
+
+D
+
+Host data transmit.
+
+STD
+
+P11
+
+KEYIN_0
+
+I
+
+D
+
+Key matrix input line 0
+
+STD
+
+L5
+
+KEYIN_1
+
+I
+
+D
+
+Key matrix input line 1
+
+STD
+
+K7
+
+KEYIN_2
+
+I
+
+D
+
+Key matrix input line 2
+
+STD
+
+L4
+
+Debug Host
+
+KEYPAD
+GPIO_20
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+SSD2_SDAT1
+
+75 / 100
+
+RDA8851CL Datasheet V1.05
+
+Pin Name
+
+I/O
+
+Type
+
+First Usage
+
+Second
+Usage
+
+KEYIN_3
+
+I
+
+D
+
+Key matrix input line 3
+
+KEYIN_4
+
+I
+
+D
+
+Key matrix input line 4
+
+KEYIN_5
+
+I/O
+
+D
+
+Key matrix input line 5
+
+PWT
+
+KEYOUT_0
+
+O
+
+D
+
+Key matrix output line 0
+
+SSD2_CLK
+
+KEYOUT_1
+
+O
+
+D
+
+Key matrix output line 1
+
+GPIO_17
+
+KEYOUT_2
+
+O
+
+D
+
+Key matrix output line 2
+
+GPIO_11
+
+KEYOUT_3
+
+O
+
+D
+
+Key matrix output line 3
+
+KEYOUT_4
+
+O
+
+D
+
+KEYOUT_5
+
+I/O
+
+KEYIN_SENSE
+
+Third Usage
+
+Power Ball
+Domain No
+STD
+
+K8
+
+GPIO_21
+
+STD
+
+K5
+
+GPIO_10
+
+STD
+
+L3
+
+STD
+
+K1
+
+SSD2_CMD
+
+STD
+
+K2
+
+SSD2_SDAT0
+
+STD
+
+J7
+
+GPIO_7
+
+STD
+
+K4
+
+Key matrix output line 4
+
+GPIO_8
+
+STD
+
+J2
+
+D
+
+Key matrix output line 5
+
+LPG
+
+STD
+
+J3
+
+I
+
+A
+
+Key input GPADC sense
+
+ABB
+
+C5
+
+KEY_P
+
+O
+
+A
+
+Key sense P
+
+ABB
+
+D4
+
+KEY_N
+
+O
+
+A
+
+Key sense N
+
+ABB
+
+D5
+
+UART2_RXD
+
+I/O
+
+D
+
+UART2 receive data
+
+GPIO_8
+
+UART1_DSR
+
+STD
+
+K11
+
+UART2_CTS
+
+I/O
+
+D
+
+UART2 clear to send
+
+GPIO_5
+
+UART1_DC
+
+STD
+
+G10
+
+UART2_TXD
+
+I/O
+
+D
+
+UART2 transmit data
+
+GPIO_13
+
+UART_RI
+
+STD
+
+H10
+
+UART2_RTS
+
+I/O
+
+D
+
+UART2 receive to send
+
+GPIO_7
+
+UART1_DTR
+
+STD
+
+J10
+
+GPIO_9
+
+UART
+
+General Purpose I/O
+GPIO_1
+
+I/O
+
+D
+
+GPIO 1
+
+KEYIN_6
+
+STD
+
+M16
+
+GPIO_2
+
+I/O
+
+D
+
+GPIO 2(Only output,default
+“1”)
+
+Internal BT
+control
+
+STD
+
+M17
+
+GPIO_3
+
+I/O
+
+D
+
+GPIO 3
+
+STD
+
+N15
+
+STD
+
+P13
+
+STD
+
+K15
+
+STD
+
+P16
+
+STD
+
+J12
+
+STD
+
+N13
+
+STD
+
+G12
+
+General Purpose Output
+GPO_0
+
+O
+
+D
+
+GPO 0
+
+KEYOUT_6
+
+GPO_1
+
+O
+
+D
+
+GPO 1
+
+GPO_5
+
+O
+
+D
+
+GPO 5
+
+PWL_1
+
+O
+
+D
+
+Pulse with Light for back light GPO_6
+control 1
+
+CLK_OUT
+
+O
+
+D
+
+Clock Output
+(32kHz/26MHz/156Mhz/n)
+
+LPSCO_1
+
+I/O
+
+D
+
+Low Power Synchronizer
+Controlled Output 1
+
+CODE_COMPRE
+SS_EN
+
+I
+
+D
+
+Code compress function
+enable
+
+STD
+
+A15
+
+RESETB_EXT
+
+I
+
+D
+
+External Reset for chip
+
+STD
+
+B14
+
+TST_H
+
+ID
+
+D
+
+Test Mode
+
+RTC
+
+C15
+
+BBPLL_TEST
+
+O
+
+D
+
+Digital CLK output for test
+
+ABB
+
+K9
+
+KEYOUT_7
+
+Miscellaneous Pins
+
+GPIO_4
+
+CLK_32K
+
+General Purpose ADC
+RDA Microelectronics Inc. CONFIDENTIAL
+
+76 / 100
+
+RDA8851CL Datasheet V1.05
+
+Pin Name
+
+I/O
+
+Type
+
+First Usage
+
+Second
+Usage
+
+Third Usage
+
+Power Ball
+Domain No
+
+GP_ADC_IN_0
+
+I
+
+A
+
+GPADC input channel 0
+
+ABB
+
+C4
+
+GP_ADC_IN_1
+
+I
+
+A
+
+GPADC input channel 1
+
+ABB
+
+C3
+
+USB_DM
+
+I/O
+
+A
+
+USB D-
+
+ABB
+
+M7
+
+USB_DP
+
+I/O
+
+A
+
+USB D+
+
+ABB
+
+M8
+
+LINE_IN_L
+
+I
+
+A
+
+Stereo Line input
+
+ABB
+
+N1
+
+LINE_IN_R
+
+I
+
+A
+
+Stereo Line input
+
+ABB
+
+P1
+
+AU_AUXMIC_P
+
+I
+
+A
+
+Audio Aux In+
+
+ABB
+
+P3
+
+AU_AUXMIC_N
+
+I
+
+A
+
+Audio Aux In-
+
+ABB
+
+N3
+
+AU_MIC_P
+
+I
+
+A
+
+Audio In+
+
+ABB
+
+P2
+
+AU_MIC_N
+
+I
+
+A
+
+Audio In-
+
+ABB
+
+N2
+
+AU_RCV_P
+
+O
+
+A
+
+Receiver Out +
+
+ABB
+
+M5
+
+AU_RCV_N
+
+O
+
+A
+
+Receiver Out -
+
+ABB
+
+M6
+
+AU_LSL_P
+
+O
+
+A
+
+Loudspeaker Left Out +
+
+ABB
+
+A10
+
+AU_LSL_N
+
+O
+
+A
+
+Loudspeaker Left Out -
+
+ABB
+
+B10
+
+AU_LSR_P
+
+O
+
+A
+
+Loudspeaker Right Out +
+
+ABB
+
+A9
+
+AU_LSR_N
+
+O
+
+A
+
+Loudspeaker Right Out -
+
+ABB
+
+B9
+
+AU_HPL
+
+O
+
+A
+
+Headset Left Out
+
+ABB
+
+N4
+
+AU_HPR
+
+O
+
+A
+
+Headset Right Out
+
+ABB
+
+P5
+
+FMIN
+
+I
+
+A
+
+FM RF differential input
+
+FM
+
+M2
+
+FMIP
+
+I
+
+A
+
+FM RF differential input
+
+FM
+
+M1
+
+A
+
+FM GND
+
+FM
+
+L1
+
+USB
+
+AUDIO
+
+FM
+
+FM_GND
+Bluetooth
+BT_RFIP
+
+I
+
+A
+
+BT RF signal input
+
+BT
+
+L17
+
+BT_RFIN
+
+I
+
+A
+
+BT RF signal input
+
+BT
+
+L16
+
+A
+
+BT DECAP
+
+BT
+
+P17
+
+DECAP_BTDVDD
+RF TRANCEIVER
+XVR_AUXCLKOU
+T
+
+O
+
+A
+
+26MHz Auxiliary clock out
+
+XCVR
+
+N17
+
+RAMPOUT
+
+O
+
+A
+
+Ramp DAC Output
+
+XCVR
+
+C17
+
+RFOL
+
+O
+
+A
+
+GSM 900 and GSM 850
+band transmit Output
+
+XCVR
+
+E17
+
+RFOH
+
+O
+
+A
+
+PCS 1900 and DCS 1800
+band transmit Output
+
+XCVR
+
+D17
+
+PAON
+
+O
+
+A
+
+Power Amplifier On
+
+XCVR
+
+B17
+
+RF_SINGLE_L
+
+I
+
+A
+
+GSM 900/GSM850 band
+single input
+
+XCVR
+
+F17
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+77 / 100
+
+RDA8851CL Datasheet V1.05
+
+Pin Name
+
+I/O
+
+Type
+
+First Usage
+
+Second
+Usage
+
+Third Usage
+
+Power Ball
+Domain No
+
+RF_SINGLE_H
+
+I
+
+A
+
+PCS 1900/DCS1800 band
+single input
+
+XCVR
+
+G17
+
+RF_SINGLE_L_G
+ND
+
+A
+
+L band GND
+
+XCVR
+
+F16
+
+RF_SINGLE_H_G
+ND
+
+A
+
+H band GND
+
+XCVR
+
+G16
+
+XVR_BS0
+
+O
+
+A
+
+FEM Band select signal 0
+
+XCVR
+
+A17
+
+XVR_BS1
+
+O
+
+A
+
+FEM Band select signal 1
+
+XCVR
+
+A16
+
+XVR_BS2
+
+O
+
+A
+
+RF Switch Enable
+
+XCVR
+
+B15
+
+QP_RXTX_EN
+
+O
+
+A
+
+BB Analog QP for Test
+
+DigRF's
+RxTxEn
+
+XCVR
+
+H15
+
+QN_RXTX_DATA
+
+O
+
+A
+
+BB Analog QN for Test
+
+DigRF's
+RxTxData
+
+XCVR
+
+H16
+
+IN_STROBE
+
+O
+
+A
+
+BB Analog IN for Test
+
+DigRf strobe
+
+XCVR
+
+G15
+
+IP
+
+O
+
+A
+
+BB Analog IP for Test
+
+XCVR
+
+F15
+
+XVR_XTAL1
+
+I
+
+A
+
+26MHz Crystal port Input
+
+XCVR
+
+P14
+
+XVR_XTAL2
+
+O
+
+A
+
+26MHz Crystal port Output
+
+XCVR
+
+P15
+
+ANA_TEST_EN
+
+I
+
+A
+
+XVR test mode
+
+XCVR
+
+D15
+
+Power Management Control
+POWERKEY
+
+I
+
+A
+
+Power-on switch enable
+signal. Active High.
+
+PMU
+
+B6
+
+AC_R
+
+I
+
+A
+
+Input from the AC charger or
+USB inlet
+
+PMU
+
+E4
+
+GDRV
+
+O
+
+A
+
+Charger drive
+
+PMU
+
+F4
+
+IS_CHG
+
+I
+
+A
+
+Current Sens for Charger
+Control
+
+PMU
+
+F3
+
+VBAT_SENSE
+
+I
+
+A
+
+Battery voltage ADC detect
+
+PMU
+
+F2
+
+SW_BULK
+
+O
+
+A
+
+DC/DC control
+
+PMU
+
+A4
+
+SW_BULK2
+
+O
+
+A
+
+DC/DC control
+
+PMU
+
+A5
+
+BOOST_CPP1
+
+O
+
+A
+
+DC/DC control
+
+PMU
+
+A7
+
+BOOST_CPP2
+
+O
+
+A
+
+DC/DC control
+
+PMU
+
+B7
+
+BOOST_CPN1
+
+O
+
+A
+
+DC/DC control
+
+PMU
+
+A8
+
+BOOST_CPP2
+
+O
+
+A
+
+DC/DC control
+
+PMU
+
+B8
+
+VSPIM_SEL
+
+I
+
+A
+
+Selects V_SPIMEM power
+supply ('0':2.8V, '1':1.8V).
+
+PMU
+
+A6
+
+PROG_EFUSE
+
+I
+
+A
+
+High voltage input for
+OTP/EFUSE programming
+
+PMU
+
+C6
+
+TSC_XP
+
+I
+
+A
+
+Horizontal Measure Input
+
+PMU
+
+F7
+
+TSC_XN
+
+I
+
+A
+
+Horizontal Measure Input
+
+PMU
+
+F8
+
+TSC_YP
+
+I
+
+A
+
+Vertical Measure Input
+
+PMU
+
+F5
+
+Touchscreen
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+78 / 100
+
+RDA8851CL Datasheet V1.05
+
+Pin Name
+
+I/O
+
+Type
+
+I
+
+A
+
+Vertical Measure Input
+
+PMU
+
+E5
+
+LED1
+
+I
+
+A
+
+LED driver current sink
+
+PMU
+
+D2
+
+LED2
+
+I
+
+A
+
+LED driver current sink
+
+PMU
+
+C1
+
+LED3
+
+I
+
+A
+
+LED driver current sink
+
+PMU
+
+C2
+
+LED4
+
+I
+
+A
+
+LED driver current sink
+
+PMU
+
+D3
+
+KP_LEDR
+
+I
+
+A
+
+LED driver current sink
+
+PMU
+
+D1
+
+KP_LEDG
+
+I
+
+A
+
+LED driver current sink
+
+PMU
+
+E3
+
+KP_LEDB
+
+I
+
+A
+
+LED driver current sink
+
+PMU
+
+E2
+
+BL_LED_OUT
+
+O
+
+A
+
+LED driver
+
+PMU
+
+B3
+
+VSIM0
+
+O
+
+A
+
+SIM Card 0 Power Supply
+
+PMU
+
+N7
+
+SIM0_RST
+
+O
+
+A
+
+SIM Card 0 Reset Line
+
+PMU
+
+N9
+
+SIM0_CLK
+
+O
+
+A
+
+SIM Card 0 Clock Line
+
+PMU
+
+M9
+
+SIM0_DIO
+
+I/O
+
+A
+
+SIM Card 0 Data Line
+
+PMU
+
+M10
+
+VSIM1
+
+O
+
+A
+
+SIM Card 1 Power Supply
+
+PMU
+
+P7
+
+SIM1_RST
+
+O
+
+A
+
+SIM Card 1 Reset Line
+
+PMU
+
+P10
+
+SIM1_CLK
+
+O
+
+A
+
+SIM Card 1 Clock Line
+
+PMU
+
+N10
+
+SIM1_DIO
+
+I/O
+
+A
+
+SIM Card 1 Data Line
+
+PMU
+
+N11
+
+VSIM2
+
+O
+
+A
+
+SIM Card 2 Power Supply
+
+PMU
+
+N6
+
+SIM2_RST
+
+O
+
+A
+
+SIM Card 2 Reset Line
+
+PMU
+
+M3
+
+SIM2_CLK
+
+O
+
+A
+
+SIM Card 2 Clock Line
+
+PMU
+
+L2
+
+SIM2_DIO
+
+I/O
+
+A
+
+SIM Card 2 Data Line
+
+PMU
+
+M4
+
+AVDD_2V4
+
+O
+
+A
+
+Supplies XCVER
+
+XCVER A14
+
+VBAT_PMU1
+
+I
+
+A
+
+PMU Battery Power Supply
+
+PMU
+
+A1
+
+VBAT_PMU2
+
+I
+
+A
+
+PMU Battery Power Supply
+
+PMU
+
+A2
+
+V_CORE
+
+O
+
+A
+
+Supplies BB Core. Out for
+decoupling / debug / backup
+
+PMU
+
+B4
+
+VBUCK2_2V4
+
+O
+
+A
+
+DCDC power supply
+
+PMU
+
+B5
+
+VBOOST
+
+O
+
+A
+
+DCDC power supply
+
+PMU
+
+A3
+
+V_SPIMEM
+
+O
+
+A
+
+Supplies external SPI flash
+
+PMU
+
+A11
+
+V_ANA
+
+O
+
+A
+
+Out for decoupling / debug /
+backup
+
+PMU
+
+N5
+
+V_MEM
+
+O
+
+A
+
+Supplies Memory PADs I/O
+ring and V_MEM output PAD
+
+PMU
+
+P8
+
+V_PAD
+
+O
+
+A
+
+Supplies Standard PADs I/O
+ring. Out for decoupling /
+debug / backup
+
+PMU
+
+P12
+
+TSC_YN
+
+First Usage
+
+Second
+Usage
+
+Third Usage
+
+Power Ball
+Domain No
+
+LED Drivers
+
+Dual SIM Interface
+
+POWER
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+79 / 100
+
+RDA8851CL Datasheet V1.05
+
+Pin Name
+
+I/O
+
+Type
+
+First Usage
+
+Second
+Usage
+
+Third Usage
+
+Power Ball
+Domain No
+
+V_CAM
+
+O
+
+A
+
+Supplies Camera PADs I/O
+ring
+
+PMU
+
+K17
+
+V_LCD
+
+O
+
+A
+
+Supplies LCD PADs I/O ring
+
+PMU
+
+J1
+
+V_MMC
+
+O
+
+A
+
+Supplies MMC PADs I/O ring
+
+PMU
+
+P9
+
+V_VIB
+
+O
+
+A
+
+Supplies Vibrator
+
+PMU
+
+G1
+
+V_USB
+
+O
+
+A
+
+Supplies USB PHY. Out for
+debug / backup / decoupling
+
+PMU
+
+H1
+
+V_RTC
+
+O
+
+A
+
+Supplies RTC domain
+
+PMU
+
+F1
+
+V_BAT_RTC
+
+O
+
+A
+
+Charges Backup CAP
+
+PMU
+
+E1
+
+V_MIC
+
+O
+
+A
+
+Microphone Biasing
+
+PMU
+
+P4
+
+V_ASW
+
+O
+
+A
+
+Supplies periphery device
+
+PMU
+
+N8
+
+V_NEG
+
+O
+
+A
+
+Negative Voltage generator
+
+PMU
+
+P6
+
+SW_GND
+
+A
+
+DC/DC Switch GND
+
+PMU
+
+B1
+
+SW_GND
+
+A
+
+DC/DC Switch GND
+
+PMU
+
+B2
+
+CP_GND
+
+A
+
+Boost GND
+
+PMU
+
+C8
+
+CP_GND
+
+A
+
+Boost GND
+
+PMU
+
+C9
+
+XVR_GND
+
+A
+
+XVR_GND
+
+XCVER B16
+
+XVR_GND
+
+A
+
+XVR_GND
+
+XCVER C16
+
+XVR_GND
+
+A
+
+XVR_GND
+
+XCVER D16
+
+XVR_GND
+
+A
+
+XVR_GND
+
+XCVER E16
+
+XVR_GND
+
+A
+
+XVR_GND
+
+XCVER H17
+
+CORE_GND
+
+A
+
+CORE_GND
+
+PMU
+
+C7
+
+CORE_GND
+
+A
+
+CORE_GND
+
+PMU
+
+C10
+
+CORE_GND
+
+A
+
+CORE_GND
+
+PMU
+
+E7
+
+CORE_GND
+
+A
+
+CORE_GND
+
+PMU
+
+E8
+
+CORE_GND
+
+A
+
+CORE_GND
+
+PMU
+
+E9
+
+CORE_GND
+
+A
+
+CORE_GND
+
+PMU
+
+F9
+
+CORE_GND
+
+A
+
+CORE_GND
+
+PMU
+
+G9
+
+CORE_GND
+
+A
+
+CORE_GND
+
+PMU
+
+H9
+
+CORE_GND
+
+A
+
+CORE_GND
+
+PMU
+
+M11
+
+CORE_GND
+
+A
+
+CORE_GND
+
+PMU
+
+M12
+
+GROUND
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+80 / 100
+
+RDA8851CL Datasheet V1.05
+
+M. ELECTRICAL CHARACTERISTICS
+M.I Absolute Maximum Rating
+Name
+VBAT_ABB,
+VBAT_XCVR
+VBAT_PMU
+
+Min
+/
+
+DC Charger
+
+Typical
+
+Max
+
+Usage (power domain)
+
+3.8V
+
+4.5V
+
+For chip
+
+5V
+
+7V
+
+For charger circuit
+
+M.II Temperature Characteristics
+Parameter
+
+Min
+
+Typ
+
+Max
+
+Unit
+
+Work Temperature
+
+-25
+
+25
+
+70
+
+°C
+
+Storage Temperature
+
+-40
+
+/
+
+125
+
+°C
+
+M.III RF Characteristics
+TX
+Symbol
+Fo
+
+Parameter
+output frequency
+
+Po
+
+output power
+
+PE_rms
+
+RMS phase error
+
+PE_peak
+
+peak phase error
+
+M400K
+
+output modulation @ +-400KHz
+offset
+
+M1.8M
+
+output modulation @ +-1.8MHz
+
+Condition
+GSM850 Band
+EGSM Band
+DCS Band
+PCS Band
+GSM850 Band
+EGSM Band
+DCS Band
+PCS Band
+GSM850 Band
+EGSM Band
+DCS Band
+PCS Band
+GSM850 Band
+EGSM Band
+DCS Band
+PCS Band
+
+Min.
+824
+880
+1710
+1850
+4
+4
+1
+1
+
+Typ.
+
+6
+6
+3
+3
+1.5
+1.5
+2.2
+2.2
+
+Max.
+849
+915
+1785
+1910
+8
+8
+5
+5
+3
+3
+4
+4
+10
+10
+15
+15
+
+Unit
+MHz
+MHz
+MHz
+MHz
+dBm
+dBm
+dBm
+dBm
+deg
+deg
+deg
+deg
+deg
+deg
+deg
+deg
+
+GSM850 Band
+
+-65
+
+-62
+
+dBc
+
+EGSM Band
+DCS Band
+PCS Band
+GSM850 Band
+
+-65
+-64
+-64
+-74
+
+-62
+-62
+-62
+-68
+
+dBc
+dBc
+dBc
+dBc
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+81 / 100
+
+RDA8851CL Datasheet V1.05
+
+offset
+
+HS2
+
+2nd harmonic suppression
+
+HS3
+
+3rd harmonic suppression
+
+EGSM Band
+DCS Band
+PCS Band
+GSM850 Band
+EGSM Band
+DCS Band
+PCS Band
+GSM850 Band
+EGSM Band
+DCS Band
+PCS Band
+
+-74
+-71
+-71
+
+-68
+-65
+-65
+-30
+-30
+-25
+-25
+-8
+-8
+-12
+-12
+
+dBc
+dBc
+dBc
+dBc
+dBc
+dBc
+dBc
+dBc
+dBc
+dBc
+dBc
+
+Max.
+894
+960
+1880
+1990
+-109.5
+-109.5
+-109.5
+-108.5
+
+Unit
+MHz
+MHz
+MHz
+MHz
+dBm
+dBm
+dBm
+dBm
+
+note1
+note1
+note1
+note1
+
+RX
+Symbol
+Fi
+
+Parameter
+input frequency
+
+Srx
+
+RX sensitivity
+
+Block3
+
+the blocking characteristic
+@+-3MHz offset
+
+Block20
+
+SUPam
+
+the blocking characteristic
+@+-20MHz offset
+
+AM suppression
+
+Condition
+GSM850 Band
+EGSM Band
+DCS Band
+PCS Band
+GSM850 Band
+EGSM Band
+DCS Band
+PCS Band
+
+Min.
+869
+925
+1805
+1930
+
+Typ.
+
+-111.5
+-111.5
+-111.5
+-110.5
+
+GSM850 Band
+
+-23
+
+dBm
+
+note2
+
+EGSM Band
+DCS Band
+PCS Band
+
+-24
+-23
+-23
+
+dBm
+dBm
+dBm
+
+note2
+note2
+note2
+
+GSM850 Band
+
+-18
+
+dBm
+
+note2
+
+EGSM Band
+DCS Band
+PCS Band
+GSM850 Band
+EGSM Band
+DCS Band
+PCS Band
+
+-20
+-19
+-20
+-22
+-22
+-22
+-22
+
+dBm
+dBm
+dBm
+dBm
+dBm
+dBm
+dBm
+
+note2
+note2
+note2
+note2
+note2
+note2
+note2
+
+dBc
+
+note3
+
+dBc
+dBc
+dBc
+
+note3
+note3
+note3
+
+dBc
+
+note3
+
+dBc
+dBc
+dBc
+dBm
+dBm
+dBm
+dBm
+
+note3
+note3
+note3
+
+adjacent channel selectivity
+GSM850 Band
+10
+16
+@+-200KHz
+EGSM Band
+10
+16
+DCS Band
+11
+17
+PCS Band
+11
+17
+adjacent channel selectivity
+ACS400K
+GSM850 Band
+45
+57
+@+-400KHz
+EGSM Band
+45
+57
+DCS Band
+44
+56
+PCS Band
+44
+56
+Pi_max
+maximum input power
+GSM850 Band
+-15
+EGSM Band
+-15
+DCS Band
+-24
+PCS Band
+-24
+Note1. The insertion loss of the antenna switch and the PCB have been calibrated
+Note2. Pdesired=-99dBm
+Note3. Pdesired=-85dBm
+ACS200K
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+82 / 100
+
+RDA8851CL Datasheet V1.05
+
+M.IV Audio Characteristics
+Class K
+OUT RMS
+ON
+
+THD
+
+SINAD
+(dB)
+
+OUT RMS
+OFF
+OUT PWR SNR
+(v)
+
+Battery
+Voltage
+
+(v)
+
+%
+
+0.407738
+
+0.028088
+
+60.39795
+
+0.000038
+
+0.02
+
+80.61
+
+4
+
+1.61769
+
+0.089419
+
+58.53993
+
+0.000106
+
+0.33
+
+83.67
+
+4
+
+3.102641
+
+1.108774
+
+38.38455
+
+0.000198
+
+1.2
+
+83.9
+
+4
+
+3.541256
+
+13.22943
+
+17.52715
+
+0.000277
+
+1.57
+
+82.13
+
+4
+
+3.691639
+
+19.08801
+
+14.3687
+
+0.000346
+
+1.7
+
+80.56
+
+4
+
+3.788224
+
+22.92822
+
+12.76289
+
+0.000415
+
+1.79
+
+79.21
+
+4
+
+3.842082
+
+25.25349
+
+11.92124
+
+0.000468
+
+1.85
+
+78.29
+
+4
+
+3.887335
+
+27.4225
+
+11.20234
+
+0.000533
+
+1.89
+
+77.26
+
+4
+
+OUT RMS
+ON
+
+THD
+
+SINAD
+
+(v)
+
+%
+
+0.40716
+
+Class D
+
+(dB)
+
+OUT RMS
+OFF
+OUT PWR SNR
+(v)
+
+Battery
+Voltage
+
+0.02335
+
+61.2679
+
+0.000034
+
+0.02
+
+81.57
+
+4
+
+1.62075
+
+0.09883
+
+58.1445
+
+0.000093
+
+0.33
+
+84.82
+
+4
+
+2.4675
+
+15.0481
+
+16.4175
+
+0.000181
+
+0.76
+
+82.69
+
+4
+
+2.60929
+
+22.7619
+
+12.8336
+
+0.000245
+
+0.85
+
+80.55
+
+4
+
+2.6702
+
+26.2587
+
+11.5887
+
+0.000306
+
+0.89
+
+78.82
+
+4
+
+2.70852
+
+28.5461
+
+10.8718
+
+0.000366
+
+0.92
+
+77.39
+
+4
+
+2.73082
+
+29.8979
+
+10.4747
+
+0.000414
+
+0.93
+
+76.39
+
+4
+
+2.7511
+
+31.1126
+
+10.1232
+
+0.00048
+
+0.95
+
+75.17
+
+4
+
+OUT RMS
+ON
+
+THD
+
+SINAD
+
+(v)
+
+%
+
+0.23615
+
+Headphone
+
+(dB)
+
+OUT RMS
+OFF
+OUT PWR SNR
+(v)
+
+Battery
+Voltage
+
+0.00844
+
+46.353
+
+0.000024
+
+0.001743
+
+79.86
+
+4
+
+0.32909
+
+0.01013
+
+46.3297
+
+0.000036
+
+0.003384
+
+79.22
+
+4
+
+0.46948
+
+0.01152
+
+46.3691
+
+0.000046
+
+0.006888
+
+80.18
+
+4
+
+0.6456
+
+2.45938
+
+31.9825
+
+0.000066
+
+0.013025
+
+79.81
+
+4
+
+0.82236
+
+13.9234
+
+17.1464
+
+0.000091
+
+0.021134
+
+79.12
+
+4
+
+1.02057
+
+21.5071
+
+13.3848
+
+0.000127
+
+0.032549
+
+78.1
+
+4
+
+1.11581
+
+26.4702
+
+11.5432
+
+0.000193
+
+0.038907
+
+75.24
+
+4
+
+1.16341
+
+30.8232
+
+10.1984
+
+0.000326
+
+0.042298
+
+71.05
+
+4
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+83 / 100
+
+RDA8851CL Datasheet V1.05
+
+Receiver
+OUT RMS
+ON
+
+THD
+
+SINAD
+(dB)
+
+OUT RMS
+OFF
+OUT PWR SNR
+(v)
+
+Battery
+Voltage
+
+(v)
+
+%
+
+0.131718
+
+0.02263
+
+46.29659
+
+0.000019
+
+0.002169
+
+76.82
+
+4
+
+0.186607
+
+0.032254
+
+46.29754
+
+0.000023
+
+0.004353
+
+78.18
+
+4
+
+0.261563
+
+0.046055
+
+46.2518
+
+0.000029
+
+0.008552
+
+79.1
+
+4
+
+0.370479
+
+0.066329
+
+46.17642
+
+0.00004
+
+0.017157
+
+79.33
+
+4
+
+0.519742
+
+0.096372
+
+46.15026
+
+0.000053
+
+0.033766
+
+79.83
+
+4
+
+0.731471
+
+0.162468
+
+45.74333
+
+0.000074
+
+0.066881
+
+79.9
+
+4
+
+0.978627
+
+4.08141
+
+27.70084
+
+0.000106
+
+0.119714
+
+79.31
+
+4
+
+1.121201
+
+14.80495
+
+16.579
+
+0.000143
+
+0.157136
+
+77.89
+
+4
+
+M.V
+
+M.VI DC Characteristics
+Name
+
+Min.(V)
+
+Typical(V)
+
+Max.(V)
+
+Description
+
+VBAT
+
+3.4
+
+3.8
+
+4.2
+
+Normal work
+
+VCORE
+
+0.9
+
+1.2
+
+1.8
+
+Normal work
+
+V_BUCK_2V4
+
+1.4
+
+2.4
+
+2.8
+
+Normal work
+
+AVDD_2V4
+
+2.4
+
+2.4
+
+2.7
+
+Normal work
+
+V_BOOST
+
+4.1
+
+4.3
+
+4.5
+
+Normal work
+
+V_ANA
+
+2.6
+
+2.8
+
+3.0
+
+Normal work
+
+V_RTC
+
+1.1
+
+1.2
+
+1.5
+
+Normal work
+
+V_MIC
+
+1.3
+
+1.4
+
+1.5
+
+Normal work
+
+V_USB
+V_SIM
+V_PAD,V_MEM,
+V_SPIMEM,
+V_ASW,V_CAM
+V_LCD
+V_MMC
+V_VIB
+V_CORE
+Vcore_DCDC
+2FH[15:12]
+0000
+
+3.3
+
+Normal work
+
+1.6
+
+1.8
+
+2.0
+
+When 1.8V mode
+
+2.8
+
+3.0
+
+3.3
+
+When 3.0V mode
+
+1.7
+
+1.8
+
+1.9
+
+When 1.8V mode
+
+2.6
+
+2.8
+
+3.0
+
+When 3.0V mode
+
+Vbat=4.2V
+
+Vbat=3.4V
+
+PWM
+
+PFM
+
+PWM
+
+PFM
+
+Voltage(V)
+
+Voltage(V)
+
+Voltage(V)
+
+Voltage(V)
+
+0.734343
+
+0.851079
+
+0.734317
+
+0.851287
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+84 / 100
+
+RDA8851CL Datasheet V1.05
+
+0001
+
+0.803534
+
+0.913479
+
+0.803521
+
+0.917133
+
+0010
+
+0.873937
+
+0.982545
+
+0.87401
+
+0.986022
+
+0011
+
+0.945415
+
+1.046256
+
+0.94553
+
+1.054174
+
+0100
+
+1.018249
+
+1.125916
+
+1.018255
+
+1.123417
+
+0101
+
+1.086779
+
+1.185644
+
+1.086697
+
+1.187782
+
+0110
+
+1.154799
+
+1.245822
+
+1.154695
+
+1.253376
+
+0111
+
+1.245088
+
+1.331853
+
+1.244965
+
+1.338222
+
+1000
+
+1.323666
+
+1.408776
+
+1.323419
+
+1.412903
+
+1001
+
+1.42365
+
+1.502113
+
+1.423239
+
+1.5059
+
+1010
+
+1.484614
+
+1.560248
+
+1.484106
+
+1.561996
+
+1011
+
+1.554532
+
+1.622902
+
+1.554064
+
+1.625002
+
+1100
+
+1.636774
+
+1.693612
+
+1.636572
+
+1.696991
+
+1101
+
+1.683802
+
+1.732771
+
+1.683665
+
+1.735503
+
+1110
+
+1.735693
+
+1.776002
+
+1.735418
+
+1.775653
+
+1111
+1.792848
+1.822333
+1.792613
+BOOST_4V3
+36H[4:0]=
+36H[4:0]=
+Vcp_out_b Reserved_analog<4:0 Reserved_analog<4:0
+it
+>=00000
+>=10000
+27H[13:10
+Vbat=3.4
+]
+Vbat=4.2V
+Vbat=4.2V Vbat=3.4V
+V
+
+1.803393
+
+0010
+
+4.720
+
+4.676
+
+5.159
+
+5.113
+
+0011
+
+4.791
+
+4.747
+
+5.224
+
+5.184
+
+0100
+
+4.864
+
+4.820
+
+5.301
+
+5.256
+
+0101
+
+4.938
+
+4.894
+
+5.373
+
+5.326
+
+0110
+
+5.008
+
+4.965
+
+5.450
+
+5.400
+
+0111
+
+5.081
+
+5.039
+
+5.519
+
+5.475
+
+1000
+
+5.154
+
+5.110
+
+5.593
+
+5.544
+
+1001
+
+5.224
+
+5.183
+
+5.664
+
+5.616
+
+1010
+
+5.298
+
+5.254
+
+5.737
+
+5.689
+
+1011
+
+5.374
+
+5.325
+
+5.812
+
+5.761
+
+1100
+
+5.446
+
+5.399
+
+5.883
+
+5.831
+
+1101
+
+5.521
+
+5.469
+
+5.952
+
+5.902
+
+1110
+
+5.590
+
+5.543
+
+6.029
+
+5.974
+
+1111
+5.662
+5.615
+V_BUCK2
+Vbat=4.2V
+Vbuck2_DCDC
+PWM
+2FH[7:4]
+Voltage(V)
+
+6.094
+
+6.036
+
+0000
+
+1.372298
+
+Vbat=3.4V
+PFM
+
+PWM
+
+PFM
+
+Voltage(V)
+
+Voltage(V)
+
+Voltage(V)
+
+1.326017
+
+1.372103
+
+1.326514
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+85 / 100
+
+RDA8851CL Datasheet V1.05
+
+0001
+
+1.462675
+
+1.418426
+
+1.462358
+
+1.415203
+
+0010
+
+1.554009
+
+1.495003
+
+1.553642
+
+1.489541
+
+0011
+
+1.646787
+
+1.583869
+
+1.646447
+
+1.569516
+
+0100
+
+1.74188
+
+1.672534
+
+1.741347
+
+1.654777
+
+0101
+
+1.830813
+
+1.751696
+
+1.830326
+
+1.743785
+
+0110
+
+1.919983
+
+1.835457
+
+1.919578
+
+1.836826
+
+0111
+
+2.036944
+
+1.951065
+
+2.036566
+
+1.94758
+
+1000
+
+2.139276
+
+2.060935
+
+2.138946
+
+2.041343
+
+1001
+
+2.268955
+
+2.171742
+
+2.268683
+
+2.16727
+
+1010
+
+2.347893
+
+2.252698
+
+2.347531
+
+2.242021
+
+1011
+
+2.439514
+
+2.338851
+
+2.439071
+
+2.342576
+
+1100
+
+2.548583
+
+2.448924
+
+2.547497
+
+2.451623
+
+1101
+
+2.609603
+
+2.512368
+
+2.60867
+
+2.505622
+
+1110
+
+2.676921
+
+2.570107
+
+2.675591
+
+2.56608
+
+1111
+V_PAD
+
+2.750746
+
+2.649165
+
+2.749533
+
+2.629614
+
+VIO_Vsel
+04H[12]
+
+1
+
+0
+
+Vbat=4.2V
+
+Vbat=3.4V
+
+05H[5:3]
+
+Output Voltage(V)
+
+Output Voltage(V)
+
+000
+
+1.727
+
+1.724
+
+001
+
+1.744
+
+1.740
+
+010
+
+1.761
+
+1.758
+
+011
+
+1.780
+
+1.776
+
+100
+
+1.800
+
+1.796
+
+101
+
+1.820
+
+1.817
+
+110
+
+1.844
+
+1.840
+
+111
+
+1.868
+
+1.865
+
+000
+
+2.667251
+
+2.666588
+
+001
+
+2.666319
+
+2.665895
+
+010
+
+2.679315
+
+2.673723
+
+011
+
+2.727957
+
+2.722229
+
+100
+
+2.780148
+
+2.774493
+
+101
+
+2.835819
+
+2.829775
+
+110
+
+2.896831
+
+2.89022
+
+111
+
+2.960846
+
+2.953016
+
+V_SIM
+Vbat=4.2
+28H[11:9 VSIM1
+28H[8:
+07H[15]
+17H[14]
+]
+6]
+Voltage(V
+)
+
+Vbat=3.4
+VSIM2
+
+1
+
+1.895166 1
+
+000
+
+1.90902
+
+1
+
+000
+
+Vbat=4.2V
+28H[5:3 SIM3
+17H[13]
+]
+Voltage(V
+Voltage(V)
+)
+000
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+1.89932
+
+86 / 100
+
+RDA8851CL Datasheet V1.05
+
+001
+
+1.925163
+
+001
+
+1.911395
+
+001
+
+1.915508
+
+010
+
+1.942981
+
+010
+
+1.928485
+
+010
+
+1.933345
+
+011
+
+1.961617
+
+011
+
+1.94709
+
+011
+
+1.951602
+
+100
+
+1.981902
+
+100
+
+1.967064
+
+100
+
+1.97164
+
+101
+
+2.003256
+
+101
+
+1.988063
+
+101
+
+1.992602
+
+110
+
+2.026355
+
+110
+
+2.010621
+
+110
+
+2.015864
+
+111
+
+2.051003
+
+111
+
+2.035029
+
+111
+
+2.040025
+
+000
+
+2.61221
+
+000
+
+2.730938
+
+000
+
+2.736613
+
+001
+
+2.655151
+
+001
+
+2.773002
+
+001
+
+2.778881
+
+010
+
+2.701614
+
+010
+
+2.817206
+
+010
+
+2.823909
+
+011
+
+2.750609
+
+011
+
+2.865482
+
+011
+
+2.871713
+
+100
+
+2.804466
+
+100
+
+2.91652
+
+100
+
+2.922754
+
+101
+
+2.860389
+
+101
+
+2.970877
+
+101
+
+2.977137
+
+110
+
+2.921344
+
+110
+
+3.028572
+
+110
+
+3.035606
+
+111
+V_SPIMEM
+
+2.985843
+
+111
+
+3.091241
+
+111
+
+3.098374
+
+0
+
+V_SPIMEM
+_Sel
+
+High
+
+Low
+
+0
+
+0
+
+Vbat=4.2V
+
+Vbat=3.4V
+
+05H[11:9]
+
+Output
+Voltage (V)
+
+Output
+Voltage (V)
+
+000
+
+1.877194
+
+1.874062
+
+001
+
+1.8944
+
+1.890982
+
+010
+
+1.912432
+
+1.909278
+
+011
+
+1.931852
+
+1.928487
+
+100
+
+1.952319
+
+1.949049
+
+101
+
+1.974344
+
+1.97093
+
+110
+
+1.998006
+
+1.994547
+
+111
+
+2.023369
+
+2.020061
+
+000
+
+2.72786
+
+2.723132
+
+001
+
+2.770905
+
+2.765748
+
+010
+
+2.816633
+
+2.811368
+
+011
+
+2.865366
+
+2.859963
+
+100
+
+2.917075
+
+2.911277
+
+101
+
+2.972707
+
+2.966338
+
+110
+
+3.031905
+
+3.024916
+
+111
+
+3.095477
+
+3.083739
+
+V_MEM
+Vbat=4.2V
+
+Vbat=3.4V
+
+05H[8:6]
+
+Output
+Voltage(V)
+
+Output
+Voltage(V)
+
+000
+
+1.813802
+
+1.810993
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+87 / 100
+
+RDA8851CL Datasheet V1.05
+
+001
+
+1.83121
+
+1.828281
+
+010
+
+1.849414
+
+1.846548
+
+011
+
+1.869049
+
+1.866056
+
+100
+
+1.88952
+
+1.886536
+
+101
+
+1.911659
+
+1.90852
+
+110
+
+1.935356
+
+1.932362
+
+111
+V_LCD
+
+1.960581
+
+1.957629
+
+Vlcd_vsel
+04H[9]
+
+1
+
+0
+
+Vbat=4.2V
+
+Vbat=3.4V
+
+06H[8:6]
+
+Output
+Voltage(V)
+
+Output
+Voltage(V)
+
+000
+
+1.884624
+
+1.881268
+
+001
+
+1.900926
+
+1.897644
+
+010
+
+1.918653
+
+1.915154
+
+011
+
+1.937167
+
+1.933992
+
+100
+
+1.957664
+
+1.954354
+
+101
+
+1.978871
+
+1.975393
+
+110
+
+2.00204
+
+1.998532
+
+111
+
+2.026158
+
+2.022905
+
+000
+
+2.721137
+
+2.716595
+
+001
+
+2.763116
+
+2.758507
+
+010
+
+2.808443
+
+2.803737
+
+011
+
+2.856142
+
+2.851215
+
+100
+
+2.908199
+
+2.903146
+
+101
+
+2.962014
+
+2.956682
+
+110
+
+3.021087
+
+3.015138
+
+111
+
+3.083413
+
+3.075401
+
+V_CAM
+Vcam_vsel
+04H[10]
+
+1
+
+Vbat=4.2V
+
+Vbat=3.4V
+
+06H[11:9]
+
+Output
+Voltage(V)
+
+Output
+Voltage(V)
+
+000
+
+1.900696
+
+1.897653
+
+001
+
+1.916342
+
+1.913417
+
+010
+
+1.933346
+
+1.930315
+
+011
+
+1.951283
+
+1.948154
+
+100
+
+1.970642
+
+1.967851
+
+101
+
+1.991096
+
+1.988103
+
+110
+
+2.013386
+
+2.010134
+
+111
+
+2.036699
+
+2.033604
+
+000
+
+2.684454
+
+2.68182
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+88 / 100
+
+RDA8851CL Datasheet V1.05
+
+0
+
+001
+
+2.693521
+
+2.692196
+
+010
+
+2.730155
+
+2.720973
+
+011
+
+2.77925
+
+2.768611
+
+100
+
+2.832138
+
+2.814278
+
+101
+
+2.886759
+
+2.848665
+
+110
+
+2.946589
+
+2.870453
+
+111
+
+3.010126
+
+2.883678
+
+V_MMC
+VMC_vsel
+04H[8]
+
+1
+
+0
+
+Vbat=4.2V
+
+Vbat=3.4V
+
+06H[5:3]
+
+Output Voltage
+(V)
+
+Output Voltage
+(V)
+
+000
+
+3.011621
+
+3.003268
+
+001
+
+3.063471
+
+3.047207
+
+010
+
+3.119571
+
+3.080525
+
+011
+
+3.177808
+
+3.101405
+
+100
+
+3.238899
+
+3.115282
+
+101
+
+3.283025
+
+3.124006
+
+110
+
+3.309923
+
+3.129626
+
+111
+
+3.310144
+
+3.133079
+
+000
+
+2.663742
+
+2.655401
+
+001
+
+2.705838
+
+2.696863
+
+010
+
+2.751196
+
+2.741702
+
+011
+
+2.798733
+
+2.788834
+
+100
+
+2.852021
+
+2.836747
+
+101
+
+2.905989
+
+2.874893
+
+110
+
+2.965718
+
+2.900944
+
+111
+
+3.02769
+
+2.917139
+
+V_RTC
+Vbat=4.2V
+
+Vbat=3.4V
+
+Output Voltage(V)
+
+Output Voltage(V)
+
+000
+
+1.186234
+
+1.184931
+
+001
+
+1.230272
+
+1.229045
+
+010
+
+1.274606
+
+1.273073
+
+011
+
+1.318833
+
+1.317157
+
+100
+
+1.36277
+
+1.360878
+
+101
+
+1.406876
+
+1.404861
+
+110
+
+1.451079
+
+1.448805
+
+111
+V_VIB
+Vibr_vsel
+
+1.494915
+
+1.492837
+
+04H[15:13]
+
+Vbat=4.2V
+
+Vbat=3.4V
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+89 / 100
+
+RDA8851CL Datasheet V1.05
+
+04H[7]
+
+1
+
+0
+
+06H[2:0]
+
+Output Voltage(V)
+
+Output Voltage(V)
+
+000
+
+2.930721
+
+2.928602
+
+001
+
+2.983699
+
+2.981695
+
+010
+
+3.040768
+
+3.038966
+
+011
+
+3.101282
+
+3.099892
+
+100
+
+3.16886
+
+3.167146
+
+101
+
+3.237951
+
+3.236285
+
+110
+
+3.313436
+
+3.311352
+
+111
+
+3.393591
+
+3.386707
+
+000
+
+2.930598
+
+2.928872
+
+001
+
+2.983143
+
+2.981893
+
+010
+
+3.040267
+
+3.039417
+
+011
+
+3.101032
+
+3.099901
+
+100
+
+3.168993
+
+3.167552
+
+101
+
+3.237801
+
+3.236038
+
+110
+
+3.313189
+
+3.31135
+
+111
+
+3.393581
+
+3.38671
+
+V_ASW
+Vasw_vsel
+04H[11]
+
+1
+
+0
+
+V_ANA
+07H[8:6]
+
+Vbat=4.2V
+
+Vbat=3.4V
+
+06H[14:12]
+
+Output
+Voltage(V)
+
+Output
+Voltage(V)
+
+000
+
+1.898296
+
+1.892917
+
+001
+
+1.914543
+
+1.909376
+
+010
+
+1.932078
+
+1.926779
+
+011
+
+1.950724
+
+1.945268
+
+100
+
+1.97053
+
+1.965045
+
+101
+
+1.991559
+
+1.986128
+
+110
+
+2.014514
+
+2.00895
+
+111
+
+2.038958
+
+2.033227
+
+000
+
+2.597639
+
+2.591382
+
+001
+
+2.640999
+
+2.63448
+
+010
+
+2.686948
+
+2.680374
+
+011
+
+2.735839
+
+2.729014
+
+100
+
+2.7881
+
+2.78095
+
+101
+
+2.843998
+
+2.836121
+
+110
+
+2.904497
+
+2.894896
+
+111
+
+2.96897
+
+2.956203
+
+Vbat=4.2V
+
+Vbat=3.4V
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+90 / 100
+
+RDA8851CL Datasheet V1.05
+
+Output
+Voltage(V)
+
+Output
+Voltage(V)
+
+000
+
+2.268517
+
+2.266341
+
+001
+
+2.318284
+
+2.315792
+
+010
+
+2.374201
+
+2.372018
+
+011
+
+2.435136
+
+2.433037
+
+100
+
+2.502894
+
+2.500666
+
+101
+
+2.577594
+
+2.575412
+
+110
+
+2.664263
+
+2.662017
+
+111
+V_USB
+
+2.760628
+
+2.758421
+
+Vbat=4.2V
+
+Vbat=3.4V
+
+07H[11:9]
+
+Output Voltage
+(V)
+
+Output Voltage
+(V)
+
+000
+
+2.947253
+
+2.946909
+
+001
+
+3.026925
+
+3.026907
+
+010
+
+3.116152
+
+3.114516
+
+011
+
+3.212047
+
+3.209178
+
+100
+
+3.317436
+
+3.314619
+
+101
+
+3.433383
+
+3.386186
+
+110
+
+3.564778
+
+3.386197
+
+111
+V_MIC
+
+3.711378
+
+3.386196
+Vbat=4.2V
+
+Vbat=3.4V
+
+Output Voltage(V)
+
+Output Voltage(V)
+
+00
+
+1.60
+
+1.60
+
+01
+
+1.71
+
+1.71
+
+10
+
+1.83
+
+1.83
+
+11
+BL_LED_OUT
+
+1.97
+
+1.97
+
+Vrgb_led_vsel
+07H[5:3]
+
+Vrgb_led_ibit
+07H[2:0]
+
+000
+
+100
+
+ABB
+Mb_sel_bit05H[15:14]
+
+Vbat=4.2V
+
+Vbat=3.4V
+
+Vbat=3.9V
+
+Output Voltage(V)
+
+Output
+Voltage(V)
+
+Output Voltage(V)
+
+3.858844
+
+3.386533
+
+3.821235
+
+001
+
+3.777488
+
+3.386551
+
+3.744894
+
+010
+
+3.694971
+
+3.386536
+
+3.664874
+
+011
+
+3.61652
+
+3.386561
+
+3.584801
+
+100
+
+3.529182
+
+3.386511
+
+3.50099
+
+101
+
+3.446335
+
+3.386513
+
+3.421506
+
+110
+
+3.36194
+
+3.318819
+
+3.338001
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+91 / 100
+
+RDA8851CL Datasheet V1.05
+
+111
+Vrgb_led_vsel
+07H[5:3]
+
+100
+
+3.28034
+
+3.239741
+
+3.256048
+
+Vbat=4.2V
+
+Vbat=3.4V
+
+Vbat=3.9V
+
+Output Voltage(V)
+
+Output
+Voltage(V)
+
+Output Voltage(V)
+
+000
+
+3.175092
+
+3.139901
+
+3.15332
+
+001
+
+3.254025
+
+3.213903
+
+3.232406
+
+010
+
+3.338909
+
+3.294401
+
+3.313164
+
+011
+
+3.430583
+
+3.380321
+
+3.404199
+
+100
+
+3.528182
+
+3.386532
+
+3.501821
+
+101
+
+3.638125
+
+3.386532
+
+3.610481
+
+110
+
+3.756213
+
+3.386545
+
+3.725145
+
+111
+
+3.889404
+
+3.386525
+
+3.852747
+
+Vrgb_led_ibit
+07H[2:0]
+
+V_BACKUP
+Vbat=4.2V
+
+Vbat=3.4V
+
+05H[14:12]
+
+Output Voltage(V)
+
+Output Voltage(V)
+
+000
+
+2.588458
+
+2.592573
+
+001
+
+2.642122
+
+2.647193
+
+010
+
+2.699878
+
+2.70839
+
+011
+
+2.76277
+
+2.787603
+
+100
+
+2.830785
+
+2.875284
+
+101
+
+2.905058
+
+2.917465
+
+110
+
+2.985784
+
+2.93846
+
+111
+
+3.074953
+
+2.950116
+
+Charge Characteristics
+
+CC
+current
+
+13H[9:7]=chr_cc_i_bit
+000
+001
+
+chr_current (mA)
+41
+70
+
+010
+
+109
+
+011
+
+166
+
+100
+101
+110
+
+223
+329
+474
+
+111
+
+580
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+92 / 100
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+0.53
+0.3
+0.07
+
+1.68
+1.45
+1.22
+0.99
+0.76
+
+2.14
+1.91
+
+4.21
+3.98
+3.75
+3.52
+3.29
+3.06
+2.83
+2.6
+2.37
+
+4.34
+
+4.12
+
+3.9
+
+3.68
+
+3.24
+3.46
+
+3.02
+
+2.8
+
+2.36
+2.58
+
+2.17
+
+1.95
+
+1.73
+
+1.51
+
+1.29
+
+1.07
+
+0.85
+
+0.41
+0.63
+
+0.19
+
+RDA8851CL Datasheet V1.05
+
+600
+
+500
+
+400
+
+300
+系列1
+
+200
+
+100
+
+0
+
+600
+
+500
+
+400
+
+300
+系列1
+
+200
+
+100
+
+0
+
+93 / 100
+
+RDA8851CL Datasheet V1.05
+
+M.VII Digital IO DC Characteristics
+Symbol
+
+Description
+
+Min.(V)
+
+Typical(V)
+
+Max.(V)
+
+VDD
+
+All of power for digital usage
+
+VDD-0.2
+
+1.8/2.8
+
+VDD+0.2
+
+VIL
+
+CMOS Low Level Input Voltage
+
+0
+
+-
+
+0.3*VDD
+
+VIH
+
+CMOS High Level Input Voltage
+
+0.7*VDD
+
+-
+
+VDD
+
+VTH
+
+CMOS Threshold Voltage
+
+-
+
+0.5*VDD
+
+-
+
+M.VIII Digital IO AC Characteristics (SPI Interface Timing)
+Symbol
+
+Description
+
+Min.
+
+Typ.
+
+Max.
+
+Unit
+
+tCLK
+
+SCLK Cycle Time
+
+35
+
+-
+
+-
+
+ns
+
+tR
+
+SCLK Rise Time
+
+-
+
+-
+
+50
+
+ns
+
+tF
+
+SCLK Fall Time
+
+-
+
+-
+
+50
+
+ns
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+94 / 100
+
+RDA8851CL Datasheet V1.05
+
+Symbol
+
+Description
+
+Min.
+
+Typ.
+
+Max.
+
+Unit
+
+tHI
+
+SCLK High Time
+
+10
+
+-
+
+-
+
+ns
+
+tLO
+
+SCLK Low Time
+
+10
+
+-
+
+-
+
+ns
+
+tSU
+
+SDI Setup Time to SCLK↑
+
+15
+
+-
+
+-
+
+ns
+
+tHOLD
+
+SDI Hold Time to SCLK↑
+
+10
+
+-
+
+-
+
+ns
+
+tEN1
+
+SEN↓ to SCLK↑ Delay Time
+
+10
+
+-
+
+-
+
+ns
+
+tEN2
+
+SCLK↑ to SEN↑ Delay Time
+
+12
+
+-
+
+-
+
+ns
+
+tEN3
+
+SEN↑ to SCLK↑ Delay Time
+
+12
+
+-
+
+-
+
+ns
+
+tW
+
+SEN Pulse Width
+
+10
+
+-
+
+-
+
+ns
+
+tCA
+
+SCLK↑ to SDO Delay Time
+
+-
+
+-
+
+27
+
+ns
+
+Cload
+
+Digital Input Pin Capacitance
+
+-
+
+-
+
+5
+
+pF
+
+fREF
+
+Crystal Reference Frequency
+
+-
+
+26
+
+-
+
+MHz
+
+Figure M.1: SCLK Timing Diagram
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+95 / 100
+
+RDA8851CL Datasheet V1.05
+
+Figure M.2: SPI Write Timing Diagram
+
+Figure M.3: SPI Read Timing Diagram
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+96 / 100
+
+RDA8851CL Datasheet V1.05
+
+N. PACKAGING
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+97 / 100
+
+RDA8851CL Datasheet V1.05
+
+O. BALL OUT
+
+Figure O.1: RDA8851CL Ball out diagram
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+98 / 100
+
+RDA8851CL Datasheet V1.05
+
+P. GLOSSARY
+Name
+AHB
+
+Description
+AMBA Advanced High-performance Bus.
+
+AHB2AHB
+
+Bridge allowing Sys AHB to communicate with BB AHB, and vice versa.
+
+AIF
+
+RDA8851CL's Audio Interface, including PCM, DAI and Audio Analog
+Interface.
+
+APB
+
+AMBA Advanced Peripheral Bus, slow bandwidth bus.
+
+ATR
+
+Answer To Reset, see SCI module for details.
+
+BB
+
+Base Band part of RDA8851CL, dedicated to GSM and GPRS modem.
+
+Comfort Tone
+
+Tone generated by the AIF, used to indicate ringing, occupied...
+
+CS
+
+Chip Select.
+
+DAI
+
+Digital Audio Interface, part of the AIF used for test purpose.
+
+DMA
+
+Direct Memory Access, can copy a part of the memory at an other address.
+
+DTMF
+
+Dual Tone Multi Frequency generated by the AIF when a number is dialed.
+
+EBC
+
+External Bus Controller, to connect external RAM, polyphonic chips, MMC...
+
+ETU
+
+Elementary Time Unit, see SCI module for details.
+
+GP ADC
+
+General Purpose Analog to Digital Converter.
+
+IFC
+
+Base Band Intelligent Flow Controller, a bridge between AHB and APB buses.
+
+IrDA
+
+Infra Red communication protocol used by RDA8851CL's UART infra red
+mode.
+
+Mailbox
+
+Communication module between the Sys AHB bus and the BB AHB bus.
+
+MMC
+
+Multi Media Chips.
+
+MMI
+
+Man-Machine Interface, a part of the software that handle the user interface.
+
+PA DAC
+
+Power Amplifier Digital to Analog Converter.
+
+PCM
+
+Pulse Code Modulation, the part of the AIF that outputs samples in serial.
+
+PLL
+
+Phase-Locked Loop.
+
+RF IF
+
+RF Interface, the part of RDA8851CL connected to the RF chip.
+
+SCI
+
+SIM Card Interface.
+
+SIM
+
+Subscriber Identity Module, used to read SIM Cards.
+
+SPI
+
+Serial Peripheral Interface.
+
+Sys
+
+System side of RDA8851CL, dedicated to the application, MMI and GSM
+stack.
+
+TCO
+
+Time-Controlled Output. Pins controlled by the TCU.
+
+TCU
+
+Timing Control Unit, handle the scheduling of individual events.
+
+UART
+
+Universal Asynchronous Receiver Transmitter, asynchronous serial port.
+
+VCO
+
+Voltage Controlled Oscillator.
+
+XCPU
+
+System RDA's 16/32-bit RISC CPU.
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+99 / 100
+
+RDA8851CL Datasheet V1.05
+
+Document History
+The evolution of this document is described in the following table:
+Version
+
+Date
+
+Description
+
+1.00
+
+2012-04-23
+
+Initial version.
+
+1.01
+
+2012-06-05
+
+revision
+
+1.02
+
+2012-06-20
+
+revision
+
+1.03
+
+2012-07-04
+
+Update pin_out list
+
+RDA Microelectronics Inc. CONFIDENTIAL
+
+100 / 100
+
+

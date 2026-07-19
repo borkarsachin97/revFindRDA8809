@@ -1,0 +1,10 @@
+
+chunk_0_0x01c000a0.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00000000 <.data>:
+   0:	00000000 	nop
+   4:	81c00280 	lb	zero,640(t6)
+	...
